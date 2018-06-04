@@ -36,6 +36,7 @@ import { InputField } from "../../../components/Element/Form";
 import Loading from "../../../components/Loading";
 import { Actions } from "react-native-router-flux";
 const { LoginButton, LoginManager, ShareDialog, AccessToken, GraphRequestManager, GraphRequest } = FBSDK;
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import * as helper from "../../../helper";
 import PropTypes from 'prop-types';
 const username = "";
@@ -56,7 +57,7 @@ class login extends React.Component {
           (data) => {
             let accessToken = data.accessToken;
             //alert(accessToken.toString());
-            
+
             const infoRequest = new GraphRequest(
               '/me',
               {
@@ -120,31 +121,62 @@ class login extends React.Component {
   componentDidMount() {
     const { loginAction } = this.props;
     const { loginReducer } = this.props;
-    try {
-      const hadUser = AsyncStorage.getItem("@userLogin")
-        .then(value => {
-          let userLogin = JSON.parse(value);
-          if (userLogin && loginReducer.Logout) {
-            loginAction.setFormLogin(userLogin);
-          } else if (
-            userLogin &&
-            userLogin.username != "" &&
-            userLogin.password != ""
-          ) {
-            loginAction.setFormLogin(userLogin);
-            loginAction.login(userLogin);
-          }
-        })
-        .done();
-    } catch (error) {
-      //error
-    }
+    this._setupGoogleSignin();
   }
 
   onValueChange(value) {
     this.setState({
       languageSelect: value
     });
+  }
+
+  async _setupGoogleSignin() {
+    try {
+      //await GoogleSignin.hasPlayServices({ autoResolve: true })
+      // const configPlatform = {
+      //   ...Platform.select({
+      //     ios: {
+      //       iosClientId: config.iosClientId
+      //     },
+      //     android: {}
+      //   })
+      // }
+
+      await GoogleSignin.configure({
+        //...configPlatform,
+        webClientId: '229107549229-q7qch6d8soskk5577u3so1s4np1s9aps.apps.googleusercontent.com',
+        offlineAccess: false
+      })
+
+      const user = await GoogleSignin.currentUserAsync()
+      console.log(user)
+      this.setState({ user })
+    } catch (err) {
+      console.warn('Google signin error', err.code, err.message)
+    }
+  }
+
+  _googleSignIn() {
+    GoogleSignin.signIn()
+      .then(user => {
+        debugger;
+        console.log(user)
+        this.setState({ user: user })
+      })
+      .catch(err => {
+        debugger;
+        console.warn(err)
+      })
+      .done()
+  }
+
+  _googleSignOut() {
+    GoogleSignin.revokeAccess()
+      .then(() => GoogleSignin.signOut())
+      .then(() => {
+        this.setState({ user: null })
+      })
+      .done()
   }
 
   render() {
@@ -172,6 +204,12 @@ class login extends React.Component {
               <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
                 <Text>Facebook</Text>
               </Button>
+              <GoogleSigninButton
+            style={{ width: 212, height: 48 }}
+            size={GoogleSigninButton.Size.Standard}
+            color={GoogleSigninButton.Color.Auto}
+            onPress={this._googleSignIn.bind(this)}
+          />
               <Button block style={[styles.buttonLogin, styles.buttonLoginGg]}  >
                 <Text>Google</Text>
               </Button>
@@ -183,7 +221,7 @@ class login extends React.Component {
   }
   //facebook call back
   responseInfoCallback(error, result) {
-    const {loginAction}=this.props;
+    const { loginAction } = this.props;
     if (error) {
       console.log(error)
       //alert('Error fetching data: ' + error.toString());

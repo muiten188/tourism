@@ -116,6 +116,12 @@ android {
         }
     }
     signingConfigs {
+        debug {
+            storeFile file('keystore/debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
         release {
             if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
                 storeFile file(MYAPP_RELEASE_STORE_FILE)
@@ -148,6 +154,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-google-signin')
     compile project(':react-native-fbsdk')
     compile project(':react-native-i18n')
     compile project(':react-native-vector-icons')
