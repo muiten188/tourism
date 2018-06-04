@@ -118,10 +118,19 @@ class login extends React.Component {
         }
       })
   }
+
+  componentWillMount() {
+    GoogleSignin.hasPlayServices({ autoResolve: true });
+    GoogleSignin.configure({
+      iosClientId: '617324734115-od9b4l2mf95331gg9m4u0a4gggq0fpjo.apps.googleusercontent.com',
+      webClientId: '229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com'
+    })
+  }
+
   componentDidMount() {
     const { loginAction } = this.props;
     const { loginReducer } = this.props;
-    this._setupGoogleSignin();
+    //this._setupGoogleSignin();
   }
 
   onValueChange(value) {
@@ -132,7 +141,7 @@ class login extends React.Component {
 
   async _setupGoogleSignin() {
     try {
-      //await GoogleSignin.hasPlayServices({ autoResolve: true })
+      await GoogleSignin.hasPlayServices({ autoResolve: true })
       // const configPlatform = {
       //   ...Platform.select({
       //     ios: {
@@ -149,6 +158,7 @@ class login extends React.Component {
       })
 
       const user = await GoogleSignin.currentUserAsync()
+      debugger;
       console.log(user)
       this.setState({ user })
     } catch (err) {
