@@ -5,7 +5,8 @@ import {
   KeyboardAvoidingView,
   FlatList,
   TouchableOpacity,
-  Alert
+  Alert,
+  Image
 } from "react-native";
 import {
   Container,
@@ -19,7 +20,8 @@ import {
   Input,
   H1,
   H2,
-  H3
+  H3,
+  Tab, Tabs, TabHeading
 } from "native-base";
 import styles from "./styles";
 import HeaderForm from "../../components/Header_form";
@@ -34,6 +36,12 @@ import { DateField } from "../../components/Element/Form";
 import ItemResult from "../../components/Item_result";
 import * as homeAction from "../../store/actions/containers/home_action";
 import Loading from "../../components/Loading";
+import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
+import IconVector from 'react-native-vector-icons/FontAwesome';
+import MuseumList from '../Museum_list';
+import Profile from '../Profile';
+import FindGuider from '../Find_guider';
+
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -47,7 +55,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      isEdit: false
+
     };
     I18n.defaultLocale = "vi";
     I18n.locale = "vi";
@@ -60,25 +68,25 @@ class Home extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { dispatch } = this.props.navigation;
     const { isLoading, listResult } = this.props.homeReducer;
-    if (this.loading.getState() == true) {
-      this.loading.hide();
-    }
-    if (this.smallLoading.getState() == true) {
-      this.smallLoading.hide();
-    }
-    if (
-      listResult.length == 1 &&
-      listResult[0].apartmentId != this.currentApartment.apartmentId
-    ) {
-      if (!blockAction) {
-        blockAction = true;
-        this.currentApartment = listResult[0];
-        //push
-        setTimeout(() => {
-          blockAction = false;
-        }, 700);
-      }
-    }
+    // if (this.loading.getState() == true) {
+    //   this.loading.hide();
+    // }
+    // if (this.smallLoading.getState() == true) {
+    //   this.smallLoading.hide();
+    // }
+    // if (
+    //   listResult.length == 1 &&
+    //   listResult[0].apartmentId != this.currentApartment.apartmentId
+    // ) {
+    //   if (!blockAction) {
+    //     blockAction = true;
+    //     this.currentApartment = listResult[0];
+    //     //push
+    //     setTimeout(() => {
+    //       blockAction = false;
+    //     }, 700);
+    //   }
+    // }
   }
 
   render() {
@@ -112,6 +120,7 @@ class Home extends Component {
       );
     }
     return (
+
       <Container style={styles.container}>
         <KeyboardAvoidingView
           behavior="padding"
@@ -125,65 +134,66 @@ class Home extends Component {
                   this.smallLoading = ref;
                 }} />
               </View>
-              <HeaderContent
-                onBack={() => {
-                  dispatch.pop();
-                }}
-                showUser={true}
-                headerTitle={I18n.t("result", {
-                  locale: locale ? locale : "vn"
-                })}
-              />
-              <Container style={styles.listResult_container}>
-                <FlatList
-                  ref={ref => {
-                    this.list = ref;
-                  }}
-                  style={styles.listResult}
-                  data={listResult ? listResult : []}
-                  keyExtractor={this._keyExtractor}
-                  renderItem={this.renderFlatListItem.bind(this)}
-                  onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                  onEndReached={({ distanceFromEnd }) => {
-                    if (distanceFromEnd > 0) {
-                      // this.onEndReachedCalledDuringMomentum = true;
-                      if (
-                        !blockLoadMoreAction &&
-                        !(listResult.length < pageSize)
-                      ) {
+              <HeaderContent />
+              <View style={styles.listResult_container}>
+                <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
+                  <Tab
+                    heading={<TabHeading style={styles.tabHeading}>
+                      <Grid>
+                        <Row style={styles.iconTab}>
+                          <IconVector name="home" size={20} />
+                        </Row>
+                        <Row style={styles.textHeadingTab}>
+                          <Text style={styles.textHeaderTab}>{I18n.t("home", {
+                            locale: "vn"
+                          })}</Text>
+                        </Row>
+                      </Grid>
+                    </TabHeading>}>
+                    <MuseumList />
+                  </Tab>
+                  <Tab heading={<TabHeading style={[styles.tabHeading, { width: 100 }]}>
+                    <Grid>
+                      <Row style={styles.iconTab}>
+                        <IconVector name="users" size={20} />
+                      </Row>
+                      <Row style={styles.textHeadingTab}>
+                        <Text style={styles.textHeaderTab}>
+                          {I18n.t("findGuider", {
+                            locale: "vn"
+                          })}</Text>
+                      </Row>
+                    </Grid>
 
-                        blockLoadMoreAction = true;
-                        this.smallLoading.show(),
-                          setTimeout(() => {
-                            homeAction.loadMore(
-                              valuesForm,
-                              currentPage,
-                              pageSize,
-                              user
-                            )
-                          }, 0);
-
-                        setTimeout(() => {
-                          if (loadEnd != true) {
-                            blockLoadMoreAction = false;
-                          }
-                        }, 700);
-                      }
-                    }
-                  }}
-                  onEndReachedThreshold={0.7}
-                />
+                  </TabHeading>}>
+                    <FindGuider />
+                  </Tab>
+                  <Tab heading={<TabHeading style={styles.tabHeading}>
+                    <Grid>
+                      <Row style={styles.iconTab}>
+                        <IconVector name="user" size={20} />
+                      </Row>
+                      <Row style={styles.textHeadingTab}>
+                        <Text style={styles.textHeaderTab}>{I18n.t("profile", {
+                          locale: "vn"
+                        })}</Text>
+                      </Row>
+                    </Grid>
+                  </TabHeading>}>
+                    <Profile />
+                  </Tab>
+                </Tabs>
                 <Loading
                   ref={ref => {
                     this.loading = ref;
                   }}
                   isShow={isLoading}
                 />
-              </Container>
+              </View>
             </Col>
           </Grid>
         </KeyboardAvoidingView>
-      </Container>
+      </Container >
     );
   }
 

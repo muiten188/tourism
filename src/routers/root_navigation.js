@@ -7,6 +7,8 @@ import { Router, Scene, Stack } from 'react-native-router-flux';
 import Login from '../authen/containers/Login';
 import Register from '../authen/containers/Register';
 import Home from '../containers/Home';
+import Museumlist from '../containers/Museum_list';
+import Profile from '../containers/Profile';
 
 import PropTypes from 'prop-types';
 
@@ -55,6 +57,20 @@ class RootNavigation extends React.Component {
                         title="Home"
                         initial={false}
                     />
+                    <Scene key="tabbar"
+                        tabs
+                        tabBarStyle={{ backgroundColor: 'yellow' }}>
+                        <Scene key="museum"
+                            component={Museumlist}
+                            title="Museum"
+                            initial={false}
+                        />
+                        <Scene key="profile"
+                            component={Profile}
+                            title="Profile"
+                            initial={false}
+                        />
+                    </Scene>
                 </Stack>
             </Router>
         );

@@ -5,11 +5,10 @@ export default {
     flex: 1
   },
   itemList: {
-    width: "50%",
+    width: "100%",
     justifyContent: "center",
-    paddingTop: 35,
-    paddingBottom: 30,
-    alignItems: "center"
+    alignItems: "center",
+    height: 150
   },
   item: {
     paddingTop: 15,
@@ -55,5 +54,8 @@ export default {
   },
   textPadding: {
     paddingBottom: 7
-  }
+  },
+  imageHotel: { resizeMode: 'cover', width: '100%', height: '100%', borderColor: "#cecece", borderWidth: 1, borderRadius: 2 },
+  context: { backgroundColor: 'black', position: 'absolute', bottom: 0, left: 0, right: 0, opacity: 0.8 },
+  textContext: { textAlign: 'center', color: '#fff' }
 };

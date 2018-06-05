@@ -214,13 +214,13 @@ class login extends React.Component {
               <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
                 <Text>Facebook</Text>
               </Button>
-              <GoogleSigninButton
+              {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
             size={GoogleSigninButton.Size.Standard}
             color={GoogleSigninButton.Color.Auto}
             onPress={this._googleSignIn.bind(this)}
-          />
-              <Button block style={[styles.buttonLogin, styles.buttonLoginGg]}  >
+          /> */}
+              <Button block onPress={this._googleSignIn.bind(this)} style={[styles.buttonLogin, styles.buttonLoginGg]}  >
                 <Text>Google</Text>
               </Button>
             </View>
@@ -237,7 +237,7 @@ class login extends React.Component {
       //alert('Error fetching data: ' + error.toString());
     } else {
       console.log(result)
-      alert('login :' + result.name)
+      //alert('login :' + result.name)
       loginAction.login(result);
       //alert('Success fetching data: ' + result.toString());
     }

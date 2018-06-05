@@ -12,4 +12,8 @@ export default {
   changePassword: 'Đổi mật khẩu',
   register:'Đăng ký',
   result:"Kết quả",
+  easyLink:'Easy link',
+  home:'Trang chủ',
+  findGuider:'Hướng dẫn viên',
+  profile:'Cá nhân'
 };
