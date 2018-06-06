@@ -136,7 +136,7 @@ class Home extends Component {
               </View>
               <HeaderContent />
               <View style={styles.listResult_container}>
-                <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
+                <Tabs initialPage={0} locked={true} tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
                   <Tab
                     heading={<TabHeading style={styles.tabHeading}>
                       <Grid>

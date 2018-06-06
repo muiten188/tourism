@@ -15,5 +15,12 @@ export default {
   easyLink:'Easy link',
   home:'Trang chủ',
   findGuider:'Hướng dẫn viên',
-  profile:'Cá nhân'
+  profile:'Cá nhân',
+  historyView:"Xem lịch sử tìm kiếm",
+  findGuider2:"Tìm hướng dẫn viên",
+  guideText:"Hướng dẫn viên điện tử",
+  pay:"Thanh toán",
+  qrcode:'QR Code',
+  atm_visa:'ATM/Visa card',
+  cash:'Tiền mặt'
 };

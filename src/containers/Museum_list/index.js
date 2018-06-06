@@ -31,7 +31,11 @@ import { InputField } from "../../components/Element/Form/index";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as meseumListAction from "../../store/actions/containers/museumList_action";
 import Loading from "../../components/Loading";
+import IconVector from 'react-native-vector-icons/FontAwesome';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
+import ItemDivider from '../../components/Item_divider';
+
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 const blockAction = false;
@@ -61,7 +65,7 @@ class MuseumList extends Component {
         const locale = "vn";
         return (
             <Container style={styles.container}>
-                <Grid>
+                <Grid style={{ marginBottom: 45 }}>
                     <Row style={{ height: 50 }}>
                         <Col><Text style={styles.textSide}>Chọn địa danh</Text></Col>
                         <Col><Picker
@@ -84,7 +88,7 @@ class MuseumList extends Component {
                                 this.list = ref;
                             }}
                             style={styles.listResult}
-                            data={[{}, {}, {}, {},{}, {}, {}, {},{}, {}, {}, {}]}
+                            data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.renderFlatListItem.bind(this)}
                             numColumns={2}
@@ -120,6 +124,22 @@ class MuseumList extends Component {
                         />
                     </Row>
                 </Grid>
+                <View style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: 45,
+                    opacity: 0.9,
+                    backgroundColor: '#007db7'
+                }}>
+                    <Button full block transparent>
+                        <IconIonicons name="md-qr-scanner" size={20} style={{ color: '#fff' }} />
+                        <Text uppercase={false} style={{ color: '#fff', paddingTop: 0 }}>{I18n.t("guideText", {
+                            locale: "vn"
+                        })}</Text>
+                    </Button>
+                </View>
             </Container>
         );
     }
@@ -127,28 +147,21 @@ class MuseumList extends Component {
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
         return (
-            <TouchableOpacity
+            <View
                 key={item.index}
                 style={
                     styles.item_container_half
                 }
                 onPress={() => {
-                    if (!blockAction) {
-                        blockAction = true;
+                    // if (!blockAction) {
+                    //     blockAction = true;
 
-                    }
+                    // }
                 }}
             >
-                <ItemResult
-                    key={item.index}
-                    userName={'bach'}
-                    position={'bền bền'}
-                    phone={'đổi phone'}
-                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
-                    item={item}>
-                </ItemResult>
+                <ItemDivider></ItemDivider>
 
-            </TouchableOpacity>
+            </View>
         );
     }
 

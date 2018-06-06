@@ -55,7 +55,32 @@ export default {
   textPadding: {
     paddingBottom: 7
   },
-  imageHotel: { resizeMode: 'cover', width: '100%', height: '100%', borderColor: "#cecece", borderWidth: 1, borderRadius: 2 },
-  context: { backgroundColor: 'black', position: 'absolute', bottom: 0, left: 0, right: 0, opacity: 0.8 },
-  textContext: { textAlign: 'center', color: '#fff' }
+  imageHotel: {
+    resizeMode: 'cover',
+    width: '100%',
+    height: '100%',
+    borderColor: "black",
+    borderWidth: 0.1,
+    borderRadius: 2
+  },
+  context: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  conInside: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    top:0,
+    opacity: 0.6
+  },
+  textContext: {
+    textAlign: 'center',
+    color: '#fff',
+    opacity: 1
+  }
 };

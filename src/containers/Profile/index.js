@@ -26,9 +26,11 @@ import { connect } from "react-redux";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import { InputField } from "../../components/Element/Form/index";
-import Icon from "react-native-vector-icons/FontAwesome";
+import IconVector from "react-native-vector-icons/FontAwesome";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as profileAction from "../../store/actions/containers/profile_action";
 import Loading from "../../components/Loading";
+import User from "../../components/User";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 const blockAction = false;
@@ -51,19 +53,70 @@ class Profile extends Component {
 
   }
   componentDidUpdate(prevProps, prevState) {
-    
+
   }
 
   render() {
     const locale = "vn";
     return (
       <Container style={styles.container}>
-            <Text>abc</Text>
+        <User></User>
+        <Grid style={styles.Grid}>
+          <Row style={styles.gridTitleRow}>
+            <Text>{I18n.t("pay", {
+              locale: "vn"
+            })}</Text>
+          </Row>
+          <Row style={styles.gridContent}>
+            <Col>
+              <Row style={styles.gridContentItem}>
+                <Col>
+                  <Button block full transparent style={styles.heightFull}>
+                    <IconVector name="qrcode" size={40}></IconVector>
+                  </Button>
+                  <View style={styles.textItem}>
+                    <Text uppercase={false}>{I18n.t("qrcode", {
+                      locale: "vn"
+                    })}</Text>
+                  </View>
+                </Col>
+                <Col>
+                  <Button block full transparent style={styles.heightFull}>
+                    <IconVector name="credit-card" size={40}></IconVector>
+                  </Button>
+                  <View style={styles.textItem}>
+                    <Text uppercase={false}>{I18n.t("atm_visa", {
+                      locale: "vn"
+                    })}</Text>
+                  </View>
+                </Col>
+              </Row>
+              <Row style={styles.gridContentItem}>
+                <Col>
+                  <Button block full transparent style={styles.heightFull}>
+                    <Ionicons name="ios-cash" size={40}></Ionicons>
+                  </Button>
+                  <View style={styles.textItem}>
+                    <Text uppercase={false}>{I18n.t("cash", {
+                      locale: "vn"
+                    })}</Text>
+                  </View>
+                </Col>
+                <Col>
+                  <Button block full transparent style={styles.heightFull}>
+                    <Ionicons name="ios-more" size={40}></Ionicons>
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+
+        </Grid>
       </Container>
     );
   }
 
-  
+
 }
 function mapStateToProps(state, props) {
   return {

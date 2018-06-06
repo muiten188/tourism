@@ -23,6 +23,7 @@ import User from "../User";
 import * as AppConfig from "../../config/app_config";
 const resolveAssetSource = require('resolveAssetSource');
 const userAvar = require("../../resources/assets/user.jpg")
+let text = "Bảo tàng hồ chí minh"
 export default class extends PureComponent {
   static navigationOptions = {
     header: null
@@ -48,10 +49,20 @@ export default class extends PureComponent {
           style={styles.imageHotel}
         />
         <View style={styles.context}>
-          <Text style={styles.textContext}>bảo tàng hồ chí minh</Text>
+          <View style={styles.conInside}>
+            <Text style={styles.textContext}></Text>
+          </View>
+          <Text style={styles.textContext}>{this.textEclipse(text)}</Text>
+
         </View>
+
 
       </View>
     );
+  }
+  textEclipse(text) {
+    return (((text).length > 20) ?
+      (((text).substring(0, 20)) + '...') :
+      text)
   }
 }
