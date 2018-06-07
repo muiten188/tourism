@@ -25,7 +25,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import styles from "./styles";
 import User from "../User";
-import ItemResult from '../../components/Item_result';
+import ItemResultProduct from '../../components/Item_result_product';
 import * as AppConfig from "../../config/app_config";
 import { Actions } from "react-native-router-flux";
 export default class extends PureComponent {
@@ -38,7 +38,7 @@ export default class extends PureComponent {
     return (
       <View key={key} style={styles.itemList}>
         <View style={styles.headerList}>
-          <Text style={styles.headerListText}>Hà Nội</Text>
+          <Text style={styles.headerListText}>Đời sống hàng ngày</Text>
         </View>
 
         <FlatList
@@ -46,7 +46,7 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={styles.listResult}
-          data={[{}, {}, {}, {},{}, {}, {}, {},{}, {}, {}, {}]}
+          data={[{}, {}, {}, {}]}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
           numColumns={2}
@@ -92,17 +92,17 @@ export default class extends PureComponent {
           styles.item_container_half
         }
         onPress={()=>{
-          Actions.museumDetail();
+          Actions.museumProduct();
         }}
       >
-        <ItemResult
+        <ItemResultProduct
           key={item.index}
           userName={'bach'}
           position={'bền bền'}
           phone={'đổi phone'}
           avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
           item={item}>
-        </ItemResult>
+        </ItemResultProduct>
 
       </TouchableOpacity>
     );

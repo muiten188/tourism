@@ -9,7 +9,8 @@ import Register from '../authen/containers/Register';
 import Home from '../containers/Home';
 import Museumlist from '../containers/Museum_list';
 import Profile from '../containers/Profile';
-
+import Museum_detail from '../containers/Museum_detail';
+import Museum_product from '../containers/Museum_product';
 import PropTypes from 'prop-types';
 
 class RootNavigation extends React.Component {
@@ -57,19 +58,15 @@ class RootNavigation extends React.Component {
                         title="Home"
                         initial={false}
                     />
-                    <Scene key="tabbar"
-                        tabs
-                        tabBarStyle={{ backgroundColor: 'yellow' }}>
-                        <Scene key="museum"
-                            component={Museumlist}
-                            title="Museum"
-                            initial={false}
-                        />
-                        <Scene key="profile"
-                            component={Profile}
-                            title="Profile"
-                            initial={false}
-                        />
+                    <Scene key="museumDetail"
+                        component={Museum_detail}
+                        title="museum Detail"
+                        initial={false}>
+                    </Scene>
+                    <Scene key="museumProduct"
+                        component={Museum_product}
+                        title="museum product"
+                        initial={false}>
                     </Scene>
                 </Stack>
             </Router>

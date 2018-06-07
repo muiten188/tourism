@@ -75,3 +75,9 @@ export function cloneObj(obj) {
   }
   return copy;
 }
+
+export function textEclipse(text, index) {
+  return (((text).length > index ? index : 0) ?
+    (((text).substring(0, index ? index : 0)) + '...') :
+    text)
+}

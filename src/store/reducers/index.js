@@ -3,6 +3,8 @@ import loginReducer from "../../authen/reducers/login_reducer";
 //app
 import homeReducer from "../../store/reducers/containers/home_reducer";
 import museumListReducer from "../../store/reducers/containers/museumList_reducer";
+import museumDetailReducer from "../../store/reducers/containers/museumDetail_reducer";
+import museumProductReducer from "../../store/reducers/containers/museumProduct_reducer";
 import findGuiderReducer from "../../store/reducers/containers/findGuider_reducer";
 import profileReducer from "../../store/reducers/containers/profile_reducer";
 import app_Reducer from "../../store/reducers/app_reducer";
@@ -15,6 +17,8 @@ const appReducer = combineReducers({
   loginReducer,
   homeReducer,
   museumListReducer,
+  museumDetailReducer,
+  museumProductReducer,
   findGuiderReducer,
   profileReducer,
   app_Reducer,
