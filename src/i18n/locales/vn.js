@@ -28,5 +28,10 @@ export default {
   view_more: "Xem thêm",
   product:'SẢN PHẨM',
   summary_button:"Thu gọn",
-  similar_product:'Sản phẩm liên quan'
+  similar_product:'Sản phẩm liên quan',
+  searchHistory:"Lịch sử tìm kiếm",
+  from :' từ ',
+  to:' đến ',
+  museum:'Bảo tàng',
+  status:'Trạng thái'
 };

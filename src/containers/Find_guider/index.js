@@ -64,7 +64,7 @@ class FindGuider extends Component {
     const locale = "vn";
     return (
       <Container style={styles.container}>
-        <Button full block transparent>
+        <Button full block transparent onPress={() => { Actions.searchHistory() }}>
           <IconVector name='history' size={16} style={styles.colorHeader} />
           <Text uppercase={false} style={styles.colorHeader}>{I18n.t("historyView", {
             locale: "vn"
@@ -101,7 +101,7 @@ class FindGuider extends Component {
         }}>
           <Button full block transparent>
             <IconVector name="search" size={20} style={styles.whileText}></IconVector>
-            <Text uppercase={false} style={{color:'#fff',paddingTop:0}}>{I18n.t("findGuider2", {
+            <Text uppercase={false} style={{ color: '#fff', paddingTop: 0 }}>{I18n.t("findGuider2", {
               locale: "vn"
             })}</Text>
           </Button>
