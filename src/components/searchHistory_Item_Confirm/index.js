@@ -15,10 +15,11 @@ import {
   Item,
   Thumbnail
 } from "native-base";
-import { View, Image, FlatList } from "react-native";
+import { View, Image, FlatList,TouchableHighlight } from "react-native";
 import IconVector from "react-native-vector-icons/FontAwesome";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Grid, Col, Row } from "react-native-easy-grid";
+import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import styles from "./styles";
 
 import I18n from "../../i18n/i18n";
@@ -110,22 +111,19 @@ export default class extends PureComponent {
   renderFlatListItem(dataItem) {
     const item = dataItem.item;
     return (
-      <View
+      <TouchableHighlight
         key={item.index}
         style={
           styles.item_container_half
         }
         onPress={() => {
-          // if (!blockAction) {
-          //     blockAction = true;
-
-          // }
+          Actions.guider();
         }}
       >
         <Thumbnail large style={{ borderColor: '#e8eff5', borderWidth: 0.5 }} source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
 
 
-      </View>
+      </TouchableHighlight>
     );
   }
 

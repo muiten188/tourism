@@ -23,6 +23,7 @@ import styles from "./styles";
 
 import I18n from "../../i18n/i18n";
 import * as AppConfig from "../../config/app_config";
+import StarRating from 'react-native-star-rating';
 const resolveAssetSource = require('resolveAssetSource');
 const userAvar = require("../../resources/assets/user.jpg")
 let text = "Bảo tàng hồ chí minh"
@@ -49,6 +50,15 @@ export default class extends PureComponent {
         <Grid>
           <Row style={{ width: '100%' }}>
             <Col style={styles.avatar}>
+              <Thumbnail large style={{ borderColor: '#e8eff5', borderWidth: 0.5 }} source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
+              <StarRating
+                disabled={false}
+                maxStars={5}
+                rating={2}
+                selectedStar={(rating) => { rating }}
+                fullStarColor={'yellow'}
+                starSize={16}
+              />
             </Col>
             <Col style={{
               paddingLeft: 6,
@@ -75,6 +85,12 @@ export default class extends PureComponent {
                 <Text style={styles.textBlue}>{"2.000.000 đ"}</Text>
               </Row>
               <Row style={styles.rowItem}>
+                <Text style={styles.fromTo}>{I18n.t("Guider", {
+                  locale: "vn"
+                })}</Text>
+                <Text style={styles.textBold}>{": "} {"Vũ Thị Tuyết Mai"}</Text>
+              </Row>
+              <Row style={styles.rowItem}>
                 <Text style={styles.fromTo}>{I18n.t("museum", {
                   locale: "vn"
                 })}</Text>
@@ -84,11 +100,11 @@ export default class extends PureComponent {
                 <Text style={styles.fromTo}>{I18n.t("status", {
                   locale: "vn"
                 })}</Text>
-                <Text style={styles.textOr}>{": "} {"Chờ xác nhận"}</Text>
+                <Text style={{}}>{": "} {"Chuyến đi hoàn thành"}</Text>
               </Row>
             </Col>
           </Row>
-          <Row style={styles.rowListAva}>
+          {/* <Row style={styles.rowListAva}>
             <FlatList
               style={styles.listResult}
               data={[{}, {}, {}, {}, {}, {}]}
@@ -97,9 +113,9 @@ export default class extends PureComponent {
               onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
               horizontal={true}
             />
+          </Row> */}
+          <Row style={{ height: 10 }}>
           </Row>
-          <Row style={{height:10}}>
-            </Row>
         </Grid>
 
 

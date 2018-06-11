@@ -8,12 +8,15 @@ export default {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: 210,
+    height: 150,
     borderBottomWidth:3,
-    borderBottomColor:'#e8eff5'
+    borderBottomColor:'#e8eff5',
+    paddingTop:6
   },
   avatar: {
     width: 80,
+    justifyContent:'center',
+    alignItems:'center'
   },
   textBlue: {
     color: '#007db7'

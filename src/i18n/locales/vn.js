@@ -33,5 +33,12 @@ export default {
   from :' từ ',
   to:' đến ',
   museum:'Bảo tàng',
-  status:'Trạng thái'
+  status:'Trạng thái',
+  Guider:'Hướng dẫn viên',
+  experience:'Kinh nghiệm',
+  language:'Ngôn ngữ',
+  introduce:'Giới thiệu',
+  chooseGuider:'Chọn hướng dẫn viên',
+  RatingDes:"Mời bạn đánh giá cho hướng dẫn viên",
+  rating:"Đánh giá"
 };

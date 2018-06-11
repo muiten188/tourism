@@ -13,6 +13,7 @@ import Museum_detail from '../containers/Museum_detail';
 import Museum_product from '../containers/Museum_product';
 import Search_history from '../containers/Search_history';
 import Guider from '../containers/Guider';
+import GuiderRating from '../containers/Guider_rating';
 import PropTypes from 'prop-types';
 
 class RootNavigation extends React.Component {
@@ -78,6 +79,11 @@ class RootNavigation extends React.Component {
                     <Scene key="guider"
                         component={Guider}
                         title="Guider"
+                        initial={false}>
+                    </Scene>
+                    <Scene key="guiderRating"
+                        component={GuiderRating}
+                        title="Guider Rating"
                         initial={false}>
                     </Scene>
                 </Stack>

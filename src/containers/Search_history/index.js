@@ -34,7 +34,8 @@ import * as searchHistoryAction from "../../store/actions/containers/searchHisto
 import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import ItemSearchHistory from '../../components/searchHistory_Item_Confirm';
+import ItemSearchHistoryConfirm from '../../components/searchHistory_Item_Confirm';
+import ItemSearchHistory from '../../components/searchHistory_Item';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
@@ -143,8 +144,8 @@ class SearchHistory extends Component {
                     // }
                 }}
             >
+                <ItemSearchHistoryConfirm></ItemSearchHistoryConfirm>
                 <ItemSearchHistory></ItemSearchHistory>
-
             </View>
         );
     }

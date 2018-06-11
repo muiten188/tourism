@@ -9,6 +9,7 @@ import findGuiderReducer from "../../store/reducers/containers/findGuider_reduce
 import profileReducer from "../../store/reducers/containers/profile_reducer";
 import searchHistoryReducer from "../../store/reducers/containers/searchHistory_reducer";
 import guiderReducer from "../../store/reducers/containers/guider_reducer";
+import guiderRatingReducer from "../../store/reducers/containers/guider_rating_reducer";
 import app_Reducer from "../../store/reducers/app_reducer";
 import router_Reducer from "../../store/reducers/router/router_reducer";
 import * as types from "../../store/constants/action_types";
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
   museumProductReducer,
   searchHistoryReducer,
   guiderReducer,
+  guiderRatingReducer,
   findGuiderReducer,
   profileReducer,
   app_Reducer,

@@ -24,7 +24,9 @@ export default {
         margin: 3
     },
     rowProfile: {
-        height: 110
+        height:'40%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     rowBar: {
         height: 2,
@@ -32,6 +34,14 @@ export default {
     },
     textWhile: {
         color: '#fff'
+    },
+    startCenter:{
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     textBold: {
         fontWeight: '500'
@@ -45,7 +55,6 @@ export default {
         borderBottomColor: '#e8eff5'
     },
     rowDescription_full: {
-        height: 'auto',
         padding: 4,
         paddingBottom: 10
     },

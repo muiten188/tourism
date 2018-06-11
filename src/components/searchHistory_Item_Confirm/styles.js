@@ -8,9 +8,10 @@ export default {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: 210,
+    height: 215,
     borderBottomWidth:3,
-    borderBottomColor:'#e8eff5'
+    borderBottomColor:'#e8eff5',
+    paddingTop:5
   },
   avatar: {
     width: 80,

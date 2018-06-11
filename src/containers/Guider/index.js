@@ -22,7 +22,8 @@ import {
     H2,
     H3,
     H6,
-    Picker
+    Picker,
+    Badge
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -40,7 +41,7 @@ import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
 import * as helper from '../../helper';
-import YouTube from 'react-native-youtube'
+import StarRating from 'react-native-star-rating';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -77,128 +78,101 @@ class Guider extends Component {
     render() {
         const locale = "vn";
         return (
-            <ScrollView style={styles.container}>
-                <HeaderContent showButtonLeft={true} headerTitle={helper.textEclipse("Chiều hoàng hôn đồng quê", 20)} />
-                <Grid style={{}}>
-                    <Row style={styles.rowYoutube}>
-                        <Slideshow
-                            height={150}
-                            arrowSize={0}
-                            position={this.state.position}
-                            onPositionChanged={position => this.setState({ position })}
-                            dataSource={[
-                                { url: 'https://foto.gettyimages.com/photos/herd-of-bisons-in-yellowstone-picture-id477419964-story-small-0a648a42-9f85-4011-887b-f8927c9dea0d.jpg' },
-                                { url: 'http://placeimg.com/640/480/any' },
-                                { url: 'https://foto.gettyimages.com/photos/sunrise-shines-on-the-garden-wall-a-spine-of-rock-shaped-by-ice-age-picture-id731750169-story-small-d8ca77e7-6f8a-4b41-aea8-74f5d1565d04.jpg' }
-                            ]} />
-                    </Row>
-                    <Row style={styles.rowBar}>
-                        <Grid>
-                            <Col>
-                                <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
-                                    <Icon name="user" size={15} style={styles.textWhile} />
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
-                                        locale: "vn"
-                                    })}</Text>
-                                </Button>
-                            </Col>
-                            <Col>
-                                {/* <Button full block transparent iconRight={true} style={styles.buttonTitle}>
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("finGuider", {
-                                        locale: "vn"
-                                    })}</Text>
-                                    <Icon name="user" size={15} style={styles.textWhile} />
-                                </Button> */}
-                            </Col>
-                        </Grid>
-                    </Row>
-                    <Row style={styles.rowDescription_full}>
-                        <View>
-                            <Text>
-                                {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
+            <Container>
+                <ScrollView style={styles.container}>
+                    <HeaderContent showButtonLeft={true} headerTitle={helper.textEclipse("Phan Thị Ánh Kim", 20)} />
+                    <Grid style={{}}>
+                        <Row style={styles.rowProfile}>
+                            <Grid style={{ paddingTop: 10, paddingBottom: 10 }}>
+                                <Col style={styles.avartarCol}>
+                                    <Thumbnail large source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
+                                </Col>
+                                <Col style={{
+                                    justifyContent: "center",
+                                    alignItems: "flex-start"
+                                }}>
+                                    <Row>
+                                        <Text style={styles.fromTo}>{I18n.t("Guider", {
+                                            locale: "vn"
+                                        })}</Text>
+                                        <Text style={styles.textBold}>{": "} {"Vũ Thị Tuyết Mai"}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text style={styles.fromTo}>{I18n.t("experience", {
+                                            locale: "vn"
+                                        })}</Text>
+                                        <Text style={styles.textBold}>{": "}3 năm</Text>
+                                    </Row>
+                                    <Row>
+                                        <Text style={styles.fromTo}>{I18n.t("language", {
+                                            locale: "vn"
+                                        })}</Text>
+                                        <Text style={styles.textBold}>{": "}{"Tiếng Việt"}</Text>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <StarRating
+                                                disabled={false}
+                                                maxStars={5}
+                                                rating={2}
+                                                selectedStar={(rating) => { rating }}
+                                                fullStarColor={'yellow'}
+                                                starSize={20}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Button transparent style={{ height: 25, marginLeft: '30%' }}
+                                                onPress={() => { Actions.guiderRating() }}>
+                                                <IconVector name="edit" size={18} />
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Grid>
+                        </Row>
+                        <Row style={styles.rowBar}>
+
+                        </Row>
+                        <Row style={{ height: 30 }}>
+                            <Text style={styles.titleProduct}>{I18n.t("introduce", {
+                                locale: "vn"
+                            })}</Text>
+                        </Row>
+                        <Row style={styles.rowDescription_full}>
+                            <View>
+                                <Text>
+                                    {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
 
 Huynh muội ơi!
 🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
 
 RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
-                            </Text>
-                        </View>
-                    </Row>
-                    <Row style={{ height: 30 }}>
-                        <Text style={styles.titleProduct}>{I18n.t("similar_product", {
+                                </Text>
+
+                            </View>
+                        </Row>
+
+                    </Grid>
+
+                </ScrollView>
+                <View style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: 45,
+                    opacity: 0.9,
+                    backgroundColor: '#007db7'
+                }}>
+                    <Button full block transparent>
+                        <IconVector name="check" size={20} style={{ color: '#fff' }} />
+                        <Text uppercase={false} style={{ color: '#fff', paddingTop: 0 }}>{I18n.t("chooseGuider", {
                             locale: "vn"
                         })}</Text>
-                    </Row>
-                    <Row>
-                        <FlatList
-                            ref={ref => {
-                                this.list = ref;
-                            }}
-                            style={styles.listResult}
-                            data={[{}]}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this.renderFlatListItem.bind(this)}
-                            numColumns={2}
-                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                            onEndReached={({ distanceFromEnd }) => {
-                                if (distanceFromEnd > 0) {
-                                    // // this.onEndReachedCalledDuringMomentum = true;
-                                    // if (
-                                    //     !blockLoadMoreAction &&
-                                    //     !(listResult.length < pageSize)
-                                    // ) {
-
-                                    //     blockLoadMoreAction = true;
-                                    //     this.smallLoading.show(),
-                                    //         setTimeout(() => {
-                                    //             searchAction.loadMore(
-                                    //                 valuesForm,
-                                    //                 currentPage,
-                                    //                 pageSize,
-                                    //                 user
-                                    //             )
-                                    //         }, 0);
-
-                                    //     setTimeout(() => {
-                                    //         if (loadEnd != true) {
-                                    //             blockLoadMoreAction = false;
-                                    //         }
-                                    //     }, 700);
-                                    // }
-                                }
-                            }}
-                            onEndReachedThreshold={0.7}
-                        />
-                    </Row>
-                </Grid>
-
-            </ScrollView>
+                    </Button>
+                </View>
+            </Container>
         );
-    }
-
-    renderFlatListItem(dataItem) {
-        const item = dataItem.item;
-        return (
-            <View
-                key={item.index}
-                style={
-                    styles.item_container_half
-                }
-                onPress={() => {
-                    // if (!blockAction) {
-                    //     blockAction = true;
-
-                    // }
-                }}
-            >
-                <ItemDividerProduct></ItemDividerProduct>
-
-            </View>
-        );
-    }
-
-    _keyExtractor(item, index) {
-        return index;
     }
 
     textEclipse(text) {
