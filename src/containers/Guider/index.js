@@ -78,83 +78,106 @@ class Guider extends Component {
     render() {
         const locale = "vn";
         return (
-            <Container>
-                <ScrollView style={styles.container}>
-                    <HeaderContent showButtonLeft={true} headerTitle={helper.textEclipse("Phan Thị Ánh Kim", 20)} />
-                    <Grid style={{}}>
-                        <Row style={styles.rowProfile}>
-                            <Grid style={{ paddingTop: 10, paddingBottom: 10 }}>
-                                <Col style={styles.avartarCol}>
-                                    <Thumbnail large source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
-                                </Col>
-                                <Col style={{
-                                    justifyContent: "center",
-                                    alignItems: "flex-start"
-                                }}>
-                                    <Row>
-                                        <Text style={styles.fromTo}>{I18n.t("Guider", {
-                                            locale: "vn"
-                                        })}</Text>
-                                        <Text style={styles.textBold}>{": "} {"Vũ Thị Tuyết Mai"}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text style={styles.fromTo}>{I18n.t("experience", {
-                                            locale: "vn"
-                                        })}</Text>
-                                        <Text style={styles.textBold}>{": "}3 năm</Text>
-                                    </Row>
-                                    <Row>
-                                        <Text style={styles.fromTo}>{I18n.t("language", {
-                                            locale: "vn"
-                                        })}</Text>
-                                        <Text style={styles.textBold}>{": "}{"Tiếng Việt"}</Text>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <StarRating
-                                                disabled={false}
-                                                maxStars={5}
-                                                rating={2}
-                                                selectedStar={(rating) => { rating }}
-                                                fullStarColor={'yellow'}
-                                                starSize={20}
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <Button transparent style={{ height: 25, marginLeft: '30%' }}
-                                                onPress={() => { Actions.guiderRating() }}>
-                                                <IconVector name="edit" size={18} />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Grid>
-                        </Row>
-                        <Row style={styles.rowBar}>
+            <Container style={styles.container}>
 
-                        </Row>
-                        <Row style={{ height: 30 }}>
-                            <Text style={styles.titleProduct}>{I18n.t("introduce", {
-                                locale: "vn"
-                            })}</Text>
-                        </Row>
-                        <Row style={styles.rowDescription_full}>
-                            <View>
-                                <Text>
-                                    {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
+                <HeaderContent showButtonLeft={true} headerTitle={helper.textEclipse("Phan Thị Ánh Kim", 20)} />
+                <Grid style={{}}>
+                    <Row style={styles.rowProfile}>
+                        <Grid style={{ paddingTop: 10, paddingBottom: 10 }}>
+                            <Col style={styles.avartarCol}>
+                                <Thumbnail large source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
+                            </Col>
+                            <Col style={{
+                                justifyContent: "center",
+                                alignItems: "flex-start"
+                            }}>
+                                <Row>
+                                    <Text style={styles.fromTo}>{I18n.t("Guider", {
+                                        locale: "vn"
+                                    })}</Text>
+                                    <Text style={styles.textBold}>{": "} {"Vũ Thị Tuyết Mai"}</Text>
+                                </Row>
+                                <Row>
+                                    <Text style={styles.fromTo}>{I18n.t("experience", {
+                                        locale: "vn"
+                                    })}</Text>
+                                    <Text style={styles.textBold}>{": "}3 năm</Text>
+                                </Row>
+                                <Row>
+                                    <Text style={styles.fromTo}>{I18n.t("language", {
+                                        locale: "vn"
+                                    })}</Text>
+                                    <Text style={styles.textBold}>{": "}{"Tiếng Việt"}</Text>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <StarRating
+                                            disabled={false}
+                                            maxStars={5}
+                                            rating={2}
+                                            selectedStar={(rating) => { rating }}
+                                            fullStarColor={'yellow'}
+                                            starSize={20}
+                                        />
+                                    </Col>
+                                    <Col>
+                                        <Button transparent style={{ height: 25, marginLeft: '30%' }}
+                                            onPress={() => { Actions.guiderRating() }}>
+                                            <IconVector name="edit" size={18} />
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Grid>
+                    </Row>
+                    <Row style={styles.rowBar}>
+
+                    </Row>
+                    <Row style={{ height: 30 }}>
+                        <Text style={styles.titleProduct}>{I18n.t("introduce", {
+                            locale: "vn"
+                        })}</Text>
+                    </Row>
+                    <Row style={styles.rowDescription_full}>
+                        <ScrollView style={styles.container}>
+                            <Text>
+                                {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
 
 Huynh muội ơi!
 🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
 
 RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
-                                </Text>
+                            </Text>
+                            <Text>
+                                {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
 
-                            </View>
-                        </Row>
+Huynh muội ơi!
+🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
 
-                    </Grid>
+RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
+                            </Text>
+                            <Text>
+                                {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
 
-                </ScrollView>
+Huynh muội ơi!
+🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
+
+RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
+                            </Text>
+                            <Text>
+                                {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
+
+Huynh muội ơi!
+🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
+
+RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
+                            </Text>
+                        </ScrollView>
+                    </Row>
+
+                </Grid>
+
+
                 <View style={{
                     position: 'absolute',
                     bottom: 0,

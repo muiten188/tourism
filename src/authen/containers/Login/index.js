@@ -153,7 +153,7 @@ class login extends React.Component {
 
       await GoogleSignin.configure({
         //...configPlatform,
-        webClientId: '229107549229-q7qch6d8soskk5577u3so1s4np1s9aps.apps.googleusercontent.com',
+        webClientId: '229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com',
         offlineAccess: false
       })
 
@@ -167,11 +167,13 @@ class login extends React.Component {
   }
 
   _googleSignIn() {
+    const { loginAction } = this.props;
     GoogleSignin.signIn()
       .then(user => {
         debugger;
         console.log(user)
         this.setState({ user: user })
+        loginAction.login(user);
       })
       .catch(err => {
         debugger;
@@ -238,7 +240,7 @@ class login extends React.Component {
     } else {
       console.log(result)
       //alert('login :' + result.name)
-      loginAction.login(result);
+      //loginAction.login(result);
       //alert('Success fetching data: ' + result.toString());
     }
   }

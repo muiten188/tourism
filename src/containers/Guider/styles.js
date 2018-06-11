@@ -45,9 +45,8 @@ export default {
         borderBottomColor: '#e8eff5'
     },
     rowDescription_full: {
-        height: 'auto',
         padding: 4,
-        paddingBottom: 10
+        paddingBottom: 50
     },
     titleProduct: {
         fontWeight: 'bold',
