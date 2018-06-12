@@ -240,7 +240,7 @@ class login extends React.Component {
     } else {
       console.log(result)
       //alert('login :' + result.name)
-      //loginAction.login(result);
+      loginAction.login(result);
       //alert('Success fetching data: ' + result.toString());
     }
   }

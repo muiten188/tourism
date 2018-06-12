@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
-  Image
+  Image,
+  DeviceEventEmitter
 } from "react-native";
 import {
   Container,
@@ -37,6 +38,8 @@ import ItemResult from "../../components/Item_result";
 import * as homeAction from "../../store/actions/containers/home_action";
 import Loading from "../../components/Loading";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
+
+import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import MuseumList from '../Museum_list';
 import Profile from '../Profile';
@@ -45,15 +48,41 @@ import FindGuider from '../Find_guider';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
+
+
+
+
+
 class Home extends Component {
   currentApartment = {};
   static navigationOptions = {
     header: null
   };
 
+  async detectBeacons() {
+    // Tells the library to detect iBeacons
+    Beacons.detectIBeacons()
+
+    // Start detecting all iBeacons in the nearby
+    try {
+      await Beacons.startRangingBeaconsInRegion('REGION1')
+      alert(`Beacons ranging started succesfully!`)
+    } catch (err) {
+      alert(`Beacons ranging not started, error: ${error}`)
+    }
+
+
+  }
+
   constructor(props) {
     super(props);
-
+    // Print a log of the detected iBeacons (1 per second)
+    DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+      if(data.beacons&&data.beacons.length>0){
+        alert('Tìm thấy beacon', data.beacons)
+      }
+    })
+    this.detectBeacons();
     this.state = {
 
     };
