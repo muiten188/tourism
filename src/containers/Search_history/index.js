@@ -62,13 +62,7 @@ class SearchHistory extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            interval: setInterval(() => {
-                this.setState({
-                    position: this.state.position === 3 ? 0 : this.state.position + 1
-                });
-            }, 4000)
-        });
+
     }
     componentDidUpdate(prevProps, prevState) {
 

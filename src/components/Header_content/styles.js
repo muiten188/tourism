@@ -22,7 +22,7 @@ export default {
     backgroundColor:'red'
   },
   itemButtonHeader: {
-    width:30,
+    width:50,
     justifyContent: "center",
     alignItems: "center"
   },

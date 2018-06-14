@@ -43,7 +43,7 @@ export default class extends Component {
         <Grid>
           {showButtonLeft == true || Platform.OS === 'ios' ? (
             <Col style={styles.itemButtonHeader}>
-              <Button transparent onPress={_onBack}>
+              <Button transparent onPress={_onBack} style={{width:'100%'}}>
                 <IconVector name="chevron-circle-left" size={20} style={styles.whileText} />
               </Button>
             </Col>
