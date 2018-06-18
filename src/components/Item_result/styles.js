@@ -76,11 +76,13 @@ export default {
     left: 0,
     right: 0,
     top:0,
-    opacity: 0.6
+    opacity: 0.5
   },
   textContext: {
     textAlign: 'center',
     color: '#fff',
+    paddingLeft:2,
+    paddingRight:2,
     opacity: 1
   }
 };

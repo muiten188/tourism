@@ -28,6 +28,7 @@ export default {
     buttonTitle: { height: 35 },
     rowDescription_summary: {
         height: 120,
+        width:'100%',
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
@@ -35,6 +36,8 @@ export default {
     },
     rowDescription_full: {
         height: 'auto',
+        width:'100%',
+        minHeight:120,
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,

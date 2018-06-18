@@ -30,7 +30,7 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { key, userName, position, phone, avatarUrl, item } = this.props;
+    const { key, avatarUrl, item } = this.props;
     return (
       <View key={key} style={styles.itemList}>
         {/* <Thumbnail
@@ -52,7 +52,7 @@ export default class extends PureComponent {
           <View style={styles.conInside}>
             <Text style={styles.textContext}></Text>
           </View>
-          <Text style={styles.textContext}>{this.textEclipse(text)}</Text>
+          <Text style={styles.textContext}>{item.museumName}</Text>
 
         </View>
 

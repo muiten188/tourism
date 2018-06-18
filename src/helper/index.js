@@ -29,7 +29,7 @@ export function clearAsyncStorage() {
 
 export function buildHeader(user) {
   return {
-    JSESSIONID: user.jSessionId
+    //JSESSIONID: user ? user.jSessionId : null
   };
 }
 
@@ -80,4 +80,18 @@ export function textEclipse(text, index) {
   return (((text).length > index ? index : 0) ?
     (((text).substring(0, index ? index : 0)) + '...') :
     text)
+}
+
+export function getQueryString(params) {
+  return Object.keys(params)
+    .map(k => {
+      if (Array.isArray(params[k])) {
+        return params[k]
+          .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+          .join("&");
+      }
+
+      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
+    })
+    .join("&");
 }

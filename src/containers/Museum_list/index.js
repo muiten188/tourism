@@ -5,7 +5,8 @@ import {
     KeyboardAvoidingView,
     FlatList,
     TouchableOpacity,
-    Alert
+    Alert,
+    RefreshControl
 } from "react-native";
 import {
     Container,
@@ -49,13 +50,18 @@ class MuseumList extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            areaId: null
+        }
         I18n.defaultLocale = "vi";
         I18n.locale = "vi";
         I18n.currentLocale();
     }
 
     componentDidMount() {
-
+        const { search_Museum, get_Area } = this.props.meseumListAction;
+        get_Area(null, 1, 100, null);
+        //search_Museum(null, 1, 100, null);
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -63,6 +69,23 @@ class MuseumList extends Component {
 
     render() {
         const locale = "vn";
+        const { listMuseum, listArea, searchErorr, isLoading } = this.props.museumListReducer;
+        const { search_Museum, clearMuseumError, clearAreaError } = this.props.meseumListAction;
+        if (searchErorr == true) {
+            Alert.alert(
+                "Thông báo",
+                "Tìm kiếm lỗi kiểm tra lại đường truyền.",
+                [
+                    {
+                        text: "Ok",
+                        onPress: e => {
+                            clearMuseumError();
+                        }
+                    }
+                ],
+                { cancelable: false }
+            );
+        }
         return (
             <Container style={styles.container}>
                 <Grid style={{ marginBottom: 45 }}>
@@ -73,13 +96,16 @@ class MuseumList extends Component {
                             iosHeader="Select your SIM"
                             // iosIcon={<Icon name="ios-arrow-down-outline" />}
                             style={{ width: undefined }}
-                            selectedValue={"Wallet"}
-                            onValueChange={() => { }}
+                            selectedValue={this.state.areaId}
+                            onValueChange={(value) => {
+                                this.setState({ areaId: value })
+                                search_Museum(value ? { areaId: value } : null, 1, 100, null);
+                            }}
                         >
-                            <Picker.Item label="Hà Nội" value="key0" />
-                            <Picker.Item label="Đã Nẵng" value="key1" />
-                            <Picker.Item label="TP.Hồ Chí Minh" value="key2" />
-                            <Picker.Item label="Cần thơ" value="key3" />
+                            <Picker.Item label="Tất cả" value={null} />
+                            {listArea.map((item, index) => {
+                                return (<Picker.Item key={index} label={item.areaName} value={item.areaId} />)
+                            })}
                         </Picker></Col>
                     </Row>
                     <Row>
@@ -87,11 +113,25 @@ class MuseumList extends Component {
                             ref={ref => {
                                 this.list = ref;
                             }}
+                            refreshControl={
+                                <RefreshControl
+                                    colors={["#9Bd35A", "#689F38"]}
+                                    refreshing={isLoading}
+                                    onRefresh={() => {
+                                        //this.loading.show();
+                                        setTimeout(() => {
+                                            search_Museum(null, 1, 10, null);
+                                        }, 0);
+
+                                    }
+                                    }
+                                />
+                            }
                             style={styles.listResult}
-                            data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
+                            data={listMuseum}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.renderFlatListItem.bind(this)}
-                            numColumns={2}
+                            horizontal={false}
                             onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
                             onEndReached={({ distanceFromEnd }) => {
                                 if (distanceFromEnd > 0) {
@@ -122,6 +162,12 @@ class MuseumList extends Component {
                             }}
                             onEndReachedThreshold={0.7}
                         />
+                        <Loading
+                            ref={ref => {
+                                this.loading = ref;
+                            }}
+                            isShow={isLoading}
+                        />
                     </Row>
                 </Grid>
                 <View style={{
@@ -146,6 +192,7 @@ class MuseumList extends Component {
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
+        console.log(item);
         return (
             <View
                 key={item.index}
@@ -159,8 +206,7 @@ class MuseumList extends Component {
                     // }
                 }}
             >
-                <ItemDivider></ItemDivider>
-
+                <ItemDivider data={item}></ItemDivider>
             </View>
         );
     }

@@ -67,12 +67,14 @@ class MuseumDetail extends Component {
 
     render() {
         const locale = "vn";
+        const { paramPassAction } = this.props;
         return (
-            <ScrollView style={styles.container}>
-                <HeaderContent showButtonLeft={true} headerTitle={"Bảo tàng dân học"}/>
-                <Grid style={{ }}>
-                    <Row style={styles.rowYoutube}>
-                        {/* <YouTube
+            <Container style={styles.container}>
+                <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
+                <ScrollView>
+                    <Grid style={{}}>
+                        <Row style={styles.rowYoutube}>
+                            {/* <YouTube
                             videoId="aJOTlE1K90k"   // The YouTube video ID
                             play={true}             // control playback of video with true/false
                             fullscreen={false}       // control whether the video should play in fullscreen or inline
@@ -85,114 +87,104 @@ class MuseumDetail extends Component {
 
                             style={{ alignSelf: 'stretch', height: 180, width: '100%' }}
                         /> */}
-                    </Row>
-                    <Row style={styles.rowBar}>
-                        <Grid>
-                            <Col>
-                                <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
-                                    <Icon name="user" size={15} style={styles.textWhile} />
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
-                                        locale: "vn"
-                                    })}</Text>
-                                </Button>
-                            </Col>
-                            <Col>
-                                <Button full block transparent iconRight={true} style={styles.buttonTitle}>
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("finGuider", {
-                                        locale: "vn"
-                                    })}</Text>
-                                    <Icon name="user" size={15} style={styles.textWhile} />
-                                </Button>
-                            </Col>
-                        </Grid>
-                    </Row>
-                    <Row style={this.state.isSummary ? styles.rowDescription_summary : styles.rowDescription_full}>
-                        {!this.state.isSummary ?
-                            <ScrollView>
-                                <Text>
-                                    {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
-
-Huynh muội ơi!
-🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
-
-RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
-                                </Text>
-                                <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom:-5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
-                                    <Text uppercase={false} style={{ color: '#007db7' }}>
-                                        {I18n.t("summary_button", {
+                        </Row>
+                        <Row style={styles.rowBar}>
+                            <Grid>
+                                <Col>
+                                    <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
+                                        <Icon name="user" size={15} style={styles.textWhile} />
+                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
                                             locale: "vn"
-                                        })}
-                                    </Text>
-                                </Button>
-                            </ScrollView>
-                            :
-                            <View>
-                                <Text>
-                                    {this.textEclipse(`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
-
-Huynh muội ơi!
-🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
-
-RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`)}
-                                </Text>
-                                <Button onPress={() => { this.setState({ isSummary: false }) }} style={{ position: 'absolute', top: 78, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
-                                    <Text uppercase={false} style={{ color: '#007db7' }}>
-                                        {I18n.t("view_more", {
+                                        })}</Text>
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button full block transparent iconRight={true} style={styles.buttonTitle}>
+                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("finGuider", {
                                             locale: "vn"
-                                        })}
+                                        })}</Text>
+                                        <Icon name="user" size={15} style={styles.textWhile} />
+                                    </Button>
+                                </Col>
+                            </Grid>
+                        </Row>
+                        <Row style={this.state.isSummary ? styles.rowDescription_summary : styles.rowDescription_full}>
+                            {!this.state.isSummary ?
+                                <ScrollView>
+                                    <Text>
+                                        {paramPassAction.description}
                                     </Text>
-                                </Button>
-                            </View>}
-                    </Row>
-                    <Row style={{ height: 30 }}>
-                        <Text style={styles.titleProduct}>{I18n.t("product", {
-                            locale: "vn"
-                        })}</Text>
-                    </Row>
-                    <Row>
-                        <FlatList
-                            ref={ref => {
-                                this.list = ref;
-                            }}
-                            style={styles.listResult}
-                            data={[{}]}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this.renderFlatListItem.bind(this)}
-                            numColumns={2}
-                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                            onEndReached={({ distanceFromEnd }) => {
-                                if (distanceFromEnd > 0) {
-                                    // // this.onEndReachedCalledDuringMomentum = true;
-                                    // if (
-                                    //     !blockLoadMoreAction &&
-                                    //     !(listResult.length < pageSize)
-                                    // ) {
+                                    <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
+                                        <Text uppercase={false} style={{ color: '#007db7' }}>
+                                            {I18n.t("summary_button", {
+                                                locale: "vn"
+                                            })}
+                                        </Text>
+                                    </Button>
+                                </ScrollView>
+                                :
+                                <View style={{width:'100%'}}>
+                                    <Text>
+                                        {this.textEclipse(paramPassAction.description)}
+                                    </Text>
+                                    <Button onPress={() => { this.setState({ isSummary: false }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
+                                        <Text uppercase={false} style={{ color: '#007db7' }}>
+                                            {I18n.t("view_more", {
+                                                locale: "vn"
+                                            })}
+                                        </Text>
+                                    </Button>
+                                </View>}
+                        </Row>
+                        <Row style={{ height: 30 }}>
+                            <Text style={styles.titleProduct}>{I18n.t("product", {
+                                locale: "vn"
+                            })}</Text>
+                        </Row>
+                        <Row>
+                            <FlatList
+                                ref={ref => {
+                                    this.list = ref;
+                                }}
+                                style={styles.listResult}
+                                data={[{}]}
+                                keyExtractor={this._keyExtractor}
+                                renderItem={this.renderFlatListItem.bind(this)}
+                                numColumns={2}
+                                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                                onEndReached={({ distanceFromEnd }) => {
+                                    if (distanceFromEnd > 0) {
+                                        // // this.onEndReachedCalledDuringMomentum = true;
+                                        // if (
+                                        //     !blockLoadMoreAction &&
+                                        //     !(listResult.length < pageSize)
+                                        // ) {
 
-                                    //     blockLoadMoreAction = true;
-                                    //     this.smallLoading.show(),
-                                    //         setTimeout(() => {
-                                    //             searchAction.loadMore(
-                                    //                 valuesForm,
-                                    //                 currentPage,
-                                    //                 pageSize,
-                                    //                 user
-                                    //             )
-                                    //         }, 0);
+                                        //     blockLoadMoreAction = true;
+                                        //     this.smallLoading.show(),
+                                        //         setTimeout(() => {
+                                        //             searchAction.loadMore(
+                                        //                 valuesForm,
+                                        //                 currentPage,
+                                        //                 pageSize,
+                                        //                 user
+                                        //             )
+                                        //         }, 0);
 
-                                    //     setTimeout(() => {
-                                    //         if (loadEnd != true) {
-                                    //             blockLoadMoreAction = false;
-                                    //         }
-                                    //     }, 700);
-                                    // }
-                                }
-                            }}
-                            onEndReachedThreshold={0.7}
-                        />
-                    </Row>
-                </Grid>
-
-            </ScrollView>
+                                        //     setTimeout(() => {
+                                        //         if (loadEnd != true) {
+                                        //             blockLoadMoreAction = false;
+                                        //         }
+                                        //     }, 700);
+                                        // }
+                                    }
+                                }}
+                                onEndReachedThreshold={0.7}
+                            />
+                        </Row>
+                    </Grid>
+                </ScrollView>
+            </Container>
         );
     }
 

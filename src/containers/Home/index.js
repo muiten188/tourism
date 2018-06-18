@@ -66,7 +66,7 @@ class Home extends Component {
     // Start detecting all iBeacons in the nearby
     try {
       await Beacons.startRangingBeaconsInRegion('REGION1')
-      alert(`Beacons ranging started succesfully!`)
+      //alert(`Beacons ranging started succesfully!`)
     } catch (err) {
       alert(`Beacons ranging not started, error: ${error}`)
     }

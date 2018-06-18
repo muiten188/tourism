@@ -34,11 +34,11 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { key, userName, position, phone, avatarUrl, item } = this.props;
+    const { key, userName, position, phone, avatarUrl, item, data } = this.props;
     return (
       <View key={key} style={styles.itemList}>
         <View style={styles.headerList}>
-          <Text style={styles.headerListText}>Hà Nội</Text>
+          <Text style={styles.headerListText}>{data.area}</Text>
         </View>
 
         <FlatList
@@ -46,7 +46,7 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={styles.listResult}
-          data={[{}, {}, {}, {},{}, {}, {}, {},{}, {}, {}, {}]}
+          data={data ? data.data : []}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
           numColumns={2}
@@ -91,8 +91,8 @@ export default class extends PureComponent {
         style={
           styles.item_container_half
         }
-        onPress={()=>{
-          Actions.museumDetail();
+        onPress={() => {
+          Actions.museumDetail({ paramPassAction: item });
         }}
       >
         <ItemResult
