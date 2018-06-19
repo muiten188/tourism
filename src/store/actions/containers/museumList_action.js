@@ -6,6 +6,7 @@ export function get_Area(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
+    
     return dispatch => {
         //dispatch(_searching_Museum());
         fetch(`${AppConfig.GET_AREA}?${helper.getQueryString(dataPost)}`, {
@@ -44,7 +45,7 @@ export function search_Museum(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    debugger;
+    
     return dispatch => {
         dispatch(_searching_Museum());
         fetch(`${AppConfig.GET_MUSEUMLIST}?${helper.getQueryString(dataPost)}`, {

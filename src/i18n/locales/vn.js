@@ -26,9 +26,9 @@ export default {
   finGuider: "Tìm Hướng dẫn viên",
   locationGuide: 'Dẫn đường',
   view_more: "Xem thêm",
-  product:'SẢN PHẨM',
+  product:'HIỆN VẬT',
   summary_button:"Thu gọn",
-  similar_product:'Sản phẩm liên quan',
+  similar_product:'Hiện vật liên quan',
   searchHistory:"Lịch sử tìm kiếm",
   from :' từ ',
   to:' đến ',
@@ -40,5 +40,6 @@ export default {
   introduce:'Giới thiệu',
   chooseGuider:'Chọn hướng dẫn viên',
   RatingDes:"Mời bạn đánh giá cho hướng dẫn viên",
-  rating:"Đánh giá"
+  rating:"Đánh giá",
+  description:'Mô tả:'
 };

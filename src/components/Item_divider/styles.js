@@ -14,12 +14,15 @@ export default {
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 3
+    margin: 3,
   },
   headerList: { width: '100%' },
   headerListText: {
     textAlign: 'left',
     fontWeight: 'bold',
     marginBottom: 3
+  },
+  listResult:{
+    width:'100%'
   }
 };

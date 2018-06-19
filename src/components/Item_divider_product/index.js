@@ -37,16 +37,16 @@ export default class extends PureComponent {
     const { key, userName, position, phone, avatarUrl, item } = this.props;
     return (
       <View key={key} style={styles.itemList}>
-        <View style={styles.headerList}>
+        {/* <View style={styles.headerList}>
           <Text style={styles.headerListText}>Đời sống hàng ngày</Text>
-        </View>
+        </View> */}
 
         <FlatList
           ref={ref => {
             this.list = ref;
           }}
           style={styles.listResult}
-          data={[{}, {}, {}, {}]}
+          data={[{},{},{}]}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
           numColumns={2}
@@ -91,15 +91,12 @@ export default class extends PureComponent {
         style={
           styles.item_container_half
         }
-        onPress={()=>{
-          Actions.museumProduct();
+        onPress={() => {
+          //Actions.museumProduct();
         }}
       >
         <ItemResultProduct
           key={item.index}
-          userName={'bach'}
-          position={'bền bền'}
-          phone={'đổi phone'}
           avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
           item={item}>
         </ItemResultProduct>

@@ -31,7 +31,7 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { key, userName, position, phone, avatarUrl, item } = this.props;
+    const { key, userName, position, phone, avatarUrl, data } = this.props;
     return (
       <View key={key} style={styles.itemList}>
         {/* <Thumbnail
@@ -50,11 +50,11 @@ export default class extends PureComponent {
           style={styles.imageHotel}
         />
         <View style={styles.context}>
-            {/* <View style={styles.conInside}>
+          {/* <View style={styles.conInside}>
               <Text style={styles.textContext}></Text>
             </View> */}
-          <Text style={styles.textContextTitle}>{this.textEclipse(text)}</Text>
-          <Text style={styles.textContext}>{this.textEclipse(text2)}</Text>
+          <Text style={styles.textContextTitle}>{this.textEclipse(data ? data.artName : "")}</Text>
+          <Text style={styles.textContext}>{this.textEclipse(data ? data.artDescription : "")}</Text>
         </View>
 
 

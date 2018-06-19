@@ -39,6 +39,7 @@ import ItemDividerProduct from '../../components/Item_divider_product';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
+import * as AppConfig from "../../config/app_config";
 import * as helper from '../../helper';
 import YouTube from 'react-native-youtube'
 const blockAction = false;
@@ -62,11 +63,16 @@ class MuseumProduct extends Component {
     }
 
     componentDidMount() {
+        const { get_AntifactByID } = this.props.meseumProductAction;
+        const { paramPassAction } = this.props;
         interval = setInterval(() => {
             this.setState({
                 position: this.state.position === 3 ? 0 : this.state.position + 1
             });
         }, 2000);
+        if (paramPassAction && paramPassAction.artId) {
+            get_AntifactByID(paramPassAction.artId, 1, 100, null);
+        }
     }
 
     componentWillUnmount() {
@@ -81,9 +87,24 @@ class MuseumProduct extends Component {
 
     render() {
         const locale = "vn";
+        const { antifactDetail } = this.props.museumProductReducer;
+        var attachments = []
+        if (antifactDetail && antifactDetail.attachments) {
+            for (var i = 0; i < antifactDetail.attachments.length; i++) {
+                var item = antifactDetail.attachments[i];
+                if (item.filePath) {
+                    var object = {
+                        url: AppConfig.API_HOST + item.filePath
+                    }
+                    attachments.push(object);
+                }
+            }
+        }
+
+
         return (
             <Container style={styles.container}>
-                <HeaderContent showButtonLeft={true} headerTitle={helper.textEclipse("Chiều hoàng hôn đồng quê", 20)} />
+                <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
                 <ScrollView>
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
@@ -92,11 +113,7 @@ class MuseumProduct extends Component {
                                 arrowSize={0}
                                 position={this.state.position}
                                 onPositionChanged={position => this.setState({ position })}
-                                dataSource={[
-                                    { url: 'https://foto.gettyimages.com/photos/herd-of-bisons-in-yellowstone-picture-id477419964-story-small-0a648a42-9f85-4011-887b-f8927c9dea0d.jpg' },
-                                    { url: 'http://placeimg.com/640/480/any' },
-                                    { url: 'https://foto.gettyimages.com/photos/sunrise-shines-on-the-garden-wall-a-spine-of-rock-shaped-by-ice-age-picture-id731750169-story-small-d8ca77e7-6f8a-4b41-aea8-74f5d1565d04.jpg' }
-                                ]} />
+                                dataSource={attachments} />
                         </Row>
                         <Row style={styles.rowBar}>
                             <Grid>
@@ -121,12 +138,7 @@ class MuseumProduct extends Component {
                         <Row style={styles.rowDescription_full}>
                             <View>
                                 <Text>
-                                    {`🔥 🔥 NGẠO THIÊN MOBILE - CHÍNH THỨC RA MẮT 05.06.2018. CHƠI LÀ NGHIỀN !!! 🔥🔥
-
-Huynh muội ơi!
-🔥 Vào 10h00 ngày 05/06, Siêu phẩm Tiên Hiệp 2018, NGẠO THIÊN MOBILE, chính thức phát hành Open Beta. Cùng Đóa Nhi CHƠI LÀ NGHIỀN nha <3
-
-RẤT RẤT nhiều event nhân VIPcode trong tuần đầu tiên ra mắt, huynh tỷ nhanh nhanh vào Fanpage để cập nhật nhé.`}
+                                    {antifactDetail ? antifactDetail.artDescription : '...'}
                                 </Text>
                             </View>
                         </Row>

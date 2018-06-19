@@ -9,7 +9,7 @@ export default {
         fontWeight: 'bold', paddingLeft: 6
     },
     item_container_half: {
-        width: "98%",
+        width: "48.5%",
         justifyContent: "center",
         alignItems: "center",
         margin: 3
@@ -46,5 +46,12 @@ export default {
     titleProduct: {
         fontWeight: 'bold',
         paddingLeft: 4
-    }
+    },
+    backgroundVideo: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0
+      },
 }

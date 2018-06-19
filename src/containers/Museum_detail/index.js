@@ -30,15 +30,18 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import { InputField } from "../../components/Element/Form/index";
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as meseumListAction from "../../store/actions/containers/museumList_action";
+import * as meseumListAction from "../../store/actions/containers/museumDetail_action";
 import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
-import ItemDividerProduct from '../../components/Item_divider_product';
+import Video from "react-native-video";
+import ItemResultProduct from '../../components/Item_result_product';
+
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-import YouTube from 'react-native-youtube'
+// import YouTube from 'react-native-youtube'
+import * as AppConfig from "../../config/app_config";
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -59,7 +62,8 @@ class MuseumDetail extends Component {
     }
 
     componentDidMount() {
-
+        const { get_Antifact } = this.props.meseumListAction;
+        get_Antifact({ museumId: this.props.paramPassAction.museumId }, 1, 100, null);
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -68,12 +72,31 @@ class MuseumDetail extends Component {
     render() {
         const locale = "vn";
         const { paramPassAction } = this.props;
+        const { listAntifact, searchAntifactErorr, isLoading } = this.props.museumDetailReducer;
+        var videoUrl = null;
+        if (paramPassAction && paramPassAction.videoProfile) {
+            videoUrl = AppConfig.API_HOST + paramPassAction.videoProfile;
+        }
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
                 <ScrollView>
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
+                            <Video source={{ uri: videoUrl }}   // Can be a URL or a local file.
+                                ref={(ref) => {
+                                    this.player = ref
+                                }}                                      // Store reference
+                                onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                                onEnd={this.onEnd}                      // Callback when playback finishes
+                                onError={this.videoError}               // Callback when video cannot be loaded
+                                onFullscreenPlayerWillPresent={this.fullScreenPlayerWillPresent} // Callback before fullscreen starts
+                                onFullscreenPlayerDidPresent={this.fullScreenPlayerDidPresent}   // Callback after fullscreen started
+                                onFullscreenPlayerWillDismiss={this.fullScreenPlayerWillDismiss} // Callback before fullscreen stops
+                                onFullscreenPlayerDidDismiss={this.fullScreenPlayerDidDismiss}  // Callback after fullscreen stopped
+                                onProgress={this.setTime}               // Callback every ~250ms with currentTime
+                                onTimedMetadata={this.onTimedMetadata}  // Callback when the stream receive some metadata
+                                style={styles.backgroundVideo} />
                             {/* <YouTube
                             videoId="aJOTlE1K90k"   // The YouTube video ID
                             play={true}             // control playback of video with true/false
@@ -112,7 +135,9 @@ class MuseumDetail extends Component {
                             {!this.state.isSummary ?
                                 <ScrollView>
                                     <Text>
-                                        {paramPassAction.description}
+                                        {(paramPassAction.description != "" && paramPassAction.description != null) == true ? paramPassAction.description : I18n.t("description", {
+                                            locale: "vn"
+                                        })}
                                     </Text>
                                     <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
                                         <Text uppercase={false} style={{ color: '#007db7' }}>
@@ -123,9 +148,11 @@ class MuseumDetail extends Component {
                                     </Button>
                                 </ScrollView>
                                 :
-                                <View style={{width:'100%'}}>
+                                <View style={{ width: '100%' }}>
                                     <Text>
-                                        {this.textEclipse(paramPassAction.description)}
+                                        {this.textEclipse((paramPassAction.description != "" && paramPassAction.description != null) == true ? paramPassAction.description : I18n.t("description", {
+                                            locale: "vn"
+                                        }))}
                                     </Text>
                                     <Button onPress={() => { this.setState({ isSummary: false }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
                                         <Text uppercase={false} style={{ color: '#007db7' }}>
@@ -147,7 +174,7 @@ class MuseumDetail extends Component {
                                     this.list = ref;
                                 }}
                                 style={styles.listResult}
-                                data={[{}]}
+                                data={listAntifact ? listAntifact : []}
                                 keyExtractor={this._keyExtractor}
                                 renderItem={this.renderFlatListItem.bind(this)}
                                 numColumns={2}
@@ -191,21 +218,23 @@ class MuseumDetail extends Component {
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
         return (
-            <View
+            <TouchableOpacity
                 key={item.index}
                 style={
                     styles.item_container_half
                 }
                 onPress={() => {
-                    // if (!blockAction) {
-                    //     blockAction = true;
-
-                    // }
+                    Actions.museumProduct({ paramPassAction: item });
                 }}
             >
-                <ItemDividerProduct></ItemDividerProduct>
+                <ItemResultProduct key={item.index}
+                    userName={'bach'}
+                    position={'bền bền'}
+                    phone={'đổi phone'}
+                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+                    data={item}></ItemResultProduct>
 
-            </View>
+            </TouchableOpacity>
         );
     }
 

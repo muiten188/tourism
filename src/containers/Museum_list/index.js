@@ -120,7 +120,7 @@ class MuseumList extends Component {
                                     onRefresh={() => {
                                         //this.loading.show();
                                         setTimeout(() => {
-                                            search_Museum(null, 1, 10, null);
+                                            search_Museum(this.state.areaId ? { areaId: this.state.areaId } : null, 1, 100, null);
                                         }, 0);
 
                                     }

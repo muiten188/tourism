@@ -158,7 +158,7 @@ class login extends React.Component {
       })
 
       const user = await GoogleSignin.currentUserAsync()
-      debugger;
+      
       console.log(user)
       this.setState({ user })
     } catch (err) {
@@ -170,13 +170,13 @@ class login extends React.Component {
     const { loginAction } = this.props;
     GoogleSignin.signIn()
       .then(user => {
-        debugger;
+        
         console.log(user)
         this.setState({ user: user })
         loginAction.login(user);
       })
       .catch(err => {
-        debugger;
+        
         console.warn(err)
       })
       .done()

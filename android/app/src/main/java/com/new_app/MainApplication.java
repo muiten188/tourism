@@ -3,6 +3,7 @@ package com.new_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -47,6 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
             new BeaconsAndroidPackage(),
             new ReactNativeYouTube(),
           new RNGoogleSigninPackage(),
