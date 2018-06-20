@@ -35,7 +35,7 @@ import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
-import ItemDividerProduct from '../../components/Item_divider_product';
+import ItemResultProduct from '../../components/Item_result_product';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
@@ -63,7 +63,7 @@ class MuseumProduct extends Component {
     }
 
     componentDidMount() {
-        const { get_AntifactByID } = this.props.meseumProductAction;
+        const { get_AntifactByID, get_AntifactByTag } = this.props.meseumProductAction;
         const { paramPassAction } = this.props;
         interval = setInterval(() => {
             this.setState({
@@ -72,6 +72,9 @@ class MuseumProduct extends Component {
         }, 2000);
         if (paramPassAction && paramPassAction.artId) {
             get_AntifactByID(paramPassAction.artId, 1, 100, null);
+        }
+        if (paramPassAction && paramPassAction.tag) {
+            get_AntifactByTag({ tagId: paramPassAction.tag }, 1, 100, null);
         }
     }
 
@@ -87,7 +90,7 @@ class MuseumProduct extends Component {
 
     render() {
         const locale = "vn";
-        const { antifactDetail } = this.props.museumProductReducer;
+        const { antifactDetail, listAntifactByTag,isLoading } = this.props.museumProductReducer;
         var attachments = []
         if (antifactDetail && antifactDetail.attachments) {
             for (var i = 0; i < antifactDetail.attachments.length; i++) {
@@ -100,8 +103,6 @@ class MuseumProduct extends Component {
                 }
             }
         }
-
-
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
@@ -153,7 +154,7 @@ class MuseumProduct extends Component {
                                     this.list = ref;
                                 }}
                                 style={styles.listResult}
-                                data={[{}]}
+                                data={listAntifactByTag ? listAntifactByTag : []}
                                 keyExtractor={this._keyExtractor}
                                 renderItem={this.renderFlatListItem.bind(this)}
                                 numColumns={2}
@@ -188,6 +189,12 @@ class MuseumProduct extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row>
+                        <Loading
+                            ref={ref => {
+                                this.loading = ref;
+                            }}
+                            isShow={isLoading}
+                        />
                     </Grid>
                 </ScrollView>
             </Container>
@@ -209,7 +216,11 @@ class MuseumProduct extends Component {
                     // }
                 }}
             >
-                <ItemDividerProduct></ItemDividerProduct>
+                <ItemResultProduct
+                    data={item}
+                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+                    item={item}>
+                </ItemResultProduct>
 
             </View>
         );

@@ -42,6 +42,7 @@ import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 // import YouTube from 'react-native-youtube'
 import * as AppConfig from "../../config/app_config";
+import VideoPlayer from "../../components/VideoPlayer";
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -77,13 +78,22 @@ class MuseumDetail extends Component {
         if (paramPassAction && paramPassAction.videoProfile) {
             videoUrl = AppConfig.API_HOST + paramPassAction.videoProfile;
         }
+        var imgUrl = null;
+        if (paramPassAction && paramPassAction.imgProfile) {
+            imgUrl = AppConfig.API_HOST + paramPassAction.imgProfile;
+        }
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
                 <ScrollView>
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
-                            <Video source={{ uri: videoUrl }}   // Can be a URL or a local file.
+                            <VideoPlayer video={{ uri: videoUrl }}
+                                volume={0.5}
+                                onClosePressed={() => { }}
+                                poster={imgUrl}
+                            />
+                            {/* <Video source={{ uri: videoUrl }}   // Can be a URL or a local file.
                                 ref={(ref) => {
                                     this.player = ref
                                 }}                                      // Store reference
@@ -96,7 +106,7 @@ class MuseumDetail extends Component {
                                 onFullscreenPlayerDidDismiss={this.fullScreenPlayerDidDismiss}  // Callback after fullscreen stopped
                                 onProgress={this.setTime}               // Callback every ~250ms with currentTime
                                 onTimedMetadata={this.onTimedMetadata}  // Callback when the stream receive some metadata
-                                style={styles.backgroundVideo} />
+                                style={styles.backgroundVideo} /> */}
                             {/* <YouTube
                             videoId="aJOTlE1K90k"   // The YouTube video ID
                             play={true}             // control playback of video with true/false
@@ -209,6 +219,12 @@ class MuseumDetail extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row>
+                        <Loading
+                            ref={ref => {
+                                this.loading = ref;
+                            }}
+                            isShow={isLoading}
+                        />
                     </Grid>
                 </ScrollView>
             </Container>

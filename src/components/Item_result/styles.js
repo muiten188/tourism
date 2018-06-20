@@ -76,7 +76,7 @@ export default {
     left: 0,
     right: 0,
     top:0,
-    opacity: 0.5
+    opacity: 0.4
   },
   textContext: {
     textAlign: 'center',

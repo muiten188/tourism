@@ -34,7 +34,7 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { key, userName, position, phone, avatarUrl, item } = this.props;
+    const { key, userName, position, phone, avatarUrl, data } = this.props;
     return (
       <View key={key} style={styles.itemList}>
         {/* <View style={styles.headerList}>
@@ -46,7 +46,7 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={styles.listResult}
-          data={[{},{},{}]}
+          data={data}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
           numColumns={2}

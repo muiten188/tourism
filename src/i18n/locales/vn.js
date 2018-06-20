@@ -26,7 +26,7 @@ export default {
   finGuider: "Tìm Hướng dẫn viên",
   locationGuide: 'Dẫn đường',
   view_more: "Xem thêm",
-  product:'HIỆN VẬT',
+  product:'Hiện vật',
   summary_button:"Thu gọn",
   similar_product:'Hiện vật liên quan',
   searchHistory:"Lịch sử tìm kiếm",

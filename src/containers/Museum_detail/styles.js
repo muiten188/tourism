@@ -15,7 +15,7 @@ export default {
         margin: 3
     },
     rowYoutube: {
-        height: 150,
+        height: 180,
         backgroundColor: 'black'
     },
     rowBar: {

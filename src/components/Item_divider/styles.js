@@ -19,7 +19,7 @@ export default {
   headerList: { width: '100%' },
   headerListText: {
     textAlign: 'left',
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginBottom: 3
   },
   listResult:{

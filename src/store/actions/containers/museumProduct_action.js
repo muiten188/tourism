@@ -4,7 +4,7 @@ import * as helper from '../../../helper';
 
 export function get_AntifactByID(id, currentPage, pageSize, user) {
     let data = [];
-     
+
     //let dataPost = values || {};
     //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
     return dispatch => {
@@ -63,5 +63,69 @@ function _seach_ANTIFACT_DETAILError() {
 export function clearANTIFACT_DETAILError() {
     return {
         type: types.SEARCH_ANTIFACT_DETAIL_CLEAR_ERROR
+    };
+}
+
+
+export function get_AntifactByTag(values, currentPage, pageSize, user) {
+    let data = [];
+
+    let dataPost = values || {};
+    //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
+    return dispatch => {
+        //dispatch(_searching_Antifact());
+        fetch(`${AppConfig.GET_ANTIFACT_BYTAG}?${helper.getQueryString(dataPost)}`, {
+            headers: helper.buildHeader(user),
+            method: "GET"
+        })
+            .then(function (response) {
+                if (response.status == 401) {
+                    //dispatch(_logout());
+                } else if (response.status != 200) {
+                    dispatch(_seach_AntifactByTagError());
+                } else {
+                    return response.json();
+                }
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    data = responseJson
+                    dispatch(_search_AntifactByTag(data));
+                }
+                else {
+                    dispatch(_seach_AntifactByTagError());
+                }
+            })
+            .catch(function (error) {
+                dispatch(_seach_AntifactByTagError());
+            });
+    };
+}
+function _search_AntifactByTag(data) {
+    return {
+        type: types.SEARCH_ANTIFACT_BY_TAG,
+        data: data,
+        isLoading: false,
+        valuesForm: null
+    };
+}
+
+function _searching_Antifact_By_Tag() {
+    return {
+        type: types.SEARCHING_ANTIFACT_BY_TAG,
+        isLoading: true
+    };
+}
+
+function _seach_AntifactByTagError() {
+    return {
+        type: types.SEARCH_ANTIFACT_BY_TAG_ERROR,
+        searchErorr: true,
+        isLoading: false
+    };
+}
+export function clearAntifactByTagError() {
+    return {
+        type: types.SEARCH_ANTIFACT_BY_TAG_CLEAR_ERROR
     };
 }
