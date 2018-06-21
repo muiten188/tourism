@@ -1,135 +1,68 @@
 import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
-import { buildHeader, fetchCatch, _logout } from "../../../helper";
-
-export function search(values, currentPage, pageSize, user) {
+import * as helper from '../../../helper';
+import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
+export function get_AntifactByUUID(values, user) {
   let data = [];
-  let dataPost = values || {};
-  dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-  return dispatch => {
-    //dispatch(_searching());
 
-    fetch(`${AppConfig.API_HOST}?${getQueryString(dataPost)}`, {
-      headers: buildHeader(user),
-      method: "GET",
-      qs: dataPost
+  let dataPost = values || {};
+  //dataPost = { ...dataPost };
+  debugger;
+  return dispatch => {
+    //dispatch(_searching_Antifact());
+    fetch(`${AppConfig.GET_ANTIFACT_BY_UUID}?${helper.getQueryString(dataPost)}`, {
+      headers: helper.buildHeader(user),
+      method: "GET"
     })
       .then(function (response) {
         if (response.status == 401) {
-          dispatch(_logout());
+          //dispatch(_logout());
         } else if (response.status != 200) {
-          dispatch(_seachError());
+          dispatch(_seach_ANTIFACT_BY_UUIDError());
         } else {
           return response.json();
         }
       })
-      .then(function (responseJson) {
+      .then((responseJson) => {
         if (responseJson) {
-          if (responseJson.data) {
-            data = responseJson.data;
-            dispatch(_search(data, dataPost));
-          } else {
-            dispatch(_seachError());
-          }
+          data = responseJson
+          //dispatch(_search_ANTIFACT_BY_UUID(data));
+          Actions.museumProduct({ paramPassAction: data });
         }
         else {
-          dispatch(_seachError());
+          dispatch(_seach_ANTIFACT_BY_UUIDError());
         }
       })
       .catch(function (error) {
-        dispatch(_seachError());
+        dispatch(_seach_ANTIFACT_BY_UUIDError());
       });
   };
 }
-
-function _search(data, valuesForm) {
+function _search_ANTIFACT_BY_UUID(data) {
   return {
-    type: types.LIST_RESULT,
+    type: types.SEARCH_ANTIFACT_BY_UUID,
     data: data,
     isLoading: false,
-    valuesForm: valuesForm
+    valuesForm: null
   };
 }
 
-function _searching() {
+function _searching_ANTIFACT_BY_UUID() {
   return {
-    type: types.SEARCHING,
+    type: types.SEARCHING_ANTIFACT_BY_UUID,
     isLoading: true
   };
 }
 
-function _seachError() {
+function _seach_ANTIFACT_BY_UUIDError() {
   return {
-    type: types.SEARCH_ERROR,
+    type: types.SEARCH_ANTIFACT_BY_UUID_ERROR,
+    searchErorr: true,
     isLoading: false
   };
 }
-
-function getQueryString(params) {
-  return Object.keys(params)
-    .map(k => {
-      if (Array.isArray(params[k])) {
-        return params[k]
-          .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
-          .join("&");
-      }
-
-      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
-    })
-    .join("&");
-}
-
-export function searchReset() {
+export function clearANTIFACT_BY_UUIDError() {
   return {
-    type: types.SEARCH_RESET
-  };
-}
-
-export function loadMore(values, currentPage, pageSize, user) {
-  let data = [];
-  let dataPost = values || {};
-  dataPost = { ...dataPost, currentPage: currentPage + 1, pageSize: pageSize };
-  return dispatch => {
-    // dispatch(_searching());
-    fetch(`${AppConfig.API_HOST}?${getQueryString(dataPost)}`, {
-      headers: buildHeader(user),
-      method: "GET",
-      qs: dataPost
-    })
-      .then(function (response) {
-        if (response.status == 401) {
-          dispatch(_logout());
-        } else if (response.status != 200) {
-          dispatch(_seachError());
-        } else {
-          return response.json();
-        }
-      })
-      .then(function (responseJson) {
-        if (responseJson) {
-          if (responseJson.data) {
-            data = responseJson.data;
-            dispatch(_dataMore(data));
-          } else {
-            dispatch(_seachError());
-          }
-        }
-      })
-      .catch(function (error) {
-        dispatch(_seachError());
-      });
-  };
-}
-
-function _dataMore(data) {
-  return {
-    type: types.SEARCH_LOAD_MORE,
-    data: data
-  };
-}
-
-export function clearError() {
-  return {
-    type: types.SEARCH_CLEAR_ERROR
+    type: types.SEARCH_ANTIFACT_BY_UUID_CLEAR_ERROR
   };
 }

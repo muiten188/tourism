@@ -192,7 +192,7 @@ class MuseumList extends Component {
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
-        console.log(item);
+        //console.log(item);
         return (
             <View
                 key={item.index}
