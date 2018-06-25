@@ -77,7 +77,7 @@ class Home extends Component {
     // Print a log of the detected iBeacons (1 per second)
 
     const { get_AntifactByUUID } = this.props.homeAction;
-    this.detectBeacons();
+    
     DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
       console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
@@ -96,7 +96,7 @@ class Home extends Component {
         console.log('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
-    
+    this.detectBeacons();
     this.state = {
 
     };
