@@ -66,7 +66,7 @@ class Home extends Component {
       await Beacons.startRangingBeaconsInRegion('REGION1')
       console.log(`Beacons ranging started succesfully!`)
     } catch (err) {
-      alert(`Beacons ranging not started, error: ${error}`)
+      console.log(`Beacons ranging not started, error: ${error}`)
     }
 
 
@@ -75,13 +75,14 @@ class Home extends Component {
   constructor(props) {
     super(props);
     // Print a log of the detected iBeacons (1 per second)
-    
+
     const { get_AntifactByUUID } = this.props.homeAction;
+    this.detectBeacons();
     DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
       console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
-        
-        if (data.beacons[0].uuid != current_uuid ) {
+
+        if (data.beacons[0].uuid != current_uuid) {
           current_uuid = data.beacons[0].uuid;
           get_AntifactByUUID({ beaconUUID: current_uuid });
           //blockUUID = true;
@@ -92,10 +93,10 @@ class Home extends Component {
           //   blockUUID = false;
           // }, 10000);
         }
-        alert('Tìm thấy beacon:', data.beacons[0].uuid)
+        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
-    this.detectBeacons();
+    
     this.state = {
 
     };
