@@ -32,7 +32,8 @@ export default class extends Component {
     const {
       showButtonLeft,
       headerTitle,
-      onBack
+      onBack,
+      hideRightButton
     } = this.props;
     if (onBack) {
       _onBack = onBack;
@@ -43,7 +44,7 @@ export default class extends Component {
         <Grid>
           {showButtonLeft == true || Platform.OS === 'ios' ? (
             <Col style={styles.itemButtonHeader}>
-              <Button transparent onPress={_onBack} style={{width:'100%'}}>
+              <Button transparent onPress={_onBack} style={{ width: '100%' }}>
                 <IconVector name="chevron-circle-left" size={20} style={styles.whileText} />
               </Button>
             </Col>
@@ -61,16 +62,23 @@ export default class extends Component {
             </Row>
 
           </Col>
-          <Col style={styles.itemHeaderEnd}>
-            <Button transparent>
-              <IconVector name="search" size={20} style={{ color: '#fff' }} />
-            </Button>
-          </Col>
-          <Col style={styles.itemHeaderEnd}>
-            <Button transparent>
-              <IconIonicons name="md-qr-scanner" size={24} style={{ color: '#fff' }} />
-            </Button>
-          </Col>
+          {!hideRightButton ?
+            <Col style={styles.itemHeaderEnd}>
+              <Button transparent>
+                <IconVector name="search" size={20} style={{ color: '#fff' }} />
+              </Button>
+            </Col>
+            : null
+          }
+          {!hideRightButton ?
+            <Col style={styles.itemHeaderEnd}>
+              <Button transparent onPress={() => { Actions.qrScanner() }}>
+                <IconIonicons name="md-qr-scanner" size={24} style={{ color: '#fff' }} />
+              </Button>
+            </Col>
+            : null
+          }
+
         </Grid>
       </Header>
     );

@@ -32,7 +32,7 @@ import * as profileAction from "../../store/actions/containers/profile_action";
 import Loading from "../../components/Loading";
 import User from "../../components/User";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-
+import { RNCamera, FaceDetector } from 'react-native-camera';
 const blockAction = false;
 const blockLoadMoreAction = false;
 

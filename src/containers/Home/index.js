@@ -50,6 +50,7 @@ const blockLoadMoreAction = false;
 const blockUUID = false;
 const timeoutUUID = null;
 const current_uuid = null;
+
 class Home extends Component {
   currentApartment = {};
   static navigationOptions = {
@@ -59,11 +60,11 @@ class Home extends Component {
   async detectBeacons() {
     // Tells the library to detect iBeacons
     Beacons.detectIBeacons()
-
+    //Beacons.requestWhenInUseAuthorization();
     // Start detecting all iBeacons in the nearby
     try {
       await Beacons.startRangingBeaconsInRegion('REGION1')
-      //alert(`Beacons ranging started succesfully!`)
+      console.log(`Beacons ranging started succesfully!`)
     } catch (err) {
       alert(`Beacons ranging not started, error: ${error}`)
     }
@@ -74,9 +75,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     // Print a log of the detected iBeacons (1 per second)
+    
     const { get_AntifactByUUID } = this.props.homeAction;
     DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+      console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
+        
         if (data.beacons[0].uuid != current_uuid ) {
           current_uuid = data.beacons[0].uuid;
           get_AntifactByUUID({ beaconUUID: current_uuid });
@@ -88,7 +92,7 @@ class Home extends Component {
           //   blockUUID = false;
           // }, 10000);
         }
-        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+        alert('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
     this.detectBeacons();

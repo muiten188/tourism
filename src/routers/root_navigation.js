@@ -14,6 +14,7 @@ import Museum_product from '../containers/Museum_product';
 import Search_history from '../containers/Search_history';
 import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
+import QrCodeScanner from '../containers/QrScanner';
 import PropTypes from 'prop-types';
 
 class RootNavigation extends React.Component {
@@ -84,6 +85,11 @@ class RootNavigation extends React.Component {
                     <Scene key="guiderRating"
                         component={GuiderRating}
                         title="Guider Rating"
+                        initial={false}>
+                    </Scene>
+                    <Scene key="qrScanner"
+                        component={QrCodeScanner}
+                        title="qrScanner"
                         initial={false}>
                     </Scene>
                 </Stack>

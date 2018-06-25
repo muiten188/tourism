@@ -11,8 +11,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
-
-
+import org.reactnative.camera.RNCameraPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -35,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     AppEventsLogger.activateApp(this);
-    //SoLoader.init(this, /* native exopackage */ false);
+    // SoLoader.init(this, /* native exopackage */ false);
   }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -46,21 +45,14 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new ReactVideoPackage(),
-            new BeaconsAndroidPackage(),
-            new ReactNativeYouTube(),
-          new RNGoogleSigninPackage(),
-          new RNI18nPackage(),
-          new VectorIconsPackage(),
-          new FBSDKPackage(mCallbackManager)
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
+          new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNGoogleSigninPackage(), new RNI18nPackage(),
+          new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
     }
 
     // @Override
     // protected String getJSMainModuleName() {
-    //   return "index";
+    // return "index";
     // }
   };
 
