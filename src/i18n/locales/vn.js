@@ -41,5 +41,6 @@ export default {
   chooseGuider:'Chọn hướng dẫn viên',
   RatingDes:"Mời bạn đánh giá cho hướng dẫn viên",
   rating:"Đánh giá",
-  description:'Mô tả:'
+  description:'Mô tả:',
+  find:"Tìm kiếm"
 };

@@ -12,6 +12,7 @@ import guiderReducer from "../../store/reducers/containers/guider_reducer";
 import guiderRatingReducer from "../../store/reducers/containers/guider_rating_reducer";
 import app_Reducer from "../../store/reducers/app_reducer";
 import qrCodeScannerReducer from '../../store/reducers/containers/qrCodeScanner_reducer';
+import searchMuseumReducer from '../../store/reducers/containers/searchMuseum_reducer';
 import router_Reducer from "../../store/reducers/router/router_reducer";
 import * as types from "../../store/constants/action_types";
 import { combineReducers } from "redux";
@@ -29,6 +30,7 @@ const appReducer = combineReducers({
   findGuiderReducer,
   profileReducer,
   qrCodeScannerReducer,
+  searchMuseumReducer,
   app_Reducer,
   router_Reducer,
   form: formReducer

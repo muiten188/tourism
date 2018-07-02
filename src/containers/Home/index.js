@@ -44,7 +44,6 @@ import IconVector from 'react-native-vector-icons/FontAwesome';
 import MuseumList from '../Museum_list';
 import Profile from '../Profile';
 import FindGuider from '../Find_guider';
-
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
