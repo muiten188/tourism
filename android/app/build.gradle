@@ -96,6 +96,9 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
+    dexOptions {
+        jumboMode = true
+    }
     defaultConfig {
         applicationId "com.new_app"
         minSdkVersion 16
