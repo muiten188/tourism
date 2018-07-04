@@ -42,5 +42,7 @@ export default {
   RatingDes:"Mời bạn đánh giá cho hướng dẫn viên",
   rating:"Đánh giá",
   description:'Mô tả:',
-  find:"Tìm kiếm"
+  find:"Tìm kiếm",
+  confirmPassword:"Nhập lại mật khẩu",
+  fullName:'Họ Tên'
 };

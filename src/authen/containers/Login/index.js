@@ -6,7 +6,8 @@ import {
   View,
   AsyncStorage,
   Alert,
-  NativeModules
+  NativeModules,
+  ScrollView
 } from "react-native";
 import {
   Container,
@@ -42,6 +43,26 @@ import PropTypes from 'prop-types';
 const username = "";
 const password = "";
 
+const validateLogin = values => {
+  const error = {};
+  error.username = "";
+  error.password = "";
+  var username = values.username;
+  var password = values.password;
+  if (values.username === undefined) {
+    username = "";
+  }
+  if (values.password === undefined) {
+    password = "";
+  }
+  if (username.length == 0 || username == "") {
+    error.username = "trống";
+  }
+  if (password.length == 0 || password == "") {
+    error.password = "trống";
+  }
+  return error;
+};
 class login extends React.Component {
   static navigationOptions = {
     header: null
@@ -95,28 +116,28 @@ class login extends React.Component {
     I18n.defaultLocale = "vi";
     I18n.locale = "vi";
     I18n.currentLocale();
-    AccessToken.getCurrentAccessToken().then(
-      (data) => {
-        if (data) {
-          let accessToken = data.accessToken;
+    // AccessToken.getCurrentAccessToken().then(
+    //   (data) => {
+    //     if (data) {
+    //       let accessToken = data.accessToken;
 
-          const infoRequest = new GraphRequest(
-            '/me',
-            {
-              accessToken: accessToken,
-              parameters: {
-                fields: {
-                  string: 'email,name,first_name,middle_name,last_name'
-                }
-              }
-            },
-            this.responseInfoCallback.bind(this)
-          );
+    //       const infoRequest = new GraphRequest(
+    //         '/me',
+    //         {
+    //           accessToken: accessToken,
+    //           parameters: {
+    //             fields: {
+    //               string: 'email,name,first_name,middle_name,last_name'
+    //             }
+    //           }
+    //         },
+    //         this.responseInfoCallback.bind(this)
+    //       );
 
-          // Start the graph request.
-          new GraphRequestManager().addRequest(infoRequest).start();
-        }
-      })
+    //       // Start the graph request.
+    //       new GraphRequestManager().addRequest(infoRequest).start();
+    //     }
+    //   })
   }
 
   componentWillMount() {
@@ -158,7 +179,7 @@ class login extends React.Component {
       })
 
       const user = await GoogleSignin.currentUserAsync()
-      
+
       console.log(user)
       this.setState({ user })
     } catch (err) {
@@ -170,13 +191,13 @@ class login extends React.Component {
     const { loginAction } = this.props;
     GoogleSignin.signIn()
       .then(user => {
-        
+
         console.log(user)
         this.setState({ user: user })
         loginAction.login(user);
       })
       .catch(err => {
-        
+
         console.warn(err)
       })
       .done()
@@ -203,32 +224,112 @@ class login extends React.Component {
       loginReducer.Logged = null;
     }
     return (
-      <View style={{ flex: 1 }}>
+      <Container
+
+      >
+
         <Loading isShow={loginReducer.Loging} />
         {/* background */}
         <Image
           source={require("../../../resources/assets/splash1.png")}
           style={[styles.backgroundImage]}
         />
+
         <View style={styles.screen}>
           <View style={styles.loginform}>
-            <View style={styles.container_login}>
-              <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
-                <Text>Facebook</Text>
-              </Button>
-              {/* <GoogleSigninButton
+            <Grid style={{ width: '100%' }}>
+              <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <Form style={styles.form}>
+                  <View style={styles.item}>
+                    {/* <Icon active name="person" /> */}
+                    <Field
+                      icon="user-circle-o"
+                      name="username"
+                      placeholder={I18n.t("account", {
+                        locale: locale ? locale : "vi"
+                      })}
+                      component={InputField}
+                    />
+                  </View>
+                  <View style={styles.item}>
+                    {/* <Icon active name="lock" /> */}
+                    <Field
+                      icon="key"
+                      name="password"
+                      placeholder={I18n.t("password", {
+                        locale: locale ? locale : "vi"
+                      })}
+                      secureTextEntry={true}
+                      component={InputField}
+                    />
+                  </View>
+                  <Button
+                    full
+                    style={[styles.buttonLogin,{backgroundColor:'#007db7'}]}
+                    onPress={handleSubmit(loginAction.login)}
+                  >
+                    <Text>
+                      {I18n.t("login", {
+                        locale: this.state.languageSelect
+                          ? this.state.languageSelect
+                          : "vi"
+                      })}
+                    </Text>
+                  </Button>
+                  <Grid>
+                    <Col>
+                      <Button transparent dark style={[styles.buttonLogin]} 
+                      onPress={()=>{
+                        Actions.register();
+                      }}>
+                        <Text uppercase={false} >
+                          {I18n.t("register", {
+                            locale: this.state.languageSelect
+                              ? this.state.languageSelect
+                              : "vi"
+                          })}
+                        </Text>
+                      </Button>
+                    </Col>
+                    <Col  size={1.5}>
+                      <Button transparent dark style={[styles.buttonLogin]} >
+                        <Text uppercase={false} x>
+                          {I18n.t("forgotPassword", {
+                            locale: this.state.languageSelect
+                              ? this.state.languageSelect
+                              : "vi"
+                          })}
+                        </Text>
+                      </Button>
+                    </Col>
+                  </Grid>
+
+
+                </Form>
+              </Row>
+              <Row style={{ height: 50 }}>
+                <Col style={{ paddingRight: 2 }}>
+                  <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
+                    <Text>Facebook</Text>
+                  </Button>
+                </Col>
+                <Col style={{ paddingLeft: 2 }}>
+                  <Button block onPress={this._googleSignIn.bind(this)} style={[styles.buttonLogin, styles.buttonLoginGg]}  >
+                    <Text>Google</Text>
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+            {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
             size={GoogleSigninButton.Size.Standard}
             color={GoogleSigninButton.Color.Auto}
             onPress={this._googleSignIn.bind(this)}
           /> */}
-              <Button block onPress={this._googleSignIn.bind(this)} style={[styles.buttonLogin, styles.buttonLoginGg]}  >
-                <Text>Google</Text>
-              </Button>
-            </View>
           </View>
         </View>
-      </View>
+
+      </Container>
     );
   }
   //facebook call back
@@ -276,6 +377,7 @@ function mapToDispatch(dispatch) {
 
 login = reduxForm({
   form: "LoginForm",
+  validate:validateLogin,
   enableReinitialize: true
 })(login);
 login = connect(mapStateToProps, mapToDispatch)(login);

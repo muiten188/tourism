@@ -51,7 +51,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={false}
+                        initial={true}
                     />
                     <Scene
                         key="register"
@@ -61,7 +61,7 @@ class RootNavigation extends React.Component {
                     <Scene key="home"
                         component={Home}
                         title="Home"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene key="museumDetail"
                         component={Museum_detail}

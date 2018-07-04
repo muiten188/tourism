@@ -6,36 +6,61 @@ export default {
     left: 0,
     right: 0,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+  },
+  container_outer: {
+    
   },
   loginform: {
-    width: 400,
-    height: "100%",
-    backgroundColor: "transparent"
+    width: '80%',
+    height: 350,
+    marginTop:78,
+    backgroundColor: "transparent",
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   backgroundImage: {
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: "cover"
+    resizeMode: "stretch"
   },
   item: {
     marginBottom: 10,
     borderRadius: 5,
-    borderWidth: 0.5
+    height:40,
+    padding:1,
+    height:44,
+    borderWidth: 0.3,
+    borderColor:'black'
+  },
+  buttonLogin:{
+    paddingLeft:4,
+    paddingRight:4,
+    width:'100%',
+    marginBottom:15,
+    height:35,
+  },
+  buttonLoginFb:{
+
+  },
+  buttonLoginGg:{
+    backgroundColor:'#f00'
   },
   container_login: {
-    marginTop: -105,
-    paddingBottom: 15,
-    paddingLeft: 25,
-    paddingRight: 25
+    //marginBottom:'50%'
+    justifyContent:'center',
+    alignItems:'center'
   },
   form: {
-    paddingTop: 30,
+    paddingTop: 20,
     padding: 20,
-    height: 280,
     borderRadius: 5,
-    borderWidth: 1,
+    width:'100%',
+    height:330,
+    borderWidth: 0.5,
+    borderColor:'#ccc',
     backgroundColor: "#fff"
   },
   content_login: {
@@ -46,8 +71,8 @@ export default {
   col_footer: {
     height: 50,
     paddingTop: 10,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   text_footer: {
     color: "#fff"
