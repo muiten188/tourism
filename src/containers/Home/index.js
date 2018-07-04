@@ -194,7 +194,7 @@ class Home extends Component {
                     </TabHeading>}>
                     <MuseumList />
                   </Tab>
-                  <Tab heading={<TabHeading style={[styles.tabHeading, { width: 100 }]}>
+                  {/* <Tab heading={<TabHeading style={[styles.tabHeading, { width: 100 }]}>
                     <Grid>
                       <Row style={styles.iconTab}>
                         <IconVector name="users" size={20} />
@@ -209,7 +209,7 @@ class Home extends Component {
 
                   </TabHeading>}>
                     <FindGuider />
-                  </Tab>
+                  </Tab> */}
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>

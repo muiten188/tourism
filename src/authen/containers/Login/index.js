@@ -7,7 +7,8 @@ import {
   AsyncStorage,
   Alert,
   NativeModules,
-  ScrollView
+  ScrollView,
+  Keyboard
 } from "react-native";
 import {
   Container,
@@ -265,7 +266,7 @@ class login extends React.Component {
                   </View>
                   <Button
                     full
-                    style={[styles.buttonLogin,{backgroundColor:'#007db7'}]}
+                    style={[styles.buttonLogin, { backgroundColor: '#007db7' }]}
                     onPress={handleSubmit(loginAction.login)}
                   >
                     <Text>
@@ -278,10 +279,10 @@ class login extends React.Component {
                   </Button>
                   <Grid>
                     <Col>
-                      <Button transparent dark style={[styles.buttonLogin]} 
-                      onPress={()=>{
-                        Actions.register();
-                      }}>
+                      <Button transparent dark style={[styles.buttonLogin]}
+                        onPress={() => {
+                          Actions.register();
+                        }}>
                         <Text uppercase={false} >
                           {I18n.t("register", {
                             locale: this.state.languageSelect
@@ -291,7 +292,7 @@ class login extends React.Component {
                         </Text>
                       </Button>
                     </Col>
-                    <Col  size={1.5}>
+                    <Col size={1.5}>
                       <Button transparent dark style={[styles.buttonLogin]} >
                         <Text uppercase={false} x>
                           {I18n.t("forgotPassword", {
@@ -377,7 +378,7 @@ function mapToDispatch(dispatch) {
 
 login = reduxForm({
   form: "LoginForm",
-  validate:validateLogin,
+  validate: validateLogin,
   enableReinitialize: true
 })(login);
 login = connect(mapStateToProps, mapToDispatch)(login);

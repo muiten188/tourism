@@ -24,6 +24,11 @@ import * as AppConfig from "../../config/app_config";
 const resolveAssetSource = require('resolveAssetSource');
 const userAvar = require("../../resources/assets/user.jpg")
 let text = "Bảo tàng hồ chí minh"
+
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this;
+  return target.replace(new RegExp(search, 'g'), replacement);
+};
 export default class extends PureComponent {
   static navigationOptions = {
     header: null
@@ -31,6 +36,7 @@ export default class extends PureComponent {
 
   render() {
     const { key, avatarUrl, item } = this.props;
+    var urlAvartar = AppConfig.API_HOST + item.imgProfile.replaceAll("\\\\", "/")
     return (
       <View key={key} style={styles.itemList}>
         {/* <Thumbnail

@@ -88,7 +88,7 @@ class MuseumList extends Component {
         }
         return (
             <Container style={styles.container}>
-                <Grid style={{ marginBottom: 45 }}>
+                <Grid style={{  }}>{/* marginBottom: 45 */}
                     <Row style={{ height: 50 }}>
                         <Col><Text style={styles.textSide}>Chọn địa danh</Text></Col>
                         <Col><Picker
@@ -170,7 +170,7 @@ class MuseumList extends Component {
                         />
                     </Row>
                 </Grid>
-                <View style={{
+                {/* <View style={{
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
@@ -185,7 +185,7 @@ class MuseumList extends Component {
                             locale: "vn"
                         })}</Text>
                     </Button>
-                </View>
+                </View> */}
             </Container>
         );
     }
