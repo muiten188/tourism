@@ -16,6 +16,7 @@ import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
 import QrCodeScanner from '../containers/QrScanner';
 import SearchMuseum from '../containers/Search_museum';
+import MuseumMap from '../containers/Museum_map';
 import PropTypes from 'prop-types';
 
 class RootNavigation extends React.Component {
@@ -51,7 +52,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene
                         key="register"
@@ -97,6 +98,11 @@ class RootNavigation extends React.Component {
                         component={SearchMuseum}
                         title="Search Museum"
                         initial={false}>
+                    </Scene>
+                    <Scene key="museumMap"
+                        component={MuseumMap}
+                        title="Museum Map"
+                        initial={true}>
                     </Scene>
                 </Stack>
             </Router>

@@ -28,6 +28,7 @@
     "react-native-tab-navigator": "^0.3.4",
     "react-native-vector-icons": "^4.4.2",
     "react-native-video": "^2.2.0",
+    "react-native-webview-leaflet": "^2.0.501",
     "react-native-youtube": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^4.1.1",
