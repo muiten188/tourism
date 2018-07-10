@@ -25,7 +25,7 @@ import HeaderContent from "../../components/Header_content";
 import * as museumMapAction from '../../store/actions/containers/MuseumMap_action';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Header_content from "../../components/Header_content";
-
+import * as AppConfig from '../../config/app_config';
 class MuseumMap extends Component {
 
     static navigationOptions = {
@@ -56,7 +56,7 @@ class MuseumMap extends Component {
             ref={(ref) => {
               this.webview = ref;
             }}
-            source={{uri: 'http://113.171.23.142:8090/smart-tourist/view-map.html?mapId=1'}}
+            source={{uri: AppConfig.MAP_NO_FRAME}}
             onLoadEnd={this.onWebViewLoaded}
             onMessage={this.handleMessage}
             startInLoadingState={true}

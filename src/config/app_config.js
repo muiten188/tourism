@@ -7,3 +7,4 @@ export const GET_ANTIFACT_BYID = `${API_HOST}api/artifact/get/`;
 export const GET_ANTIFACT_BYTAG = `${API_HOST}api/artifact/get-by-tag`;
 export const GET_ANTIFACT_BY_UUID = `${API_HOST}api/artifact/get/code`;
 export const GET_ANTIFACT_BY_QRCODE = `${API_HOST}api/artifact/get/code`;
+export const MAP_NO_FRAME=`${API_HOST}api/view-map-no-frame?mapId=1`

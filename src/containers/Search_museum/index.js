@@ -67,60 +67,62 @@ class SearchMuseum extends Component {
 
     }
 
-    onTextSearchChange(value){
+    onTextSearchChange(value) {
 
     }
 
     render() {
         const locale = "vn";
+        const { listAntifact } = this.props.searchMuseumReducer;
         return (
-            <ScrollView style={styles.container}>
-                <HeaderContent showButtonLeft={true} search={true} onSearch={this.onTextSearchChange.bind(this)}/>
-                <Grid style={{}}>
-                    <Row>
-                        <FlatList
-                            ref={ref => {
-                                this.list = ref;
-                            }}
-                            style={styles.listResult}
-                            data={[{},{},{},{}]}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this.renderFlatListItem.bind(this)}
-                            numColumns={2}
-                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                            onEndReached={({ distanceFromEnd }) => {
-                                if (distanceFromEnd > 0) {
-                                    // // this.onEndReachedCalledDuringMomentum = true;
-                                    // if (
-                                    //     !blockLoadMoreAction &&
-                                    //     !(listResult.length < pageSize)
-                                    // ) {
+            <Container>
+                <HeaderContent showButtonLeft={true} search={true} onSearch={this.onTextSearchChange.bind(this)} />
+                <ScrollView style={styles.container}>
+                    <Grid style={{}}>
+                        <Row>
+                            <FlatList
+                                ref={ref => {
+                                    this.list = ref;
+                                }}
+                                style={styles.listResult}
+                                data={listAntifact ? listAntifact : []}
+                                keyExtractor={this._keyExtractor}
+                                renderItem={this.renderFlatListItem.bind(this)}
+                                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                                onEndReached={({ distanceFromEnd }) => {
+                                    if (distanceFromEnd > 0) {
+                                        // // this.onEndReachedCalledDuringMomentum = true;
+                                        // if (
+                                        //     !blockLoadMoreAction &&
+                                        //     !(listResult.length < pageSize)
+                                        // ) {
 
-                                    //     blockLoadMoreAction = true;
-                                    //     this.smallLoading.show(),
-                                    //         setTimeout(() => {
-                                    //             searchAction.loadMore(
-                                    //                 valuesForm,
-                                    //                 currentPage,
-                                    //                 pageSize,
-                                    //                 user
-                                    //             )
-                                    //         }, 0);
+                                        //     blockLoadMoreAction = true;
+                                        //     this.smallLoading.show(),
+                                        //         setTimeout(() => {
+                                        //             searchAction.loadMore(
+                                        //                 valuesForm,
+                                        //                 currentPage,
+                                        //                 pageSize,
+                                        //                 user
+                                        //             )
+                                        //         }, 0);
 
-                                    //     setTimeout(() => {
-                                    //         if (loadEnd != true) {
-                                    //             blockLoadMoreAction = false;
-                                    //         }
-                                    //     }, 700);
-                                    // }
-                                }
-                            }}
-                            onEndReachedThreshold={0.7}
-                        />
-                    </Row>
-                </Grid>
+                                        //     setTimeout(() => {
+                                        //         if (loadEnd != true) {
+                                        //             blockLoadMoreAction = false;
+                                        //         }
+                                        //     }, 700);
+                                        // }
+                                    }
+                                }}
+                                onEndReachedThreshold={0.7}
+                            />
+                        </Row>
+                    </Grid>
 
-            </ScrollView>
+                </ScrollView>
+            </Container>
         );
     }
 

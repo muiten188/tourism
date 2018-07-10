@@ -59,8 +59,8 @@ export default {
     resizeMode: 'cover',
     width: '100%',
     height: '100%',
-    borderColor: "black",
-    borderWidth: 0.1,
+    borderColor: "#cccc",
+    borderWidth: 0.3,
     borderRadius: 2
   },
   context: {

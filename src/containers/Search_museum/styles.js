@@ -12,7 +12,10 @@ export default {
         width: "98%",
         justifyContent: "center",
         alignItems: "center",
-        margin: 3
+        margin: 3,
+    },
+    listResult:{
+
     },
     rowYoutube: {
         height: 150,

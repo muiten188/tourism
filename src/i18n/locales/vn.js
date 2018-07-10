@@ -44,5 +44,6 @@ export default {
   description:'Mô tả:',
   find:"Tìm kiếm",
   confirmPassword:"Nhập lại mật khẩu",
-  fullName:'Họ Tên'
+  fullName:'Họ Tên',
+  diagram:'Sơ đồ'
 };

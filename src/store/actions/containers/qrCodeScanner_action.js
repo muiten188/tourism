@@ -5,7 +5,7 @@ import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 export function get_AntifactByQRCODE(values, user) {
     let data = [];
-
+    Actions.pop();
     let dataPost = values || {};
     //dataPost = { ...dataPost };
     return dispatch => {
@@ -27,7 +27,7 @@ export function get_AntifactByQRCODE(values, user) {
                 if (responseJson) {
                     data = responseJson
                     //dispatch(_search_ANTIFACT_BY_QRCODE(data));
-                    Actions.pop();
+                    
                     Actions.museumProduct({ paramPassAction: data });
                 }
                 else {

@@ -365,8 +365,8 @@ function mapStateToProps(state, props) {
     initialValues: state.loginReducer.userForm
       ? state.loginReducer.userForm
       : {
-        username: "",
-        password: ""
+        username: "test",
+        password: "test"
       }
   };
 }

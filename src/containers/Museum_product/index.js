@@ -90,7 +90,7 @@ class MuseumProduct extends Component {
 
     render() {
         const locale = "vn";
-        const { antifactDetail, listAntifactByTag,isLoading } = this.props.museumProductReducer;
+        const { antifactDetail, listAntifactByTag, isLoading } = this.props.museumProductReducer;
         var attachments = []
         if (antifactDetail && antifactDetail.attachments) {
             for (var i = 0; i < antifactDetail.attachments.length; i++) {
@@ -127,12 +127,12 @@ class MuseumProduct extends Component {
                                     </Button>
                                 </Col>
                                 <Col>
-                                    {/* <Button full block transparent iconRight={true} style={styles.buttonTitle}>
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("finGuider", {
-                                        locale: "vn"
-                                    })}</Text>
-                                    <Icon name="user" size={15} style={styles.textWhile} />
-                                </Button> */}
+                                    <Button full block transparent onPress={()=>Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
+                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
+                                            locale: "vn"
+                                        })}</Text>
+                                        <Icon name="map" size={15} style={styles.textWhile} />
+                                    </Button>
                                 </Col>
                             </Grid>
                         </Row>
