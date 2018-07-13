@@ -1,10 +1,12 @@
 import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
+import { Fab } from "native-base";
 export function get_Antifact(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
+    var error=false;
     return dispatch => {
         //dispatch(_searching_Antifact());
         fetch(`${AppConfig.GET_ANTIFACT}?${helper.getQueryString(dataPost)}`, {
@@ -15,6 +17,7 @@ export function get_Antifact(values, currentPage, pageSize, user) {
                 if (response.status == 401) {
                     //dispatch(_logout());
                 } else if (response.status != 200) {
+                    error=true;
                     dispatch(_seach_AntifactError());
                 } else {
                     return response.json();
@@ -30,7 +33,9 @@ export function get_Antifact(values, currentPage, pageSize, user) {
                     }
                 }
                 else {
-                    dispatch(_seach_AntifactError());
+                    if(!error){
+                        dispatch(_seach_AntifactError());
+                    }        
                 }
             })
             .catch(function (error) {

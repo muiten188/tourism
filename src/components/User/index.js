@@ -52,6 +52,8 @@ class user extends React.Component {
 
   render() {
     const { state } = this;
+    const { user, onLogout } = this.props;
+    var oUser = user.user;
     return (
       <View style={styles.viewContain}>
         <Grid>
@@ -60,27 +62,26 @@ class user extends React.Component {
           </Col>
           <Col style={{
             justifyContent: "center",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
+            paddingTop: 10
           }}>
             <Row>
-
-            </Row>
-            <Row>
-              <Text>Đỗ Thành Đạt</Text>
+              <Text>{`${oUser.firstName} ${oUser.lastName}`}</Text>
             </Row>
             <Row>
               <Badge primary>
-                <Text>VIP</Text>
+                <Text>{oUser.accountType}</Text>
               </Badge>
             </Row>
-            <Row>
-              <Text>Ngày hết hạn:10/10/2018</Text>
+            <Row style={{ marginTop: 10 }}>
+              {/* <Text>Ngày hết hạn:10/10/2018</Text> */}
+              <Button onPress={onLogout} small={true}><Text>Đăng xuất</Text></Button>
             </Row>
             <Row>
 
             </Row>
           </Col>
-          <Col style={styles.editCol}>
+          {/* <Col style={styles.editCol}>
             <Row style={{ height: 15 }}>
 
             </Row>
@@ -100,7 +101,7 @@ class user extends React.Component {
             <Row>
 
             </Row>
-          </Col>
+          </Col> */}
         </Grid>
       </View>
     );

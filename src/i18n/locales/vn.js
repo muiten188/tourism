@@ -41,9 +41,11 @@ export default {
   chooseGuider:'Chọn hướng dẫn viên',
   RatingDes:"Mời bạn đánh giá cho hướng dẫn viên",
   rating:"Đánh giá",
-  description:'Mô tả:',
+  description:'Mô tả: ',
   find:"Tìm kiếm",
   confirmPassword:"Nhập lại mật khẩu",
   fullName:'Họ Tên',
-  diagram:'Sơ đồ'
+  diagram:'Sơ đồ',
+  firstName:'Họ',
+  lastName:'Tên'
 };

@@ -1,5 +1,5 @@
 //APP
-export const RESET_APPSTATE="RESET_APPSTATE";
+export const RESET_APPSTATE = "RESET_APPSTATE";
 //Fetch API
 export const FETCH_CATCH = "FETCH_CATCH";
 //authen
@@ -11,7 +11,12 @@ export const LOGGED_IN = "LOGGED_IN";
 export const LOGGED_OUT = "LOGGED_OUT";
 export const EXPORT_FORM = "EXPORT_FORM";
 export const AUTHEN_EXPRI = "AUTHEN_EXPRI";
-
+//register
+export const REGISTER = "REGISTER";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_EROR = "REGISTER_EROR";
+export const REGISTING = "REGISTING";
+export const REGISTER_CLEAR = "REGISTER_CLEAR";
 export const DEFAULT = "DEFAULT";
 //QUICK actions
 export const SEARCH_MUSEUM = "SEARCH_MUSEUM";

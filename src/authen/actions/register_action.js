@@ -3,85 +3,87 @@ import { Keyboard } from "react-native";
 import * as types from "../../store/constants/action_types";
 import * as AppConfig from "../../config/app_config";
 import { Actions } from 'react-native-router-flux';
-export function login(user) {
+
+function getQueryString(params) {
+  return Object.keys(params)
+    .map(k => {
+      if (Array.isArray(params[k])) {
+        return params[k]
+          .map(val => `${encodeURIComponent(k)}[]=${encodeURIComponent(val)}`)
+          .join("&");
+      }
+
+      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
+    })
+    .join("&");
+}
+
+export function register(user) {
 
   return dispatch => {
-    //dispatch(_login(true, user));
+    //dispatch(_register(true, user));
     Keyboard.dismiss();
     //Actions.home()
-    dispatch(_loging());
+    dispatch(_registing());
     let error = false;
-    fetch(`${AppConfig.LOGIN}`, {
+    fetch(`${AppConfig.REGISTER}?${getQueryString(user)}`, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
+      }
     })
       .then(function (response) {
+        
         if (response.status != 200) {
-          dispatch(_login(false));
+          dispatch(_register(false));
           error = true;
         } else {
           return response.json();
         }
       })
       .then(function (responseJson) {
-        if (responseJson && responseJson.user) {
+        if (responseJson) {
           var oUser = responseJson;
-          dispatch(_login(true, oUser));
+          dispatch(_register(true, oUser));
 
         }
         else {
           if (!error) {
-            dispatch(_login(false));
+            dispatch(_register(false));
           }
         }
       })
       .catch(function (error) {
-        dispatch(_login(false));
+        dispatch(_register(false));
       });
   };
 }
 
-export function setFormLogin(userForm) {
+export function _registing() {
   return {
-    type: types.EXPORT_FORM,
-    userForm: userForm
-  };
-}
-
-export function _loging() {
-  return {
-    type: types.LOGIN,
+    type: types.REGISTING,
     Loging: true
   };
 }
 
-export function _login(status, user) {
+export function _register(status, user) {
   if (status) {
     return {
-      type: types.LOGIN_SUCCESS,
+      type: types.REGISTER_SUCCESS,
       user: user,
       Logged: status
     };
   } else {
     return {
-      type: types.LOGIN_EROR,
+      type: types.REGISTER_EROR,
       Logged: status
     };
   }
 }
 
-export function setUser(user) {
-  return dispatch => {
-    dispatch(_login(true, user));
-  };
-}
-
-export function logout() {
+export function clearRegister(){
   return {
-    type: types.LOGGED_OUT
+    type: types.REGISTER_CLEAR,
   };
 }

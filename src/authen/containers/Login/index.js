@@ -139,6 +139,7 @@ class login extends React.Component {
     //       new GraphRequestManager().addRequest(infoRequest).start();
     //     }
     //   })
+
   }
 
   componentWillMount() {
@@ -153,6 +154,15 @@ class login extends React.Component {
     const { loginAction } = this.props;
     const { loginReducer } = this.props;
     //this._setupGoogleSignin();
+    const { setUser } = this.props.loginAction;
+    helper.getAsyncStorage("@userLogin", (promise) => {
+      promise.done((value) => {
+        if (value != '' && value != null) {
+          var user = JSON.parse(value);
+          setUser(user);
+        }
+      })
+    })
   }
 
   onValueChange(value) {
@@ -213,9 +223,8 @@ class login extends React.Component {
       .done()
   }
 
-  render() {
-    const { loginAction, handleSubmit, submitting, loginReducer } = this.props;
-    const locale = "vn";
+  componentDidUpdate() {
+    const { loginReducer } = this.props;
     if (
       loginReducer.Logged != null &&
       loginReducer.Logged == false &&
@@ -224,6 +233,15 @@ class login extends React.Component {
       Alert.alert("Thông báo", "Đăng nhập thất bại");
       loginReducer.Logged = null;
     }
+    else if (loginReducer.Logged == true) {
+      helper.setAsyncStorage("@userLogin", loginReducer.user);
+      Actions.reset('home');
+    }
+  }
+  render() {
+    const { loginAction, handleSubmit, submitting, loginReducer } = this.props;
+    const locale = "vn";
+
     return (
       <Container
 
@@ -308,7 +326,7 @@ class login extends React.Component {
 
                 </Form>
               </Row>
-              <Row style={{ height: 50 }}>
+              {/* <Row style={{ height: 50 }}>
                 <Col style={{ paddingRight: 2 }}>
                   <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
                     <Text>Facebook</Text>
@@ -319,7 +337,7 @@ class login extends React.Component {
                     <Text>Google</Text>
                   </Button>
                 </Col>
-              </Row>
+              </Row> */}
             </Grid>
             {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
@@ -365,8 +383,8 @@ function mapStateToProps(state, props) {
     initialValues: state.loginReducer.userForm
       ? state.loginReducer.userForm
       : {
-        username: "test",
-        password: "test"
+        username: "admin",
+        password: "123456a@"
       }
   };
 }

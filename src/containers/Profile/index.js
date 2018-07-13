@@ -32,7 +32,9 @@ import * as profileAction from "../../store/actions/containers/profile_action";
 import Loading from "../../components/Loading";
 import User from "../../components/User";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-import { RNCamera, FaceDetector } from 'react-native-camera';
+import * as loginAction from "../../authen/actions/login_action";
+// import { RNCamera, FaceDetector } from 'react-native-camera';
+import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -50,17 +52,25 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-
+    const { user } = this.props.loginReducer;
   }
   componentDidUpdate(prevProps, prevState) {
 
   }
 
+  onLogout() {
+    const { loginAction } = this.props;
+    helper.clearAsyncStorage();
+    loginAction.logout();
+    Actions.reset('login');
+  }
+
   render() {
     const locale = "vn";
+    const { user } = this.props.loginReducer;
     return (
       <Container style={styles.container}>
-        <User></User>
+        {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> : null}
         <Grid style={styles.Grid}>
           <Row style={styles.gridTitleRow}>
             <Text>{I18n.t("pay", {
@@ -126,7 +136,8 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
   return {
-    profileAction: bindActionCreators(profileAction, dispatch)
+    profileAction: bindActionCreators(profileAction, dispatch),
+    loginAction: bindActionCreators(loginAction, dispatch)
   };
 }
 

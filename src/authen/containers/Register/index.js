@@ -28,27 +28,31 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import styles from "./styles";
 import theme from "../../../themes/default/styles";
-import * as loginAction from "../../actions/login_action";
+import * as registerAction from "../../actions/register_action";
 import I18n from "../../../i18n/i18n";
 import { Field, reduxForm } from "redux-form";
 import { InputField } from "../../../components/Element/Form";
 import Loading from "../../../components/Loading";
 import { Actions } from "react-native-router-flux";
+import * as types from "../../../store/constants/action_types";
 import * as helper from "../../../helper";
 const username = "";
 const password = "";
-const confirmPassword="";
-const fullName="";
+const confirmPassword = "";
+const firstName = "";
+const lastName = "";
 const validate = values => {
   const error = {};
   error.username = "";
   error.password = "";
-  error.confirmPassword="";
-  error.fullName="";
+  error.confirmPassword = "";
+  error.firstName = "";
+  error.lastName = "";
   var username = values.username;
   var password = values.password;
-  var confirmPassword=values.confirmPassword;
-  var fullName=values.fullName;
+  var confirmPassword = values.confirmPassword;
+  var firstName = values.firstName;
+  var lastName = values.lastName;
   if (values.username === undefined) {
     username = "";
   }
@@ -58,8 +62,11 @@ const validate = values => {
   if (values.confirmPassword === undefined) {
     confirmPassword = "";
   }
-  if (values.fullName === undefined) {
-    fullName = "";
+  if (values.firstName === undefined) {
+    firstName = "";
+  }
+  if (values.lastName === undefined) {
+    lastName = "";
   }
   if (username.length == 0 || username == "") {
     error.username = "trống";
@@ -70,8 +77,14 @@ const validate = values => {
   if (confirmPassword.length == 0 || confirmPassword == "") {
     error.confirmPassword = "trống";
   }
-  if (fullName.length == 0 || fullName == "") {
-    error.fullName = "trống";
+  if (confirmPassword !== password) {
+    error.confirmPassword = "không khớp";
+  }
+  if (firstName.length == 0 || firstName == "") {
+    error.firstName = "trống";
+  }
+  if (lastName.length == 0 || lastName == "") {
+    error.lastName = "trống";
   }
   return error;
 };
@@ -97,27 +110,8 @@ class register extends Component {
   }
 
   componentDidMount() {
-    const { loginAction } = this.props;
-    const { loginReducer } = this.props;
-    try {
-      const hadUser = AsyncStorage.getItem("@userLogin")
-        .then(value => {
-          let userLogin = JSON.parse(value);
-          if (userLogin && loginReducer.Logout) {
-            loginAction.setFormLogin(userLogin);
-          } else if (
-            userLogin &&
-            userLogin.username != "" &&
-            userLogin.password != ""
-          ) {
-            loginAction.setFormLogin(userLogin);
-            loginAction.login(userLogin);
-          }
-        })
-        .done();
-    } catch (error) {
-      //error
-    }
+    const { registerAction } = this.props;
+    const { registerReducer } = this.props;
   }
 
   onValueChange(value) {
@@ -126,24 +120,54 @@ class register extends Component {
     });
   }
 
-  render() {
-    const { loginAction, handleSubmit, submitting, loginReducer } = this.props;
-    const locale = "vn";
-    if (
-      loginReducer.Logged != null &&
-      loginReducer.Logged == false &&
-      loginReducer.Loging == false
-    ) {
-      Alert.alert("Thông báo", "Đăng nhập thất bại");
-      loginReducer.Logged = null;
+  componentDidUpdate() {
+    const { registerReducer, registerAction } = this.props;
+    if (registerReducer.action.type != types.REGISTER_CLEAR) {
+      if (
+        registerReducer.registed != null &&
+        registerReducer.registed == false &&
+        registerReducer.registed == false
+      ) {
+        Alert.alert("Thông báo", "Đăng ký thất bại", [{
+          text: 'Ok',
+          onPress: (e) => {
+            registerAction.clearRegister();
+          }
+        }],
+          { cancelable: false });
+      }
+      else if (registerReducer.registed == true) {
+        Alert.alert("Thông báo", "Đăng ký thành công", [{
+          text: 'Ok',
+          onPress: (e) => {
+            registerAction.clearRegister();
+            Actions.reset('login');
+          }
+        }],
+          { cancelable: false });
+
+      }
     }
+  }
+
+  render() {
+    const { registerAction, handleSubmit, submitting, registerReducer } = this.props;
+    const locale = "vn";
+    // if (
+    //   registerReducer.Logged != null &&
+    //   registerReducer.Logged == false &&
+    //   registerReducer.registing == false
+    // ) {
+    //   Alert.alert("Thông báo", "Đăng nhập thất bại");
+    //   registerReducer.Logged = null;
+    // }
 
     return (
       <Container
 
       >
 
-        <Loading isShow={loginReducer.Loging} />
+        <Loading isShow={registerReducer.registing} />
         {/* background */}
         <Image
           source={require("../../../resources/assets/splash1.png")}
@@ -155,16 +179,30 @@ class register extends Component {
             <Grid style={{ width: '100%' }}>
               <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <Form style={styles.form}>
-                <View style={styles.item}>
+                  <View style={styles.item}>
                     {/* <Icon active name="person" /> */}
-                    <Field
-                      icon="user-circle-o"
-                      name="fullName"
-                      placeholder={I18n.t("fullName", {
-                        locale: locale ? locale : "vi"
-                      })}
-                      component={InputField}
-                    />
+                    <Row>
+                      <Col>
+                        <Field
+                          icon="user-circle-o"
+                          name="firstName"
+                          placeholder={I18n.t("firstName", {
+                            locale: locale ? locale : "vi"
+                          })}
+                          component={InputField}
+                        />
+                      </Col>
+                      <Col>
+                        <Field
+                          icon="user-circle-o"
+                          name="lastName"
+                          placeholder={I18n.t("lastName", {
+                            locale: locale ? locale : "vi"
+                          })}
+                          component={InputField}
+                        />
+                      </Col>
+                    </Row>
                   </View>
                   <View style={styles.item}>
                     {/* <Icon active name="person" /> */}
@@ -204,7 +242,7 @@ class register extends Component {
                   <Button
                     full
                     style={[styles.buttonLogin, { backgroundColor: '#007db7' }]}
-                    onPress={handleSubmit(loginAction.login)}
+                    onPress={handleSubmit(registerAction.register)}
                   >
                     <Text>
                       {I18n.t("register", {
@@ -249,18 +287,21 @@ class register extends Component {
 
 function mapStateToProps(state, props) {
   return {
-    loginReducer: state.loginReducer,
-    initialValues: state.loginReducer.userForm
-      ? state.loginReducer.userForm
+    registerReducer: state.registerReducer,
+    initialValues: state.registerReducer.userForm
+      ? state.registerReducer.userForm
       : {
-        username: "",
-        password: ""
+        firstName: "Bùi đình",
+        lastName: 'Bách',
+        username: "bachbd",
+        password: "123456a@",
+        confirmPassword: '123456a@'
       }
   };
 }
 function mapToDispatch(dispatch) {
   return {
-    loginAction: bindActionCreators(loginAction, dispatch)
+    registerAction: bindActionCreators(registerAction, dispatch)
   };
 }
 

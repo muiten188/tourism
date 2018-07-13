@@ -61,7 +61,7 @@ class MuseumList extends Component {
     componentDidMount() {
         const { search_Museum, get_Area } = this.props.meseumListAction;
         get_Area(null, 1, 100, null);
-        //search_Museum(null, 1, 100, null);
+        search_Museum(null, 1, 100, null);
     }
     componentDidUpdate(prevProps, prevState) {
 

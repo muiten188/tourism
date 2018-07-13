@@ -1,5 +1,6 @@
 //authen
 import loginReducer from "../../authen/reducers/login_reducer";
+import registerReducer from "../../authen/reducers/register_reducer";
 //app
 import homeReducer from "../../store/reducers/containers/home_reducer";
 import museumListReducer from "../../store/reducers/containers/museumList_reducer";
@@ -21,6 +22,7 @@ import { reducer as formReducer } from "redux-form";
 
 const appReducer = combineReducers({
   loginReducer,
+  registerReducer,
   homeReducer,
   museumListReducer,
   museumDetailReducer,

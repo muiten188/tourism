@@ -82,6 +82,15 @@ class MuseumDetail extends Component {
         if (paramPassAction && paramPassAction.imgProfile) {
             imgUrl = AppConfig.API_HOST + paramPassAction.imgProfile;
         }
+        if (searchAntifactErorr) {
+            Alert.alert("Thông báo", "Lấy danh sách hiện vật thất bại", [{
+                text: 'Ok',
+                onPress: (e) => {
+                    this.props.meseumListAction.clearAntifactError();
+                }
+            }],
+                { cancelable: false });
+        }
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
@@ -145,7 +154,9 @@ class MuseumDetail extends Component {
                             {!this.state.isSummary ?
                                 <ScrollView>
                                     <Text>
-                                        {(paramPassAction.description != "" && paramPassAction.description != null) == true ? paramPassAction.description : I18n.t("description", {
+                                        {(paramPassAction.description != "" && paramPassAction.description != null) == true ? I18n.t("description", {
+                                            locale: "vn"
+                                        }) + paramPassAction.description : I18n.t("description", {
                                             locale: "vn"
                                         })}
                                     </Text>
@@ -160,7 +171,9 @@ class MuseumDetail extends Component {
                                 :
                                 <View style={{ width: '100%' }}>
                                     <Text>
-                                        {this.textEclipse((paramPassAction.description != "" && paramPassAction.description != null) == true ? paramPassAction.description : I18n.t("description", {
+                                        {this.textEclipse((paramPassAction.description != "" && paramPassAction.description != null) == true ? I18n.t("description", {
+                                            locale: "vn"
+                                        }) + paramPassAction.description : I18n.t("description", {
                                             locale: "vn"
                                         }))}
                                     </Text>

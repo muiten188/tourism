@@ -7,7 +7,6 @@ export function get_AntifactByUUID(values, user) {
 
   let dataPost = values || {};
   //dataPost = { ...dataPost };
-  debugger;
   return dispatch => {
     //dispatch(_searching_Antifact());
     fetch(`${AppConfig.GET_ANTIFACT_BY_UUID}?${helper.getQueryString(dataPost)}`, {

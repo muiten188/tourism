@@ -30,12 +30,12 @@ export default function (state = initState, action = {}) {
       return {
         ...state,
         searchAntifactErorr: action.searchErorr,
+        isLoading:false
       };
     case types.SEARCH_ANTIFACT_CLEAR_ERROR:
       return {
         ...state,
-        searchAntifactErorr: initState.searchErorr,
-        isLoading: initState.isLoading
+        searchAntifactErorr: initState.searchErorr
       };
 
     default:
