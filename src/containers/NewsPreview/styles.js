@@ -9,13 +9,13 @@ export default {
         fontWeight: 'bold', paddingLeft: 6
     },
     item_container_half: {
-        width: "48.5%",
+        width: "98%",
         justifyContent: "center",
         alignItems: "center",
         margin: 3
     },
     rowYoutube: {
-        height: 180,
+        height: 150,
         backgroundColor: 'black'
     },
     rowBar: {
@@ -28,30 +28,20 @@ export default {
     buttonTitle: { height: 35 },
     rowDescription_summary: {
         height: 120,
-        width:'100%',
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
         borderBottomColor: '#e8eff5'
     },
     rowDescription_full: {
-        width:'100%',
-        height:400,
+        height: 'auto',
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
-        borderBottomColor: '#e8eff5',
-        zIndex:99999,
+        borderBottomColor: '#e8eff5'
     },
     titleProduct: {
         fontWeight: 'bold',
         paddingLeft: 4
-    },
-    backgroundVideo: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
-      },
+    }
 }

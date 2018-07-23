@@ -1,8 +1,11 @@
 import * as types from "../../constants/action_types";
 const initState = {
   isLoading: false,
+  isLoadingNews:false,
   listMuseum: [],
+  listNews: [],
   listArea: [],
+  searchNewsError:false,
   searchErorr: false,
   searchAreaErorr: false,
   valuesForm: {},
@@ -13,6 +16,31 @@ const initState = {
 
 export default function (state = initState, action = {}) {
   switch (action.type) {
+
+    case types.SEARCH_NEWS:
+      return {
+        ...state,
+        listNews: action.data,
+        isLoadingNews: action.isLoadingNews,
+        searchNewsError: initState.searchNewsError,
+      };
+    case types.SEARCHING_NEWS:
+      return {
+        ...state,
+        isLoadingNews: action.isLoadingNews,
+      };
+    case types.SEARCH_NEWS_ERROR:
+      return {
+        ...state,
+        searchNewsError: action.searchNewsError,
+      };
+    case types.SEARCH_NEWS_CLEAR_ERROR:
+      return {
+        ...state,
+        searchNewsError: initState.searchNewsError,
+        isLoadingNews: initState.isLoadingNews
+      };
+
     case types.SEARCH_MUSEUM:
       return {
         ...state,

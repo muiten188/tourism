@@ -2,6 +2,68 @@ import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 
+export function search_News(values, currentPage, pageSize,user) {
+    let data = [];
+    let dataPost = values || {};
+    dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
+    return dispatch => {
+        dispatch(_searching_News());
+        fetch(`${AppConfig.GET_NEWS}?${helper.getQueryString(dataPost)}`, {
+            headers: helper.buildHeader(user),
+            method: "GET"
+        })
+            .then(function (response) {
+                if (response.status == 401) {
+                    //dispatch(_logout());
+                } else if (response.status != 200) {
+                    dispatch(_seach_NewsError());
+                } else {
+                    return response.json();
+                }
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    if (responseJson.data) {
+                        data = responseJson.data;
+                        dispatch(_search_News(data, dataPost));
+                    } else {
+                        dispatch(_seach_NewsError());
+                    }
+                }
+                else {
+                    dispatch(_seach_NewsError());
+                }
+            })
+            .catch(function (error) {
+                dispatch(_seach_NewsError());
+            });
+    };
+}
+function _search_News(data, valuesForm) {
+    return {
+        type: types.SEARCH_NEWS,
+        data: data,
+        isLoadingNews: false,
+        valuesForm: valuesForm
+    };
+}
+
+function _searching_News() {
+    return {
+        type: types.SEARCHING_NEWS,
+        isLoadingNews: true
+    };
+}
+
+function _seach_NewsError() {
+    return {
+        type: types.SEARCH_NEWS_ERROR,
+        searchNewsError: true,
+        isLoadingNews: false
+    };
+}
+
+
 export function get_Area(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};

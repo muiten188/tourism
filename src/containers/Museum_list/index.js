@@ -36,7 +36,7 @@ import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
 import ItemDivider from '../../components/Item_divider';
-
+import ItemNews from '../../components/Item_news';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 const blockAction = false;
@@ -59,9 +59,10 @@ class MuseumList extends Component {
     }
 
     componentDidMount() {
-        const { search_Museum, get_Area } = this.props.meseumListAction;
-        get_Area(null, 1, 100, null);
-        search_Museum(null, 1, 100, null);
+        const { search_Museum, get_Area,search_News } = this.props.meseumListAction;
+        get_Area(null, 1, 1000, null);
+        search_Museum(null, 1, 1000, null);
+        search_News(null, 1, 1000, null)
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -69,8 +70,8 @@ class MuseumList extends Component {
 
     render() {
         const locale = "vn";
-        const { listMuseum, listArea, searchErorr, isLoading } = this.props.museumListReducer;
-        const { search_Museum, clearMuseumError, clearAreaError } = this.props.meseumListAction;
+        const { listMuseum, listArea, searchErorr, isLoading,listNews,isLoadingNews } = this.props.museumListReducer;
+        const { search_Museum, clearMuseumError, clearAreaError,search_News } = this.props.meseumListAction;
         if (searchErorr == true) {
             Alert.alert(
                 "Thông báo",
@@ -88,7 +89,38 @@ class MuseumList extends Component {
         }
         return (
             <Container style={styles.container}>
-                <Grid style={{  }}>{/* marginBottom: 45 */}
+                <Grid style={{}}>{/* marginBottom: 45 */}
+                    <Row style={{ height: 40 }}>
+                        <Col><Text style={styles.textSide}>Tin tức</Text></Col>
+                    </Row>
+                    <Row style={styles.rowNews}>
+                        <FlatList
+                            ref={ref => {
+                                this.list = ref;
+                            }}
+                            refreshControl={
+                                <RefreshControl
+                                    colors={["#9Bd35A", "#689F38"]}
+                                    refreshing={isLoadingNews?isLoadingNews:false}
+                                    onRefresh={() => {
+                                        //this.loading.show();
+                                        setTimeout(() => {
+                                            search_News( null, 1, 1000, null);
+                                        }, 0);
+
+                                    }
+                                    }
+                                />
+                            }
+                            style={styles.listResult}
+                            data={[...listNews,...listMuseum,...listMuseum,...listMuseum,...listMuseum,...listMuseum,...listMuseum]}
+                            keyExtractor={this._keyExtractor}
+                            renderItem={this.renderNewsFlatListItem.bind(this)}
+                            horizontal={true}
+                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                            onEndReachedThreshold={0.7}
+                        />
+                    </Row>
                     <Row style={{ height: 50 }}>
                         <Col><Text style={styles.textSide}>Chọn địa danh</Text></Col>
                         <Col><Picker
@@ -187,6 +219,32 @@ class MuseumList extends Component {
                     </Button>
                 </View> */}
             </Container>
+        );
+    }
+
+    renderNewsFlatListItem(dataItem) {
+        const item = dataItem.item;
+        //console.log(item);
+        return (
+            <TouchableOpacity
+                key={item.index}
+                style={
+                    styles.item_container_new
+                }
+                onPress={() => {
+                    // if (!blockAction) {
+                    //     blockAction = true;
+
+                    // }
+                }}
+            >
+                <ItemNews data={item} key={item.index}
+                    userName={'bach'}
+                    position={'bền bền'}
+                    phone={'đổi phone'}
+                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+                    item={item}></ItemNews>
+            </TouchableOpacity>
         );
     }
 

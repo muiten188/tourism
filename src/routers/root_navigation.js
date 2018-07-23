@@ -10,6 +10,7 @@ import Home from '../containers/Home';
 import Museumlist from '../containers/Museum_list';
 import Profile from '../containers/Profile';
 import Museum_detail from '../containers/Museum_detail';
+import ProductList from '../containers/Product_list';
 import Museum_product from '../containers/Museum_product';
 import Search_history from '../containers/Search_history';
 import Guider from '../containers/Guider';
@@ -52,7 +53,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene
                         key="register"
@@ -62,11 +63,16 @@ class RootNavigation extends React.Component {
                     <Scene key="home"
                         component={Home}
                         title="Home"
-                        initial={false}
+                        initial={true}
                     />
                     <Scene key="museumDetail"
                         component={Museum_detail}
                         title="museum Detail"
+                        initial={false}>
+                    </Scene>
+                    <Scene key="productList"
+                        component={ProductList}
+                        title="product list"
                         initial={false}>
                     </Scene>
                     <Scene key="museumProduct"

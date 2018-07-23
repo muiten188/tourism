@@ -36,10 +36,7 @@ export default class extends PureComponent {
 
   render() {
     const { key, avatarUrl, item } = this.props;
-    var urlAvartar = '';
-    if (item.imgProfile) {
-      urlAvartar = AppConfig.API_HOST + item.imgProfile.replaceAll("\\\\", "/");
-    }
+    //var urlAvartar = AppConfig.API_HOST + item.imgProfile.replaceAll("\\\\", "/")
     return (
       <View key={key} style={styles.itemList}>
         {/* <Thumbnail
@@ -54,14 +51,14 @@ export default class extends PureComponent {
           }}
         /> */}
         <Image
-          source={{ uri: urlAvartar }}
+          source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }}
           style={styles.imageHotel}
         />
         <View style={styles.context}>
           <View style={styles.conInside}>
             <Text style={styles.textContext}></Text>
           </View>
-          <Text style={styles.textContext}>{item.museumName}</Text>
+          <Text style={styles.textContext}>{this.textEclipse('tin tức liên bang nga')}</Text>
 
         </View>
 
@@ -70,8 +67,8 @@ export default class extends PureComponent {
     );
   }
   textEclipse(text) {
-    return (((text).length > 20) ?
-      (((text).substring(0, 20)) + '...') :
+    return (((text).length > 14) ?
+      (((text).substring(0, 14)) + '...') :
       text)
   }
 }

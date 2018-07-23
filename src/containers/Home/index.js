@@ -86,7 +86,7 @@ class Home extends Component {
 
   componentDidMount() {
     if (this.props.loginReducer.user == null) {
-      Actions.reset('login');
+      //Actions.reset('login');
     }
     else {
       const { get_AntifactByUUID } = this.props.homeAction;

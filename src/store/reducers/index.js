@@ -5,6 +5,7 @@ import registerReducer from "../../authen/reducers/register_reducer";
 import homeReducer from "../../store/reducers/containers/home_reducer";
 import museumListReducer from "../../store/reducers/containers/museumList_reducer";
 import museumDetailReducer from "../../store/reducers/containers/museumDetail_reducer";
+import productListReducer from "../../store/reducers/containers/productList_reducer";
 import museumProductReducer from "../../store/reducers/containers/museumProduct_reducer";
 import findGuiderReducer from "../../store/reducers/containers/findGuider_reducer";
 import profileReducer from "../../store/reducers/containers/profile_reducer";
@@ -26,6 +27,7 @@ const appReducer = combineReducers({
   homeReducer,
   museumListReducer,
   museumDetailReducer,
+  productListReducer,
   museumProductReducer,
   searchHistoryReducer,
   guiderReducer,

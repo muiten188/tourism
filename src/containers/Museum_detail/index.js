@@ -6,7 +6,8 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    WebView
 } from "react-native";
 import {
     Container,
@@ -63,8 +64,9 @@ class MuseumDetail extends Component {
     }
 
     componentDidMount() {
-        const { get_Antifact } = this.props.meseumListAction;
-        get_Antifact({ museumId: this.props.paramPassAction.museumId }, 1, 100, null);
+        const { get_Antifact, get_MuseumDetail } = this.props.meseumListAction;
+        get_MuseumDetail({ museumId: this.props.paramPassAction.museumId })
+        //get_Antifact({ museumId: this.props.paramPassAction.museumId }, 1, 100, null);
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -73,7 +75,7 @@ class MuseumDetail extends Component {
     render() {
         const locale = "vn";
         const { paramPassAction } = this.props;
-        const { listAntifact, searchAntifactErorr, isLoading } = this.props.museumDetailReducer;
+        const { listAntifact, searchAntifactErorr, isLoading, museumDetail } = this.props.museumDetailReducer;
         var videoUrl = null;
         if (paramPassAction && paramPassAction.videoProfile) {
             videoUrl = AppConfig.API_HOST + paramPassAction.videoProfile;
@@ -94,7 +96,7 @@ class MuseumDetail extends Component {
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
-                <ScrollView>
+                <ScrollView scrollEnabled={false}>
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
                             <VideoPlayer video={{ uri: videoUrl }}
@@ -133,66 +135,64 @@ class MuseumDetail extends Component {
                         <Row style={styles.rowBar}>
                             <Grid>
                                 <Col>
-                                    <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
+                                    {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
                                         <Icon name="user" size={15} style={styles.textWhile} />
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
                                             locale: "vn"
                                         })}</Text>
-                                    </Button>
+                                    </Button> */}
                                 </Col>
                                 <Col>
-                                    <Button full block transparent iconRight={true} style={styles.buttonTitle}>
+                                    {/* <Button full block transparent iconRight={true} style={styles.buttonTitle}>
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("finGuider", {
                                             locale: "vn"
                                         })}</Text>
                                         <Icon name="user" size={15} style={styles.textWhile} />
+                                    </Button> */}
+                                    <Button transparent onPress={() => {
+                                        Actions.productList({ paramPassAction: this.props.paramPassAction });
+                                    }} style={{ height: 33 }}>
+                                        <Text style={{ color: '#fff' }}>Xem tất cả hiện vật</Text>
                                     </Button>
                                 </Col>
                             </Grid>
                         </Row>
-                        <Row style={this.state.isSummary ? styles.rowDescription_summary : styles.rowDescription_full}>
-                            {!this.state.isSummary ?
-                                <ScrollView>
-                                    <Text>
-                                        {(paramPassAction.description != "" && paramPassAction.description != null) == true ? I18n.t("description", {
-                                            locale: "vn"
-                                        }) + paramPassAction.description : I18n.t("description", {
+                        {/* <Row style={{ height: 30 }}>
+                            <Col>
+                                <Text style={styles.titleProduct}>{I18n.t("product", {
+                                    locale: "vn"
+                                })}</Text>
+                            </Col>
+                            <Col>
+                                <Button onPress={() => {
+                                    Actions.productList({ paramPassAction: this.props.paramPassAction });
+                                }} style={{ height: 28, backgroundColor: '#fff', position: 'absolute', right: 4 }}>
+                                    <Text style={{ color: '#007db7' }}>Xem tất cả hiên vật</Text>
+                                </Button>
+                            </Col>
+                        </Row> */}
+                        <Row style={styles.rowDescription_full}>
+                            {/* <ScrollView style={{flex:1}}> */}
+                            {/* <Text>
+                                    {(paramPassAction.description != "" && paramPassAction.description != null) == true ? I18n.t("description", {
+                                        locale: "vn"
+                                    }) + museumDetail.content : I18n.t("description", {
+                                        locale: "vn"
+                                    })}
+                                </Text> */}
+                            <WebView style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} source={{ html: `<html>${museumDetail.content}</html>` }} ></WebView>
+                            {/* <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
+                                    <Text uppercase={false} style={{ color: '#007db7' }}>
+                                        {I18n.t("summary_button", {
                                             locale: "vn"
                                         })}
                                     </Text>
-                                    <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
-                                        <Text uppercase={false} style={{ color: '#007db7' }}>
-                                            {I18n.t("summary_button", {
-                                                locale: "vn"
-                                            })}
-                                        </Text>
-                                    </Button>
-                                </ScrollView>
-                                :
-                                <View style={{ width: '100%' }}>
-                                    <Text>
-                                        {this.textEclipse((paramPassAction.description != "" && paramPassAction.description != null) == true ? I18n.t("description", {
-                                            locale: "vn"
-                                        }) + paramPassAction.description : I18n.t("description", {
-                                            locale: "vn"
-                                        }))}
-                                    </Text>
-                                    <Button onPress={() => { this.setState({ isSummary: false }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
-                                        <Text uppercase={false} style={{ color: '#007db7' }}>
-                                            {I18n.t("view_more", {
-                                                locale: "vn"
-                                            })}
-                                        </Text>
-                                    </Button>
-                                </View>}
+                                </Button> */}
+                            {/* </ScrollView> */}
                         </Row>
-                        <Row style={{ height: 30 }}>
-                            <Text style={styles.titleProduct}>{I18n.t("product", {
-                                locale: "vn"
-                            })}</Text>
-                        </Row>
+
                         <Row>
-                            <FlatList
+                            {/* <FlatList
                                 ref={ref => {
                                     this.list = ref;
                                 }}
@@ -230,7 +230,7 @@ class MuseumDetail extends Component {
                                     }
                                 }}
                                 onEndReachedThreshold={0.7}
-                            />
+                            /> */}
                         </Row>
                         <Loading
                             ref={ref => {

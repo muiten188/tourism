@@ -35,13 +35,13 @@ export default {
         borderBottomColor: '#e8eff5'
     },
     rowDescription_full: {
+        height: 'auto',
         width:'100%',
-        height:400,
+        minHeight:120,
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
-        borderBottomColor: '#e8eff5',
-        zIndex:99999,
+        borderBottomColor: '#e8eff5'
     },
     titleProduct: {
         fontWeight: 'bold',

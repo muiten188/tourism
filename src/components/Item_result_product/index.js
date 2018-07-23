@@ -62,8 +62,8 @@ export default class extends PureComponent {
     );
   }
   textEclipse(text) {
-    return (((text).length > 26) ?
-      (((text).substring(0, 26)) + '...') :
+    return (((text).length > 18) ?
+      (((text).substring(0, 18)) + '...') :
       text)
   }
 }
