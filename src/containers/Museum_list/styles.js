@@ -18,7 +18,7 @@ export default {
         margin:3
     },
     item_container_new:{
-        width: 130,
+        width: 150,
         justifyContent: "center",
         alignItems: "center",
         margin:3

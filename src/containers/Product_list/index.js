@@ -6,7 +6,8 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    RefreshControl
 } from "react-native";
 import {
     Container,
@@ -64,8 +65,15 @@ class ProductList extends Component {
 
     componentDidMount() {
         const { get_Antifact } = this.props.productListAction;
-        const {paramPassAction}=this.props;
-        get_Antifact({ museumId: paramPassAction.museumId }, 1, 100000, null);
+        const { paramPassAction, beaconUUID } = this.props;
+        var objGetAntifact = {};
+        if (paramPassAction && paramPassAction.museumId) {
+            objGetAntifact = { museumId: paramPassAction.museumId };
+        }
+        if (beaconUUID) {
+            objGetAntifact.beaconUUID = beaconUUID;
+        }
+        get_Antifact(objGetAntifact, 1, 100000, null);
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -74,6 +82,7 @@ class ProductList extends Component {
     render() {
         const locale = "vn";
         const { paramPassAction } = this.props;
+        const { get_Antifact } = this.props.productListAction;
         const { listAntifact, searchAntifactErorr, isLoading } = this.props.productListReducer;
         if (searchAntifactErorr) {
             Alert.alert("Thông báo", "Lấy danh sách hiện vật thất bại", [{
@@ -99,6 +108,18 @@ class ProductList extends Component {
                                 ref={ref => {
                                     this.list = ref;
                                 }}
+                                refreshControl={
+                                    <RefreshControl
+                                        colors={["#9Bd35A", "#689F38"]}
+                                        refreshing={isLoading}
+                                        onRefresh={() => {
+                                            //this.loading.show();
+                                            get_Antifact({ museumId: paramPassAction.museumId }, 1, 100000, null);
+
+                                        }
+                                        }
+                                    />
+                                }
                                 style={styles.listResult}
                                 data={listAntifact ? listAntifact : []}
                                 keyExtractor={this._keyExtractor}
@@ -149,6 +170,10 @@ class ProductList extends Component {
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
+        var urlAvartar = null;
+        if (item.artImageProfile) {
+            urlAvartar = AppConfig.API_HOST + item.artImageProfile.replaceAll("\\\\", "/")
+        }
         return (
             <TouchableOpacity
                 key={item.index}
@@ -163,7 +188,7 @@ class ProductList extends Component {
                     userName={'bach'}
                     position={'bền bền'}
                     phone={'đổi phone'}
-                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+                    avatarUrl={urlAvartar ? urlAvartar : 'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
                     data={item}></ItemResultProduct>
 
             </TouchableOpacity>

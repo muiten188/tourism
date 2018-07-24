@@ -6,7 +6,8 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    WebView
 } from "react-native";
 import {
     Container,
@@ -73,9 +74,9 @@ class MuseumProduct extends Component {
         if (paramPassAction && paramPassAction.artId) {
             get_AntifactByID(paramPassAction.artId, 1, 100, null);
         }
-        if (paramPassAction && paramPassAction.tag) {
-            get_AntifactByTag({ tagId: paramPassAction.tag }, 1, 100, null);
-        }
+        // if (paramPassAction && paramPassAction.tag) {
+        //     get_AntifactByTag({ tagId: paramPassAction.tag }, 1, 100, null);
+        // }
     }
 
     componentWillUnmount() {
@@ -106,8 +107,8 @@ class MuseumProduct extends Component {
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
-                <ScrollView>
-                    <Grid style={{}}>
+                <ScrollView scrollEnabled={false}>
+                    <Grid>
                         <Row style={styles.rowYoutube}>
                             <Slideshow
                                 height={150}
@@ -119,15 +120,15 @@ class MuseumProduct extends Component {
                         <Row style={styles.rowBar}>
                             <Grid>
                                 <Col>
-                                    <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
+                                    {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
                                         <Icon name="user" size={15} style={styles.textWhile} />
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
                                             locale: "vn"
                                         })}</Text>
-                                    </Button>
+                                    </Button> */}
                                 </Col>
                                 <Col>
-                                    <Button full block transparent onPress={()=>Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
+                                    <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
                                             locale: "vn"
                                         })}</Text>
@@ -137,17 +138,21 @@ class MuseumProduct extends Component {
                             </Grid>
                         </Row>
                         <Row style={styles.rowDescription_full}>
-                            <View>
+                            <ScrollView style={{flex:1}}>
                                 <Text>
                                     {antifactDetail ? antifactDetail.artDescription : '...'}
                                 </Text>
-                            </View>
+                            </ScrollView>
                         </Row>
-                        <Row style={{ height: 30 }}>
+                        <Row style={{ height:400 }}>
+                            <WebView style={{ flex: 1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></WebView>
+                        </Row>
+                        {/* <Row style={{ height: 30 }}>
                             <Text style={styles.titleProduct}>{I18n.t("similar_product", {
                                 locale: "vn"
                             })}</Text>
                         </Row>
+
                         <Row>
                             <FlatList
                                 ref={ref => {
@@ -188,7 +193,7 @@ class MuseumProduct extends Component {
                                 }}
                                 onEndReachedThreshold={0.7}
                             />
-                        </Row>
+                        </Row> */}
                         <Loading
                             ref={ref => {
                                 this.loading = ref;
@@ -197,6 +202,7 @@ class MuseumProduct extends Component {
                         />
                     </Grid>
                 </ScrollView>
+
             </Container>
         );
     }

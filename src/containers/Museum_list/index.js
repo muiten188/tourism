@@ -59,7 +59,7 @@ class MuseumList extends Component {
     }
 
     componentDidMount() {
-        const { search_Museum, get_Area,search_News } = this.props.meseumListAction;
+        const { search_Museum, get_Area, search_News } = this.props.meseumListAction;
         get_Area(null, 1, 1000, null);
         search_Museum(null, 1, 1000, null);
         search_News(null, 1, 1000, null)
@@ -70,8 +70,8 @@ class MuseumList extends Component {
 
     render() {
         const locale = "vn";
-        const { listMuseum, listArea, searchErorr, isLoading,listNews,isLoadingNews } = this.props.museumListReducer;
-        const { search_Museum, clearMuseumError, clearAreaError,search_News } = this.props.meseumListAction;
+        const { listMuseum, listArea, searchErorr, isLoading, listNews, isLoadingNews } = this.props.museumListReducer;
+        const { search_Museum, clearMuseumError, clearAreaError, search_News } = this.props.meseumListAction;
         if (searchErorr == true) {
             Alert.alert(
                 "Thông báo",
@@ -101,11 +101,11 @@ class MuseumList extends Component {
                             refreshControl={
                                 <RefreshControl
                                     colors={["#9Bd35A", "#689F38"]}
-                                    refreshing={isLoadingNews?isLoadingNews:false}
+                                    refreshing={isLoadingNews ? isLoadingNews : false}
                                     onRefresh={() => {
                                         //this.loading.show();
                                         setTimeout(() => {
-                                            search_News( null, 1, 1000, null);
+                                            search_News(null, 1, 1000, null);
                                         }, 0);
 
                                     }
@@ -113,7 +113,7 @@ class MuseumList extends Component {
                                 />
                             }
                             style={styles.listResult}
-                            data={[...listNews,...listMuseum,...listMuseum,...listMuseum,...listMuseum,...listMuseum,...listMuseum]}
+                            data={[...listNews]}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.renderNewsFlatListItem.bind(this)}
                             horizontal={true}
@@ -234,7 +234,7 @@ class MuseumList extends Component {
                 onPress={() => {
                     // if (!blockAction) {
                     //     blockAction = true;
-
+                    Actions.newsPreview({ news: item })
                     // }
                 }}
             >

@@ -23,13 +23,12 @@ import User from "../User";
 import * as AppConfig from "../../config/app_config";
 const resolveAssetSource = require('resolveAssetSource');
 const userAvar = require("../../resources/assets/user.jpg")
-let text = "Một nét chân quê"
-let text2 = "Sản phẩm vải dạng tằm, bề ngang dài 80 mét"
+
 export default class extends PureComponent {
   static navigationOptions = {
     header: null
   };
-
+  
   render() {
     const { key, userName, position, phone, avatarUrl, data } = this.props;
     return (

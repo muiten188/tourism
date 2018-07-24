@@ -8,6 +8,7 @@ import {
     Alert,
     ScrollView,
     Linking,
+    WebView
 } from "react-native";
 import {
     Container,
@@ -39,11 +40,13 @@ class newPreview extends Component {
     }
 
     render() {
+        const { news } = this.props;
         return (
             <Container>
-                <HeaderContent headerTitle={"Qr Code"}
+                <HeaderContent headerTitle={news.title ? news.title : "Tin tức"}
                     showButtonLeft={true}
                     hideRightButton={true}></HeaderContent>
+                <WebView style={{ flex: 1 }} source={{ html: `<html>${news.content}</html>` }} ></WebView>
             </Container>
         );
     }

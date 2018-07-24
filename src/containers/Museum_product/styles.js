@@ -35,6 +35,7 @@ export default {
     },
     rowDescription_full: {
         height: 'auto',
+        maxHeight:150,
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,

@@ -47,6 +47,9 @@ class qrCodeScanner extends Component {
             currentQrCode=e.data;
             Alert.alert("Thông báo", e.data);
             get_AntifactByQRCODE({ qrCode: e.data })
+            setTimeout(()=>{
+                currentQrCode=null;
+            },1000)
         }
         // Linking
         //     .openURL(e.data)

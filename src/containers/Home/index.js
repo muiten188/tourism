@@ -85,36 +85,35 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    if (this.props.loginReducer.user == null) {
-      //Actions.reset('login');
-    }
-    else {
-      const { get_AntifactByUUID } = this.props.homeAction;
+    const { get_AntifactByUUID } = this.props.homeAction;
 
-      eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-        console.log('Tìm thấy beacon:', data)
-        if (data.beacons && data.beacons.length > 0) {
+    eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+      console.log('Tìm thấy beacon:', data)
+      if (data.beacons && data.beacons.length > 0) {
 
-          if (data.beacons[0].uuid != current_uuid) {
-            current_uuid = data.beacons[0].uuid;
-            get_AntifactByUUID({ beaconUUID: current_uuid });
-            //blockUUID = true;
-            // if (timeoutUUID) {
-            //   clearTimeout(timeoutUUID);
-            // }
-            // timeoutUUID = setTimeout(() => {
-            //   blockUUID = false;
-            // }, 10000);
+        if (data.beacons[0].uuid != current_uuid) {
+          current_uuid = data.beacons[0].uuid;
+          if (Actions.currentScene == 'productList') {
+            Actions.pop();
           }
-          console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+          Actions.productList({ beaconUUID: current_uuid })
+          //get_AntifactByUUID({ beaconUUID: current_uuid });
+          //blockUUID = true;
+          // if (timeoutUUID) {
+          //   clearTimeout(timeoutUUID);
+          // }
+          // setTimeout(() => {
+          //   current_uuid = null;
+          // }, 30000);
         }
-      })
-      this.detectBeacons();
-    }
+        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+      }
+    })
+    this.detectBeacons();
   }
 
   componentWillUnmount() {
-    if(eventBeacons){
+    if (eventBeacons) {
       eventBeacons.remove();
     }
   }
