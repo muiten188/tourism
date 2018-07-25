@@ -1,14 +1,14 @@
 import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
-
-export function QUICK_SEARCH_ANTIFACT(values, user) {
-    let data = [];
+import * as helper from '../../../helper';
+export function QUICK_SEARCH_ALL(values, user) {
+    let listArtifacts = [];
+    let listMuseums=[];
+    let listNews=[];
     let dataPost = values || {};
-    dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-
     return dispatch => {
-        dispatch(_QUICK_SEARCHing_ANTIFACT());
-        fetch(`${AppConfig.GET_ANTIFACTLIST}?${helper.getQueryString(dataPost)}`, {
+        dispatch(_QUICK_SEARCHing_ALL());
+        fetch(`${AppConfig.GET_ALLLIST}?${helper.getQueryString(dataPost)}`, {
             headers: helper.buildHeader(user),
             method: "GET"
         })
@@ -16,49 +16,53 @@ export function QUICK_SEARCH_ANTIFACT(values, user) {
                 if (response.status == 401) {
                     //dispatch(_logout());
                 } else if (response.status != 200) {
-                    dispatch(_seach_ANTIFACTError());
+                    dispatch(_seach_ALLError());
                 } else {
                     return response.json();
                 }
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    if (responseJson.data) {
-                        data = _buildListANTIFACT(responseJson.data);
-                        dispatch(_QUICK_SEARCH_ANTIFACT(data, dataPost));
-                    } else {
-                        dispatch(_seach_ANTIFACTError());
-                    }
+                    listArtifacts=responseJson.artifacts;
+                    listMuseums=responseJson.museums;
+                    listNews=responseJson.news;
+                    dispatch(_QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews));
                 }
                 else {
-                    dispatch(_seach_ANTIFACTError());
+                    dispatch(_seach_ALLError());
                 }
             })
             .catch(function (error) {
-                dispatch(_seach_ANTIFACTError());
+                dispatch(_seach_ALLError());
             });
     };
 }
-function _QUICK_SEARCH_ANTIFACT(data, valuesForm) {
+function _QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews) {
     return {
-        type: types.QUICK_SEARCH_ANTIFACT,
-        data: data,
+        type: types.QUICK_SEARCH_ALL,
+        listArtifacts: listArtifacts,
+        listMuseums:listMuseums,
+        listNews:listNews,
         isLoading: false,
-        valuesForm: valuesForm
     };
 }
 
-function _QUICK_SEARCHing_ANTIFACT() {
+function _QUICK_SEARCHing_ALL() {
     return {
-        type: types.QUICK_SEARCHING_ANTIFACT,
+        type: types.QUICK_SEARCHING_ALL,
         isLoading: true
     };
 }
 
-function _seach_ANTIFACTError() {
+function _seach_ALLError() {
     return {
-        type: types.QUICK_SEARCH_ANTIFACT_ERROR,
+        type: types.QUICK_SEARCH_ALL_ERROR,
         searchErorr: true,
         isLoading: false
+    };
+}
+export function clearErrorSearch(){
+    return {
+        type: types.QUICK_SEARCH_ALL_CLEAR_ERROR,
     };
 }

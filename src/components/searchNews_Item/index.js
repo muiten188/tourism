@@ -35,8 +35,8 @@ export default class extends PureComponent {
   render() {
     const { key, data } = this.props;
     var avatarUrl = null;
-    if (data && data.imgProfile) {
-      avatarUrl = `${AppConfig.API_HOST}${data.imgProfile}`
+    if (data && data.thumbnail) {
+      avatarUrl = `${AppConfig.API_HOST}${data.thumbnail}`
     }
     return (
       <View key={key} style={styles.itemList}>
@@ -68,11 +68,11 @@ export default class extends PureComponent {
               paddingRight: 6
             }}>
               <Row style={styles.rowItem}>
-                <Text style={styles.textBold}>{data ? data.museumName : ""}</Text>
+                <Text style={styles.textBold}>{data ? data.title : ''}</Text>
               </Row>
               <Row style={styles.rowItemDes}>
                 <ScrollView style={{ height: '100%' }}>
-                  <Text style={{}}>{data ? data.description : ''}</Text>
+                  <Text style={{}}>{data.description}</Text>
                 </ScrollView>
               </Row>
             </Col>
@@ -112,8 +112,6 @@ export default class extends PureComponent {
         }}
       >
         <Thumbnail large style={{ borderColor: '#e8eff5', borderWidth: 0.5 }} source={{ uri: 'http://images6.fanpop.com/image/photos/40600000/PRISTIN-WE-LIKE-Promotion-Nayoung-pristin-40694319-500-333.jpg' }} />
-
-
       </View>
     );
   }

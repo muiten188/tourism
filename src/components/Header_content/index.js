@@ -27,6 +27,12 @@ export default class extends Component {
     header: null
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      textSearch: ''
+    }
+  }
   render() {
     let _onBack = () => {
       Actions.pop();
@@ -69,9 +75,9 @@ export default class extends Component {
             </Col> :
               <Col style={styles.itemHeaderBody}>
                 <Row>
-                  <Input style={{color:'#fff'}} placeholder={I18n.t("find", {
+                  <Input style={{ color: '#fff' }} placeholder={I18n.t("find", {
                     locale: "vn"
-                  })} placeholderTextColor={"#fff"} onChange={onSearch}/>
+                  })} placeholderTextColor={"#fff"} value={this.state.textSearch} onChangeText={(value) => { this.setState({ textSearch: value }); onSearch(value) }}/>
                 </Row>
 
               </Col>
@@ -80,7 +86,12 @@ export default class extends Component {
           {!hideRightButton ?
             <Col style={styles.itemHeaderEnd}>
               <Button transparent onPress={() => {
-                Actions.searchMuseum();
+                if (onSearch) {
+                  onSearch(this.state.textSearch)
+                }
+                else {
+                  Actions.searchMuseum();
+                }
               }}>
                 <IconVector name="search" size={20} style={{ color: '#fff' }} />
               </Button>

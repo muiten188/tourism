@@ -35,8 +35,8 @@ export default class extends PureComponent {
   render() {
     const { key, data } = this.props;
     var avatarUrl = null;
-    if (data && data.imgProfile) {
-      avatarUrl = `${AppConfig.API_HOST}${data.imgProfile}`
+    if (data && data.artImageProfile) {
+      avatarUrl = `${AppConfig.API_HOST}${data.artImageProfile}`
     }
     return (
       <View key={key} style={styles.itemList}>
@@ -68,11 +68,11 @@ export default class extends PureComponent {
               paddingRight: 6
             }}>
               <Row style={styles.rowItem}>
-                <Text style={styles.textBold}>{data ? data.museumName : ""}</Text>
+                <Text style={styles.textBold}>{data.artName}</Text>
               </Row>
               <Row style={styles.rowItemDes}>
                 <ScrollView style={{ height: '100%' }}>
-                  <Text style={{}}>{data ? data.description : ''}</Text>
+                  <Text style={{}}>{data.artDescription}</Text>
                 </ScrollView>
               </Row>
             </Col>
