@@ -27,7 +27,8 @@ export function get_Antifact(values, currentPage, pageSize, user) {
                 if (responseJson) {
                     if (responseJson.data) {
                         data = responseJson.data;
-                        dispatch(_search_Antifact(data, dataPost));
+                        var listArtifact=_buildListArtifact(data);
+                        dispatch(_search_Antifact(listArtifact, dataPost));
                     } else {
                         dispatch(_seach_AntifactError());
                     }
@@ -43,6 +44,30 @@ export function get_Antifact(values, currentPage, pageSize, user) {
             });
     };
 }
+
+function _buildListArtifact(data) {
+    var listArtifact = [];
+    var listResult = [];
+    for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        if (listArtifact.indexOf(item.tagId) == -1) {
+            listArtifact.push(item.tagId);
+            var objectData = {
+                tagId: item.tagId,
+                data: []
+            }
+            for (j = i; j < data.length; j++) {
+                var itemY = data[j];
+                if ((objectData.data.indexOf(itemY) == -1) && itemY.tagId == item.tagId) {
+                    objectData.data.push(itemY);
+                }
+            }
+            listResult.push(objectData);
+        }
+    }
+    return listResult;
+}
+
 function _search_Antifact(data, valuesForm) {
     return {
         type: types.SEARCH_ANTIFACT,

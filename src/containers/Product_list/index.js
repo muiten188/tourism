@@ -37,6 +37,7 @@ import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
 import Video from "react-native-video";
+import ItemResultProductDevider from '../../components/Item_divider_product';
 import ItemResultProduct from '../../components/Item_result_product';
 
 import HeaderContent from "../../components/Header_content";
@@ -84,6 +85,7 @@ class ProductList extends Component {
         const { paramPassAction } = this.props;
         const { get_Antifact } = this.props.productListAction;
         const { listAntifact, searchAntifactErorr, isLoading } = this.props.productListReducer;
+        
         if (searchAntifactErorr) {
             Alert.alert("Thông báo", "Lấy danh sách hiện vật thất bại", [{
                 text: 'Ok',
@@ -124,36 +126,9 @@ class ProductList extends Component {
                                 data={listAntifact ? listAntifact : []}
                                 keyExtractor={this._keyExtractor}
                                 renderItem={this.renderFlatListItem.bind(this)}
-                                numColumns={2}
+                                horizontal={false}
+                                numColumns={1}
                                 onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                                onEndReached={({ distanceFromEnd }) => {
-                                    if (distanceFromEnd > 0) {
-                                        // // this.onEndReachedCalledDuringMomentum = true;
-                                        // if (
-                                        //     !blockLoadMoreAction &&
-                                        //     !(listResult.length < pageSize)
-                                        // ) {
-
-                                        //     blockLoadMoreAction = true;
-                                        //     this.smallLoading.show(),
-                                        //         setTimeout(() => {
-                                        //             searchAction.loadMore(
-                                        //                 valuesForm,
-                                        //                 currentPage,
-                                        //                 pageSize,
-                                        //                 user
-                                        //             )
-                                        //         }, 0);
-
-                                        //     setTimeout(() => {
-                                        //         if (loadEnd != true) {
-                                        //             blockLoadMoreAction = false;
-                                        //         }
-                                        //     }, 700);
-                                        // }
-                                    }
-                                }}
-                                onEndReachedThreshold={0.7}
                             />
                         </Row>
                         <Loading
@@ -170,12 +145,8 @@ class ProductList extends Component {
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
-        var urlAvartar = null;
-        if (item.artImageProfile) {
-            urlAvartar = AppConfig.API_HOST + item.artImageProfile.replaceAll("\\\\", "/")
-        }
         return (
-            <TouchableOpacity
+            <View
                 key={item.index}
                 style={
                     styles.item_container_half
@@ -184,14 +155,11 @@ class ProductList extends Component {
                     Actions.museumProduct({ paramPassAction: item });
                 }}
             >
-                <ItemResultProduct key={item.index}
-                    userName={'bach'}
-                    position={'bền bền'}
-                    phone={'đổi phone'}
-                    avatarUrl={urlAvartar ? urlAvartar : 'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
-                    data={item}></ItemResultProduct>
+                <ItemResultProductDevider key={item.index}
+                    
+                    data={item}></ItemResultProductDevider>
 
-            </TouchableOpacity>
+            </View>
         );
     }
 

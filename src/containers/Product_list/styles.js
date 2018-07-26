@@ -9,7 +9,7 @@ export default {
         fontWeight: 'bold', paddingLeft: 6
     },
     item_container_half: {
-        width: "48.5%",
+        width: "98%",
         justifyContent: "center",
         alignItems: "center",
         margin: 3

@@ -11,7 +11,7 @@ export default {
     height: 'auto'
   },
   item_container_half: {
-    width: "50%",
+    width: "48.5%",
     justifyContent: "center",
     alignItems: "center",
     margin: 3
@@ -19,6 +19,10 @@ export default {
   headerList: { width: '100%' },
   headerListText: {
     textAlign: 'left',
-    marginBottom: 3
+    marginBottom: 3,
+    fontWeight:'500'
+  },
+  listResult:{
+    width:'100%'
   }
 };
