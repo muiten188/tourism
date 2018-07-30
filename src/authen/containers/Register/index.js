@@ -291,11 +291,11 @@ function mapStateToProps(state, props) {
     initialValues: state.registerReducer.userForm
       ? state.registerReducer.userForm
       : {
-        firstName: "Bùi đình",
-        lastName: 'Bách',
-        username: "bachbd",
-        password: "123456a@",
-        confirmPassword: '123456a@'
+        firstName: "",//"Bùi đình"
+        lastName: "",//'Bách'
+        username: "",//"bachbd"
+        password: "",//"123456a@"
+        confirmPassword: ""//'123456a@'
       }
   };
 }

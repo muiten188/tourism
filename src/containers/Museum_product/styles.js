@@ -15,7 +15,7 @@ export default {
         margin: 3
     },
     rowYoutube: {
-        height: 150,
+        height: 180,
         backgroundColor: 'black'
     },
     rowBar: {
@@ -34,12 +34,12 @@ export default {
         borderBottomColor: '#e8eff5'
     },
     rowDescription_full: {
-        height: 'auto',
+        height:'auto',
         maxHeight:150,
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
-        borderBottomColor: '#e8eff5'
+        borderBottomColor: '#e8eff5',
     },
     titleProduct: {
         fontWeight: 'bold',

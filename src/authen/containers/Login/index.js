@@ -384,7 +384,7 @@ function mapStateToProps(state, props) {
       ? state.loginReducer.userForm
       : {
         username: "admin",
-        password: "123456a@"
+        password: ""//"123456a@"
       }
   };
 }

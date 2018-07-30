@@ -62,7 +62,7 @@ class Profile extends Component {
     const { loginAction } = this.props;
     helper.clearAsyncStorage();
     loginAction.logout();
-    Actions.reset('login');
+    // Actions.reset('login');
   }
 
   render() {
@@ -70,7 +70,14 @@ class Profile extends Component {
     const { user } = this.props.loginReducer;
     return (
       <Container style={styles.container}>
-        {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> : null}
+        {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
+          <Button full
+            onPress={() => {
+              Actions.login();
+            }}
+            style={{ margin: 15 }}>
+            <Text>Đăng nhập</Text>
+          </Button>}
         <Grid style={styles.Grid}>
           <Row style={styles.gridTitleRow}>
             <Text>{I18n.t("pay", {

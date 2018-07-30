@@ -90,37 +90,44 @@ class MuseumList extends Component {
         return (
             <Container style={styles.container}>
                 <Grid style={{}}>{/* marginBottom: 45 */}
-                    <Row style={{ height: 40 }}>
-                        <Col><Text style={styles.textSide}>Tin tức</Text></Col>
-                    </Row>
-                    <Row style={styles.rowNews}>
-                        <FlatList
-                            ref={ref => {
-                                this.list = ref;
-                            }}
-                            refreshControl={
-                                <RefreshControl
-                                    colors={["#9Bd35A", "#689F38"]}
-                                    refreshing={isLoadingNews ? isLoadingNews : false}
-                                    onRefresh={() => {
-                                        //this.loading.show();
-                                        setTimeout(() => {
-                                            search_News(null, 1, 1000, null);
-                                        }, 0);
+                    {(listNews && listNews.length > 0) ?
+                        <Row style={{ height: 40 }}>
+                            <Col><Text style={styles.textSide}>Tin tức</Text></Col>
+                        </Row>
+                        : null
+                    }
+                    {(listNews && listNews.length > 0) ?
+                        <Row style={styles.rowNews}>
+                            <FlatList
+                                ref={ref => {
+                                    this.list = ref;
+                                }}
+                                refreshControl={
+                                    <RefreshControl
+                                        colors={["#9Bd35A", "#689F38"]}
+                                        refreshing={isLoadingNews ? isLoadingNews : false}
+                                        onRefresh={() => {
+                                            //this.loading.show();
+                                            setTimeout(() => {
+                                                search_News(null, 1, 1000, null);
+                                            }, 0);
 
-                                    }
-                                    }
-                                />
-                            }
-                            style={styles.listResult}
-                            data={[...listNews]}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this.renderNewsFlatListItem.bind(this)}
-                            horizontal={true}
-                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                            onEndReachedThreshold={0.7}
-                        />
-                    </Row>
+                                        }
+                                        }
+                                    />
+                                }
+                                style={styles.listResult}
+                                data={[...listNews]}
+                                keyExtractor={this._keyExtractor}
+                                renderItem={this.renderNewsFlatListItem.bind(this)}
+                                horizontal={true}
+                                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                                onEndReachedThreshold={0.7}
+                            />
+                        </Row>
+                        : null
+                    }
+
                     <Row style={{ height: 50 }}>
                         <Col><Text style={styles.textSide}>Chọn địa danh</Text></Col>
                         <Col><Picker

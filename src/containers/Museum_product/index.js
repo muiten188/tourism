@@ -42,7 +42,7 @@ import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
 import * as AppConfig from "../../config/app_config";
 import * as helper from '../../helper';
-import YouTube from 'react-native-youtube'
+import VideoPlayer from "../../components/VideoPlayer";
 const blockAction = false;
 const blockLoadMoreAction = false;
 const interval = null;
@@ -104,50 +104,65 @@ class MuseumProduct extends Component {
                 }
             }
         }
+        var videoUrl = null;
+        if (antifactDetail && antifactDetail.artVideoProfile) {
+            videoUrl = AppConfig.API_HOST + antifactDetail.artVideoProfile;
+        }
+        var imgUrl = null;
+        if (antifactDetail && antifactDetail.artImageProfile) {
+            imgUrl = AppConfig.API_HOST + antifactDetail.artImageProfile;
+        }
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
-                <ScrollView scrollEnabled={false}>
-                    <Grid>
-                        <Row style={styles.rowYoutube}>
-                            <Slideshow
-                                height={150}
-                                arrowSize={0}
-                                position={this.state.position}
-                                onPositionChanged={position => this.setState({ position })}
-                                dataSource={attachments} />
-                        </Row>
-                        <Row style={styles.rowBar}>
-                            <Grid>
-                                <Col>
-                                    {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
+                <Grid style={{ flex: 1}}>
+                    {
+                        (videoUrl != null || attachments.length > 0) ?
+                            < Row style={styles.rowYoutube}>
+                                {videoUrl ? <VideoPlayer video={{ uri: videoUrl }}
+                                    volume={0.5}
+                                    onClosePressed={() => { }}
+                                    poster={imgUrl}
+                                /> : <Slideshow
+                                        height={150}
+                                        arrowSize={0}
+                                        position={this.state.position}
+                                        onPositionChanged={position => this.setState({ position })}
+                                        dataSource={attachments} />
+                                }
+                            </Row> : null
+                    }
+                    <Row style={styles.rowBar}>
+                        <Grid>
+                            <Col>
+                                {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
                                         <Icon name="user" size={15} style={styles.textWhile} />
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
                                             locale: "vn"
                                         })}</Text>
                                     </Button> */}
-                                </Col>
-                                <Col>
-                                    <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
-                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
-                                            locale: "vn"
-                                        })}</Text>
-                                        <Icon name="map" size={15} style={styles.textWhile} />
-                                    </Button>
-                                </Col>
-                            </Grid>
-                        </Row>
-                        <Row style={styles.rowDescription_full}>
-                            <ScrollView style={{flex:1}}>
+                            </Col>
+                            <Col>
+                                <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
+                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
+                                        locale: "vn"
+                                    })}</Text>
+                                    <Icon name="map" size={15} style={styles.textWhile} />
+                                </Button>
+                            </Col>
+                        </Grid>
+                    </Row>
+                    <Row style={styles.rowDescription_full}>
+                            <ScrollView style={{ flex: 1 }}>
                                 <Text>
                                     {antifactDetail ? antifactDetail.artDescription : '...'}
                                 </Text>
                             </ScrollView>
                         </Row>
-                        <Row style={{ height:400 }}>
-                            <WebView style={{ flex: 1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></WebView>
-                        </Row>
-                        {/* <Row style={{ height: 30 }}>
+                    <Row style={{ flex: 1 }}>
+                        <WebView style={{ flex:1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></WebView>
+                    </Row>
+                    {/* <Row style={{ height: 30 }}>
                             <Text style={styles.titleProduct}>{I18n.t("similar_product", {
                                 locale: "vn"
                             })}</Text>
@@ -194,16 +209,15 @@ class MuseumProduct extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row> */}
-                        <Loading
-                            ref={ref => {
-                                this.loading = ref;
-                            }}
-                            isShow={isLoading}
-                        />
-                    </Grid>
-                </ScrollView>
 
-            </Container>
+                </Grid>
+                <Loading
+                    ref={ref => {
+                        this.loading = ref;
+                    }}
+                    isShow={isLoading}
+                />
+            </Container >
         );
     }
 

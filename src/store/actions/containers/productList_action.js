@@ -53,7 +53,7 @@ function _buildListArtifact(data) {
         if (listArtifact.indexOf(item.tagId) == -1) {
             listArtifact.push(item.tagId);
             var objectData = {
-                tagId: item.tagId,
+                tagId: item.tagName,
                 data: []
             }
             for (j = i; j < data.length; j++) {
