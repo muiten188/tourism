@@ -100,7 +100,7 @@ android {
         jumboMode = true
     }
     defaultConfig {
-        applicationId "com.new_app"
+        applicationId "com.Easylink"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 8

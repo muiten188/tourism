@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:229107549229:android:d319bec6d8bb8dec",
         "android_client_info": {
-          "package_name": "com.new_app"
+          "package_name": "com.Easylink"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "229107549229-pe31ka6ep5dnghr7luvadupuiirv0e15.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.new_app",
+            "package_name": "com.Easylink",
             "certificate_hash": "46a77cb91f44e7e5e6190533e0dd947e3e2584bb"
           }
         },

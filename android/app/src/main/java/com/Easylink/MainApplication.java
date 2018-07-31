@@ -1,4 +1,4 @@
-package com.new_app;
+package com.Easylink;
 
 import android.app.Application;
 
