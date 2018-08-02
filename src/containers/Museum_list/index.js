@@ -34,7 +34,7 @@ import * as meseumListAction from "../../store/actions/containers/museumList_act
 import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import ItemResult from '../../components/Item_result';
+import NewsSlider from '../../components/NewsSlider';
 import ItemDivider from '../../components/Item_divider';
 import ItemNews from '../../components/Item_news';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
@@ -89,27 +89,63 @@ class MuseumList extends Component {
         }
         return (
             <Container style={styles.container}>
-                <Grid style={{}}>{/* marginBottom: 45 */}
-                    {(listNews && listNews.length > 0) ?
-                        <Row style={{ height: 40 }}>
-                            <Col><Text style={styles.textSide}>Tin tức</Text></Col>
+                <Content>
+                    <Grid>{/* marginBottom: 45 */}
+
+                        <Row style={{ height: 180 }}>
+                            <NewsSlider listNews={listNews}></NewsSlider>
                         </Row>
-                        : null
-                    }
-                    {(listNews && listNews.length > 0) ?
-                        <Row style={styles.rowNews}>
+                        <Row style={{ paddingBottom: 6, paddingTop: 6, height: 50, borderBottomWidth: 0.5, borderBottomColor: '#cecece' }}>
                             <FlatList
-                                ref={ref => {
-                                    this.list = ref;
+                                style={styles.listResult}
+                                data={[{ areaName: "Tất cả", areaId: null }, ...listArea]}
+                                keyExtractor={this._keyExtractor}
+                                renderItem={(dataItem) => {
+                                    var item = dataItem.item;
+                                    return (
+                                        <TouchableOpacity style={{
+                                            minWidth: 50,
+                                            width: 'auto',
+                                            marginRight: 4,
+                                            paddingLeft: 6,
+                                            paddingRight: 6,
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}
+                                            onPress={() => {
+                                                this.setState({ areaId: item.areaId })
+                                                search_Museum(item.areaId ? { areaId: item.areaId } : null, 1, 100, null);
+                                            }}>
+                                            <Grid>
+                                                <Row style={{
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center'
+                                                }}>
+                                                    <IconVector style={this.state.areaId == item.areaId ? { color: '#007db7' } : {}} size={15} name="map-o"></IconVector>
+                                                </Row>
+                                                <Row style={{
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center'
+                                                }}>
+                                                    <Text style={this.state.areaId == item.areaId ? { color: '#007db7' } : {}}>{item.areaName}</Text>
+                                                </Row>
+                                            </Grid>
+                                        </TouchableOpacity>
+                                    )
                                 }}
+                                horizontal={true}
+                            />
+                        </Row>
+                        <Row>
+                            <FlatList
                                 refreshControl={
                                     <RefreshControl
                                         colors={["#9Bd35A", "#689F38"]}
-                                        refreshing={isLoadingNews ? isLoadingNews : false}
+                                        refreshing={isLoading}
                                         onRefresh={() => {
                                             //this.loading.show();
                                             setTimeout(() => {
-                                                search_News(null, 1, 1000, null);
+                                                search_Museum(this.state.areaId ? { areaId: this.state.areaId } : null, 1, 100, null);
                                             }, 0);
 
                                         }
@@ -117,99 +153,86 @@ class MuseumList extends Component {
                                     />
                                 }
                                 style={styles.listResult}
-                                data={[...listNews]}
+                                data={listMuseum}
                                 keyExtractor={this._keyExtractor}
-                                renderItem={this.renderNewsFlatListItem.bind(this)}
-                                horizontal={true}
+                                renderItem={this.renderFlatListItem.bind(this)}
+                                horizontal={false}
                                 onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                                onEndReached={({ distanceFromEnd }) => {
+                                    if (distanceFromEnd > 0) {
+                                        // // this.onEndReachedCalledDuringMomentum = true;
+                                        // if (
+                                        //     !blockLoadMoreAction &&
+                                        //     !(listResult.length < pageSize)
+                                        // ) {
+
+                                        //     blockLoadMoreAction = true;
+                                        //     this.smallLoading.show(),
+                                        //         setTimeout(() => {
+                                        //             searchAction.loadMore(
+                                        //                 valuesForm,
+                                        //                 currentPage,
+                                        //                 pageSize,
+                                        //                 user
+                                        //             )
+                                        //         }, 0);
+
+                                        //     setTimeout(() => {
+                                        //         if (loadEnd != true) {
+                                        //             blockLoadMoreAction = false;
+                                        //         }
+                                        //     }, 700);
+                                        // }
+                                    }
+                                }}
                                 onEndReachedThreshold={0.7}
                             />
+                            <Loading
+                                ref={ref => {
+                                    this.loading = ref;
+                                }}
+                                isShow={isLoading}
+                            />
                         </Row>
-                        : null
-                    }
+                        {(listNews && listNews.length > 0) ?
+                            <Row style={{ height: 40 }}>
+                                <Col><Text style={styles.textSide}>Tin tức</Text></Col>
+                            </Row>
+                            : null
+                        }
+                        {(listNews && listNews.length > 0) ?
+                            <Row style={styles.rowNews}>
+                                <FlatList
+                                    ref={ref => {
+                                        this.list = ref;
+                                    }}
+                                    refreshControl={
+                                        <RefreshControl
+                                            colors={["#9Bd35A", "#689F38"]}
+                                            refreshing={isLoadingNews ? isLoadingNews : false}
+                                            onRefresh={() => {
+                                                //this.loading.show();
+                                                setTimeout(() => {
+                                                    search_News(null, 1, 1000, null);
+                                                }, 0);
 
-                    <Row style={{ height: 50 }}>
-                        <Col><Text style={styles.textSide}>Chọn địa danh</Text></Col>
-                        <Col><Picker
-                            mode="dropdown"
-                            iosHeader="Select your SIM"
-                            // iosIcon={<Icon name="ios-arrow-down-outline" />}
-                            style={{ width: undefined }}
-                            selectedValue={this.state.areaId}
-                            onValueChange={(value) => {
-                                this.setState({ areaId: value })
-                                search_Museum(value ? { areaId: value } : null, 1, 100, null);
-                            }}
-                        >
-                            <Picker.Item label="Tất cả" value={null} />
-                            {listArea.map((item, index) => {
-                                return (<Picker.Item key={index} label={item.areaName} value={item.areaId} />)
-                            })}
-                        </Picker></Col>
-                    </Row>
-                    <Row>
-                        <FlatList
-                            ref={ref => {
-                                this.list = ref;
-                            }}
-                            refreshControl={
-                                <RefreshControl
-                                    colors={["#9Bd35A", "#689F38"]}
-                                    refreshing={isLoading}
-                                    onRefresh={() => {
-                                        //this.loading.show();
-                                        setTimeout(() => {
-                                            search_Museum(this.state.areaId ? { areaId: this.state.areaId } : null, 1, 100, null);
-                                        }, 0);
-
+                                            }
+                                            }
+                                        />
                                     }
-                                    }
+                                    style={styles.listResult}
+                                    data={[...listNews]}
+                                    keyExtractor={this._keyExtractor}
+                                    renderItem={this.renderNewsFlatListItem.bind(this)}
+                                    horizontal={false}
+                                    onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                                    onEndReachedThreshold={0.7}
                                 />
-                            }
-                            style={styles.listResult}
-                            data={listMuseum}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this.renderFlatListItem.bind(this)}
-                            horizontal={false}
-                            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                            onEndReached={({ distanceFromEnd }) => {
-                                if (distanceFromEnd > 0) {
-                                    // // this.onEndReachedCalledDuringMomentum = true;
-                                    // if (
-                                    //     !blockLoadMoreAction &&
-                                    //     !(listResult.length < pageSize)
-                                    // ) {
-
-                                    //     blockLoadMoreAction = true;
-                                    //     this.smallLoading.show(),
-                                    //         setTimeout(() => {
-                                    //             searchAction.loadMore(
-                                    //                 valuesForm,
-                                    //                 currentPage,
-                                    //                 pageSize,
-                                    //                 user
-                                    //             )
-                                    //         }, 0);
-
-                                    //     setTimeout(() => {
-                                    //         if (loadEnd != true) {
-                                    //             blockLoadMoreAction = false;
-                                    //         }
-                                    //     }, 700);
-                                    // }
-                                }
-                            }}
-                            onEndReachedThreshold={0.7}
-                        />
-                        <Loading
-                            ref={ref => {
-                                this.loading = ref;
-                            }}
-                            isShow={isLoading}
-                        />
-                    </Row>
-                </Grid>
-                {/* <View style={{
+                            </Row>
+                            : null
+                        }
+                    </Grid>
+                    {/* <View style={{
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
@@ -225,6 +248,7 @@ class MuseumList extends Component {
                         })}</Text>
                     </Button>
                 </View> */}
+                </Content>
             </Container>
         );
     }
@@ -236,7 +260,9 @@ class MuseumList extends Component {
             <TouchableOpacity
                 key={item.index}
                 style={
-                    styles.item_container_new
+                    dataItem.index==0?
+                    styles.item_container_new:
+                    styles.item_container_new2
                 }
                 onPress={() => {
                     // if (!blockAction) {
@@ -245,11 +271,8 @@ class MuseumList extends Component {
                     // }
                 }}
             >
-                <ItemNews data={item} key={item.index}
-                    userName={'bach'}
-                    position={'bền bền'}
-                    phone={'đổi phone'}
-                    avatarUrl={'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+                <ItemNews data={item} ikey={dataItem.index}
+
                     item={item}></ItemNews>
             </TouchableOpacity>
         );

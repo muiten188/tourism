@@ -35,15 +35,18 @@ export default class extends PureComponent {
   };
 
   render() {
-    const { key, avatarUrl, item } = this.props;
+    const { ikey, avatarUrl, item } = this.props;
     var urlAvartar = null;
     if (item.thumbnail) {
       urlAvartar = AppConfig.API_HOST + item.thumbnail.replaceAll("\\\\", "/")
     }
-
+    debugger;
     return (
-      <View key={key} style={styles.itemList}>
-        {/* <Thumbnail
+      <View style={styles.itemList}>{
+        ikey == 0 ?
+          <View style={styles.itemList}>
+            <View style={{ width: '100%' }}>
+              {/* <Thumbnail
           style={styles.thumbnail_avatar}
           source={avatarUrl ? {
             uri: `${avatarUrl}`
@@ -54,25 +57,48 @@ export default class extends PureComponent {
             this.thumbnail.setNativeProps({ src: [resolveAssetSource(userAvar)] })
           }}
         /> */}
-        <Image
-          source={{ uri: urlAvartar }}
-          style={styles.imageHotel}
-        />
-        <View style={styles.context}>
-          <View style={styles.conInside}>
-            <Text style={styles.textContext}></Text>
+              <Image
+                source={{ uri: urlAvartar }}
+                style={styles.imageHotel}
+              />
+
+            </View>
+            <View style={styles.context}>
+
+              <Text style={styles.textContextTitle}>{this.textEclipse(item.title)}</Text>
+              <Text style={styles.textContextDes}>{this.textEclipseDes(item.description)}</Text>
+
+            </View>
           </View>
-          <Text style={styles.textContext}>{this.textEclipse(item.title)}</Text>
+          : <View style={styles.itemList}>
+            <Grid>
+              <Col size={0.55}>
+                <Image
+                  source={{ uri: urlAvartar }}
+                  style={styles.imageHotel2}
+                />
+              </Col>
+              <Col>
+                <View style={[styles.context, { paddingLeft: 6}]}>
 
-        </View>
+                  <Text style={styles.textContextTitle}>{this.textEclipseDes(item.title)}</Text>
+                  <Text style={styles.textContextDes}>{this.textEclipseDes(item.description)}</Text>
 
-
-      </View>
+                </View>
+              </Col>
+            </Grid>
+          </View>
+      }</View>
     );
   }
   textEclipse(text) {
-    return (((text).length > 30) ?
-      (((text).substring(0, 30)) + '...') :
+    return (((text).length > 50) ?
+      (((text).substring(0, 50)) + '...') :
+      text)
+  }
+  textEclipseDes(text) {
+    return (((text).length > 120) ?
+      (((text).substring(0, 120)) + '...') :
       text)
   }
 }

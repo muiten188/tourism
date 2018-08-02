@@ -5,7 +5,6 @@ export default {
         flex: 1
     },
     rowNews:{
-        height:130
     },
     textSide: {
         marginTop: 13,
@@ -18,9 +17,25 @@ export default {
         margin:3
     },
     item_container_new:{
-        width: 150,
+        width: '100%',
+        minHeight:230,
+        height:'auto',
         justifyContent: "center",
         alignItems: "center",
-        margin:3
+        margin:0,
+        padding:10
+        
+    },
+    item_container_new2:{
+        width: '100%',
+        minHeight:130,
+        height:'auto',
+        justifyContent: "center",
+        alignItems: "center",
+        margin:0,
+        paddingLeft:10,
+        paddingRight:10,
+        paddingTop:5,
+        paddingBottom:5
     }
 }

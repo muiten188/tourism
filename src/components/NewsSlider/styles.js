@@ -11,7 +11,6 @@ export default {
     flex:1
   },
   item: {
-    paddingTop: 15,
     width: 240,
     minHeight: 145,
     backgroundColor: "#fff",
@@ -58,23 +57,17 @@ export default {
   imageHotel: {
     resizeMode: 'cover',
     width: '100%',
-    height: 190,
+    height: '100%',
     borderColor: "#cccc",
     borderWidth: 0.3,
     borderRadius: 2
   },
-  imageHotel2:{
-    resizeMode: 'cover',
-    width: '100%',
-    height: 127,
-    borderColor: "#cccc",
-    borderWidth: 0.3,
-    borderRadius: 2,
-    marginTop:4
-  },
   context: {
-    width:'100%',
-    minHeight:20
+    position: 'absolute',
+    bottom: 2,
+    left: 0,
+    right: 0,
+    minHeight:50
   },
   conInside: {
     backgroundColor: 'black',
@@ -86,16 +79,21 @@ export default {
     opacity: 0.4
   },
   textContext: {
-    textAlign: 'center',
+    textAlign: 'left',
+    marginLeft:10,
+    color: '#fff',
+    paddingLeft:2,
+    paddingRight:2,
+    fontSize:14,
+    opacity: 1
+  },
+  textContextTitle:{
+    textAlign: 'left',
+    fontSize:16,
+    marginLeft:10,
     color: '#fff',
     paddingLeft:2,
     paddingRight:2,
     opacity: 1
   },
-  textContextDes:{
-    fontSize:14
-  },
-  textContextTitle:{
-    fontWeight:'500'
-  }
 };
