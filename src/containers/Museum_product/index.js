@@ -42,6 +42,7 @@ import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Slideshow from 'react-native-slideshow';
 import * as AppConfig from "../../config/app_config";
 import * as helper from '../../helper';
+import AutoHeightWebView from 'react-native-autoheight-webview';
 import VideoPlayer from "../../components/VideoPlayer";
 const blockAction = false;
 const blockLoadMoreAction = false;
@@ -74,15 +75,17 @@ class MuseumProduct extends Component {
         if (paramPassAction && paramPassAction.artId) {
             get_AntifactByID(paramPassAction.artId, 1, 100, null);
         }
-        // if (paramPassAction && paramPassAction.tag) {
-        //     get_AntifactByTag({ tagId: paramPassAction.tag }, 1, 100, null);
-        // }
+        if (paramPassAction && paramPassAction.tagId && paramPassAction.artId) {
+            get_AntifactByTag({ tagId: paramPassAction.tagId, currId: paramPassAction.artId }, 1, 100, null);
+        }
     }
 
     componentWillUnmount() {
         if (interval) {
             clearInterval(interval);
         }
+        const { antifactDetail } = this.props.museumProductReducer;
+        antifactDetail.artContent = null;
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -112,57 +115,61 @@ class MuseumProduct extends Component {
         if (antifactDetail && antifactDetail.artImageProfile) {
             imgUrl = AppConfig.API_HOST + antifactDetail.artImageProfile;
         }
+
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
-                <Grid style={{ flex: 1}}>
-                    {
-                        (videoUrl != null || attachments.length > 0) ?
-                            < Row style={styles.rowYoutube}>
-                                {videoUrl ? <VideoPlayer video={{ uri: videoUrl }}
-                                    volume={0.5}
-                                    onClosePressed={() => { }}
-                                    poster={imgUrl}
-                                /> : <Slideshow
-                                        height={150}
-                                        arrowSize={0}
-                                        position={this.state.position}
-                                        onPositionChanged={position => this.setState({ position })}
-                                        dataSource={attachments} />
-                                }
-                            </Row> : null
-                    }
-                    <Row style={styles.rowBar}>
-                        <Grid>
-                            <Col>
-                                {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
+                <Content>
+                    <Grid style={{ flex: 1 }}>
+                        {
+                            (videoUrl != null || attachments.length > 0) ?
+                                < Row style={styles.rowYoutube}>
+                                    {videoUrl ? <VideoPlayer video={{ uri: videoUrl }}
+                                        volume={0.5}
+                                        onClosePressed={() => { }}
+                                        poster={imgUrl}
+                                    /> : <Slideshow
+                                            height={150}
+                                            arrowSize={0}
+                                            position={this.state.position}
+                                            onPositionChanged={position => this.setState({ position })}
+                                            dataSource={attachments} />
+                                    }
+                                </Row> : null
+                        }
+                        <Row style={styles.rowBar}>
+                            <Grid>
+                                <Col>
+                                    {/* <Button full block transparent iconLeft={true} style={styles.buttonTitle}>
                                         <Icon name="user" size={15} style={styles.textWhile} />
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("locationGuide", {
                                             locale: "vn"
                                         })}</Text>
                                     </Button> */}
-                            </Col>
-                            <Col>
-                                <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
-                                    <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
-                                        locale: "vn"
-                                    })}</Text>
-                                    <Icon name="map" size={15} style={styles.textWhile} />
-                                </Button>
-                            </Col>
-                        </Grid>
-                    </Row>
-                    <Row style={styles.rowDescription_full}>
+                                </Col>
+                                <Col>
+                                    <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
+                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
+                                            locale: "vn"
+                                        })}</Text>
+                                        <Icon name="map" size={15} style={styles.textWhile} />
+                                    </Button>
+                                </Col>
+                            </Grid>
+                        </Row>
+                        <Row style={styles.rowDescription_full}>
                             <ScrollView style={{ flex: 1 }}>
                                 <Text>
                                     {antifactDetail ? antifactDetail.artDescription : '...'}
                                 </Text>
                             </ScrollView>
                         </Row>
-                    <Row style={{ flex: 1 }}>
-                        <WebView style={{ flex:1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></WebView>
-                    </Row>
-                    {/* <Row style={{ height: 30 }}>
+                        <Row style={{ flex: 1,paddingLeft:4 }}>
+                            {antifactDetail && antifactDetail.artContent ?
+                                <AutoHeightWebView style={{ flex: 1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></AutoHeightWebView>
+                                : null}
+                        </Row>
+                        <Row style={{ height: 30 }}>
                             <Text style={styles.titleProduct}>{I18n.t("similar_product", {
                                 locale: "vn"
                             })}</Text>
@@ -208,15 +215,16 @@ class MuseumProduct extends Component {
                                 }}
                                 onEndReachedThreshold={0.7}
                             />
-                        </Row> */}
+                        </Row>
 
-                </Grid>
-                <Loading
-                    ref={ref => {
-                        this.loading = ref;
-                    }}
-                    isShow={isLoading}
-                />
+                    </Grid>
+                    <Loading
+                        ref={ref => {
+                            this.loading = ref;
+                        }}
+                        isShow={isLoading}
+                    />
+                </Content>
             </Container >
         );
     }

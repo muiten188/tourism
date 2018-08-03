@@ -3,6 +3,7 @@ package com.Easylink;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.iou90.autoheightwebview.AutoHeightWebViewPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
@@ -45,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new AutoHeightWebViewPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
           new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNGoogleSigninPackage(), new RNI18nPackage(),
           new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
     }

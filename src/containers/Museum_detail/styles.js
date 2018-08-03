@@ -36,7 +36,7 @@ export default {
     },
     rowDescription_full: {
         width:'100%',
-        height:400,
+        flex:1,
         padding: 4,
         paddingBottom: 10,
         borderBottomWidth: 2.5,

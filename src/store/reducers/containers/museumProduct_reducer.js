@@ -1,7 +1,7 @@
 import * as types from "../../constants/action_types";
 const initState = {
   isLoading: true,
-  antifactDetail: [],
+  antifactDetail: {},
   listAntifactByTag: [],
   searchAntifactDetailErorr: false,
   searchAntifactBytagErorr: false,

@@ -74,7 +74,7 @@ export default class extends PureComponent {
       >
         <ItemResultProduct
           key={item.index}
-          avatarUrl={urlAvartar ? urlAvartar : 'https://q.bstatic.com/images/hotel/max1024x768/101/101428465.jpg'}
+          avatarUrl={urlAvartar ? urlAvartar : 'https://cdn.washingtoncitypaper.com/files/base/scomm/wcp/image/2009/04/640w/__contexts.org_socimages_files_2009_04_d_silhouette.jpg'}
           data={item}>
         </ItemResultProduct>
 

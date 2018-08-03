@@ -38,7 +38,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ItemResult from '../../components/Item_result';
 import Video from "react-native-video";
 import ItemResultProduct from '../../components/Item_result_product';
-
+import AutoHeightWebView from 'react-native-autoheight-webview';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 // import YouTube from 'react-native-youtube'
@@ -96,7 +96,7 @@ class MuseumDetail extends Component {
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
-                <ScrollView scrollEnabled={false}>
+                <Content>
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
                             <VideoPlayer video={{ uri: videoUrl }}
@@ -180,7 +180,10 @@ class MuseumDetail extends Component {
                                         locale: "vn"
                                     })}
                                 </Text> */}
-                            <WebView style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} source={{ html: `<html>${museumDetail.content}</html>` }} ></WebView>
+                            <AutoHeightWebView
+                                source={{ html: `<html>${museumDetail.content}</html>` }}
+                            />
+                            {/* <WebView style={{}} source={{ html: `<html>${museumDetail.content}</html>` }} ></WebView> */}
                             {/* <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
                                     <Text uppercase={false} style={{ color: '#007db7' }}>
                                         {I18n.t("summary_button", {
@@ -239,7 +242,7 @@ class MuseumDetail extends Component {
                             isShow={isLoading}
                         />
                     </Grid>
-                </ScrollView>
+                </Content>
             </Container>
         );
     }

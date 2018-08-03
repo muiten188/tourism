@@ -40,7 +40,6 @@ export default class extends PureComponent {
     if (item.thumbnail) {
       urlAvartar = AppConfig.API_HOST + item.thumbnail.replaceAll("\\\\", "/")
     }
-    debugger;
     return (
       <View style={styles.itemList}>{
         ikey == 0 ?
