@@ -38,7 +38,8 @@ import ItemResult from "../../components/Item_result";
 import * as homeAction from "../../store/actions/containers/home_action";
 import Loading from "../../components/Loading";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-
+import * as loginAction from "../../authen/actions/login_action";
+import * as helper from '../../helper';
 import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import MuseumList from '../Museum_list';
@@ -86,9 +87,17 @@ class Home extends Component {
 
   componentDidMount() {
     const { get_AntifactByUUID } = this.props.homeAction;
-
+    const { setUser } = this.props.loginAction;
+    helper.getAsyncStorage("@userLogin", (promise) => {
+      promise.done((value) => {
+        if (value != '' && value != null) {
+          var user = JSON.parse(value);
+          setUser(user);
+        }
+      })
+    })
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-      console.log('Tìm thấy beacon:', data)
+      // console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
 
         if (data.beacons[0].uuid != current_uuid) {
@@ -106,7 +115,7 @@ class Home extends Component {
           //   current_uuid = null;
           // }, 30000);
         }
-        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+        // console.log('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
     this.detectBeacons();
@@ -293,7 +302,8 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
   return {
-    homeAction: bindActionCreators(homeAction, dispatch)
+    homeAction: bindActionCreators(homeAction, dispatch),
+    loginAction: bindActionCreators(loginAction, dispatch)
   };
 }
 // export default reduxForm({

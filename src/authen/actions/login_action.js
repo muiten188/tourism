@@ -3,6 +3,61 @@ import { Keyboard } from "react-native";
 import * as types from "../../store/constants/action_types";
 import * as AppConfig from "../../config/app_config";
 import { Actions } from 'react-native-router-flux';
+
+export function login_Socail(user, typeSocail) {
+  debugger
+  return dispatch => {
+    dispatch(_loging());
+    var _user = {};
+    if (typeSocail == "GOOGLE") {
+      _user.firstName = user.givenName;
+      _user.lastName = user.familyName;
+      _user.socialIdentification=user.id;
+      _user.loginMethod = user.typeSocail;
+      _user.name = user.name;
+    }
+    else if(typeSocail=="FACEBOOK"){
+      _user.firstName = user.first_name;
+      _user.lastName = user.last_name;
+      _user.socialIdentification=user.id;
+      _user.loginMethod = user.typeSocail;
+      _user.name = user.name;
+    }
+    let error = false;
+    fetch(`${AppConfig.LOGIN_SOCAIL}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(_user)
+    })
+      .then(function (response) {
+        if (response.status != 200) {
+          dispatch(_login(false));
+          error = true;
+        } else {
+          return response.json();
+        }
+      })
+      .then(function (responseJson) {
+        if (responseJson && responseJson.user) {
+          var oUser = responseJson;
+          dispatch(_login(true, oUser));
+
+        }
+        else {
+          if (!error) {
+            dispatch(_login(false));
+          }
+        }
+      })
+      .catch(function (error) {
+        dispatch(_login(false));
+      });
+  };
+}
+
 export function login(user) {
 
   return dispatch => {

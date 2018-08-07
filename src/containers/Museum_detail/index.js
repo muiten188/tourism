@@ -40,6 +40,7 @@ import Video from "react-native-video";
 import ItemResultProduct from '../../components/Item_result_product';
 import AutoHeightWebView from 'react-native-autoheight-webview';
 import HeaderContent from "../../components/Header_content";
+import * as helper from '../../helper';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 // import YouTube from 'react-native-youtube'
 import * as AppConfig from "../../config/app_config";
@@ -56,7 +57,8 @@ class MuseumDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSummary: true
+            isSummary: true,
+            backgroundVideo: false
         }
         I18n.defaultLocale = "vi";
         I18n.locale = "vi";
@@ -67,11 +69,20 @@ class MuseumDetail extends Component {
         const { get_Antifact, get_MuseumDetail } = this.props.meseumListAction;
         get_MuseumDetail({ museumId: this.props.paramPassAction.museumId })
         //get_Antifact({ museumId: this.props.paramPassAction.museumId }, 1, 100, null);
+        this.loadSetting();
     }
     componentDidUpdate(prevProps, prevState) {
 
     }
 
+    async loadSetting() {
+        var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
+        if (backgroundVideoSetting != null) {
+            this.setState({
+                backgroundVideo: backgroundVideoSetting
+            })
+        }
+    }
     render() {
         const locale = "vn";
         const { paramPassAction } = this.props;
@@ -100,9 +111,10 @@ class MuseumDetail extends Component {
                     <Grid style={{}}>
                         <Row style={styles.rowYoutube}>
                             <VideoPlayer video={{ uri: videoUrl }}
-                                volume={0.5}
+                                volume={0.7}
                                 onClosePressed={() => { }}
                                 poster={imgUrl}
+                                playInBackground={this.state.backgroundVideo}
                             />
                             {/* <Video source={{ uri: videoUrl }}   // Can be a URL or a local file.
                                 ref={(ref) => {

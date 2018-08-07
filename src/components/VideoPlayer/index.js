@@ -66,7 +66,7 @@ class VideoPlayer extends Component {
     onProgressChanged(newPercent, paused) {
         let { duration } = this.state;
         let newTime = newPercent * duration / 100;
-        this.setState({ currentTime: newTime, paused: paused });
+        this.setState({ currentTime: newTime});
         this.videoPlayer.seek(newTime);
     }
 
@@ -97,10 +97,11 @@ class VideoPlayer extends Component {
                     resizeMode="contain"
                     poster={paused ? poster : null}
                     posterResizeMode="cover"
-                    style={styles.videoContainer} />
-                {paused &&
+                    style={styles.videoContainer}
+                    playInBackground={this.props.playInBackground ? this.props.playInBackground : false} />
+                {paused ?
                     <Image style={showProgressing ? styles.videoIcon_hideProgress : styles.videoIcon}
-                        source={require("../../resources/assets/play-icon.png")} />}
+                        source={require("../../resources/assets/play-icon.png")} />:null}
             </TouchableOpacity>
             {true ? <View style={[styles.controller]}>
                 <View

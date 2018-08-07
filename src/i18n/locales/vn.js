@@ -47,5 +47,6 @@ export default {
   fullName:'Họ Tên',
   diagram:'Sơ đồ',
   firstName:'Họ',
-  lastName:'Tên'
+  lastName:'Tên',
+  setting:'Cài đặt'
 };

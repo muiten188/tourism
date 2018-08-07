@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   FlatList,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import {
   Container,
@@ -19,7 +19,12 @@ import {
   Input,
   H1,
   H2,
-  H3
+  H3,
+  ListItem,
+  Left,
+  CheckBox,
+  Icon,
+  Right
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -46,6 +51,10 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      backgroundVideo: false,
+      notification: false,
+    }
     I18n.defaultLocale = "vi";
     I18n.locale = "vi";
     I18n.currentLocale();
@@ -53,7 +62,25 @@ class Profile extends Component {
 
   componentDidMount() {
     const { user } = this.props.loginReducer;
+    this.loadSetting();
   }
+
+  async loadSetting() {
+    var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
+    var notifiSetting = await helper.getnotifiSetting()
+    
+    if (backgroundVideoSetting != null) {
+      this.setState({
+        backgroundVideo: backgroundVideoSetting
+      })
+    }
+    if (notifiSetting != null) {
+      this.setState({
+        notification: notifiSetting
+      })
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
 
   }
@@ -63,6 +90,20 @@ class Profile extends Component {
     helper.clearAsyncStorage();
     loginAction.logout();
     // Actions.reset('login');
+  }
+
+  settingVideoChange() {
+    this.setState({
+      backgroundVideo: !this.state.backgroundVideo
+    })
+    helper.setAsyncStorage("@backgroundVideo", !this.state.backgroundVideo);
+  }
+
+  settingNotifiChange() {
+    this.setState({
+      notification: !this.state.notification
+    })
+    helper.setAsyncStorage("@notifi", !this.state.notification);
   }
 
   render() {
@@ -80,11 +121,41 @@ class Profile extends Component {
           </Button>}
         <Grid style={styles.Grid}>
           <Row style={styles.gridTitleRow}>
-            <Text>{I18n.t("pay", {
+            <Text style={{ fontWeight: '500' }}>{I18n.t("setting", {
               locale: "vn"
             })}</Text>
           </Row>
-          <Row style={styles.gridContent}>
+          <Row>
+            <Content>
+              <ListItem icon>
+                <Left>
+                  <Button onPress={this.settingVideoChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
+                    <Icon active name="plane" />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Chạy video ngầm</Text>
+                </Body>
+                <Right>
+                  <CheckBox onPress={this.settingVideoChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.backgroundVideo} />
+                </Right>
+              </ListItem>
+              <ListItem icon >
+                <Left>
+                  <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
+                    <Icon active name="plane" />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Thông báo</Text>
+                </Body>
+                <Right>
+                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.notification} />
+                </Right>
+              </ListItem>
+            </Content>
+          </Row>
+          {/* <Row style={styles.gridContent}>
             <Col>
               <Row style={styles.gridContentItem}>
                 <Col>
@@ -126,7 +197,7 @@ class Profile extends Component {
                 </Col>
               </Row>
             </Col>
-          </Row>
+          </Row> */}
 
         </Grid>
       </Container>

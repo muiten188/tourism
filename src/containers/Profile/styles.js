@@ -10,6 +10,8 @@ export default {
     height: 40,
     justifyContent: "flex-start",
     alignItems: "center",
+    paddingLeft:6,
+    
   },
   Grid: {
     borderTopColor: '#e8eff5',

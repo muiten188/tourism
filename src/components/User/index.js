@@ -70,7 +70,7 @@ class user extends React.Component {
             </Row>
             <Row>
               <Badge primary>
-                <Text>{oUser.accountType}</Text>
+                <Text>{oUser.accountType?oUser.accountType:'NORMAL'}</Text>
               </Badge>
             </Row>
             <Row style={{ marginTop: 10 }}>

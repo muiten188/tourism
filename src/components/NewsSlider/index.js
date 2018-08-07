@@ -79,7 +79,9 @@ export default class extends PureComponent {
     return (
       <TouchableOpacity key={key} style={styles.itemList}
         onPress={() => {
-          Actions.newsPreview({ news: _item })
+          if (_item) {
+            Actions.newsPreview({ news: _item })
+          }
         }}
       >
         {/* <Thumbnail

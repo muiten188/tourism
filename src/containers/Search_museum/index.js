@@ -22,7 +22,8 @@ import {
     H2,
     H3,
     H6,
-    Picker
+    Picker,
+    Badge
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -55,7 +56,10 @@ class SearchMuseum extends Component {
         super(props);
         this.state = {
             isSummary: true,
-            position: 1
+            position: 1,
+            searchNews: false,
+            searchMuseum: false,
+            searchArtifact: false
         }
         I18n.defaultLocale = "vi";
         I18n.locale = "vi";
@@ -93,14 +97,41 @@ class SearchMuseum extends Component {
     render() {
         const locale = "vn";
         const { listMuseums, listNews, listArtifacts, isLoading } = this.props.searchMuseumReducer;
+        const { searchNews, searchArtifact, searchMuseum } = this.state;
         return (
             <Container>
                 <HeaderContent showButtonLeft={true} search={true} onSearch={this.onTextSearchChange.bind(this)} />
                 <ScrollView style={styles.container}>
                     <Grid style={{}}>
-                        <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 18 }}>Tin tức</Text>
+                        <Row>
+                            <Text>Gợi ý tìm kiếm</Text>
+
                         </Row>
+                        <Row>
+                            <Col style={{ width: 80 }}>
+                                <TouchableOpacity onPress={() => { this.setState({ searchNews: !this.state.searchNews }) }}>
+                                    <Badge style={searchNews ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}><Text>Tin tức</Text></Badge>
+                                </TouchableOpacity>
+                            </Col>
+
+                            <Col style={{ width: 90 }}>
+                                <TouchableOpacity onPress={() => { this.setState({ searchMuseum: !this.state.searchMuseum }) }}>
+                                    <Badge style={searchMuseum ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}><Text>Bảo tàng</Text></Badge>
+                                </TouchableOpacity>
+                            </Col>
+                            <Col style={{ width: 90 }}>
+                                <TouchableOpacity onPress={() => { this.setState({ searchArtifact: !this.state.searchArtifact }) }}>
+                                    <Badge
+                                        style={searchArtifact ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}
+                                    ><Text>Hiện vật</Text></Badge>
+                                </TouchableOpacity>
+                            </Col>
+
+                        </Row>
+                        {listNews && listNews.length > 0 ?
+                            <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 }}>Tin tức</Text>
+                            </Row> : null}
                         <Row>
                             <FlatList
                                 ref={ref => {
@@ -141,9 +172,12 @@ class SearchMuseum extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row>
-                        <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 18 }}>Bảo tàng</Text>
-                        </Row>
+                        {
+                            listMuseums && listMuseums.length > 0 ?
+                                <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
+                                    <Text style={{ fontSize: 18 }}>Bảo tàng</Text>
+                                </Row> : null
+                        }
                         <Row>
                             <FlatList
                                 ref={ref => {
@@ -184,9 +218,11 @@ class SearchMuseum extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row>
-                        <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 18 }}>Vật phẩm</Text>
-                        </Row>
+                        {listArtifacts && listArtifacts.length ?
+                            <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 }}>Vật phẩm</Text>
+                            </Row> : null
+                        }
                         <Row>
                             <FlatList
                                 ref={ref => {

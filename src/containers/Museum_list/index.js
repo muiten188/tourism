@@ -37,6 +37,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import NewsSlider from '../../components/NewsSlider';
 import ItemDivider from '../../components/Item_divider';
 import ItemNews from '../../components/Item_news';
+import Comment from "../../components/Comment";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 const blockAction = false;
@@ -59,8 +60,9 @@ class MuseumList extends Component {
     }
 
     componentDidMount() {
-        const { search_Museum, get_Area, search_News } = this.props.meseumListAction;
+        const { search_Museum, get_Area, search_News,search_HOT_NEWS } = this.props.meseumListAction;
         get_Area(null, 1, 1000, null);
+        search_HOT_NEWS(null, 1, 1000, null)
         search_Museum(null, 1, 1000, null);
         search_News(null, 1, 1000, null)
     }
@@ -70,7 +72,7 @@ class MuseumList extends Component {
 
     render() {
         const locale = "vn";
-        const { listMuseum, listArea, searchErorr, isLoading, listNews, isLoadingNews } = this.props.museumListReducer;
+        const { listMuseum, listArea, searchErorr, isLoading, listNews, isLoadingNews, listHotNews, isLoadingHotNews } = this.props.museumListReducer;
         const { search_Museum, clearMuseumError, clearAreaError, search_News } = this.props.meseumListAction;
         if (searchErorr == true) {
             Alert.alert(
@@ -93,7 +95,7 @@ class MuseumList extends Component {
                     <Grid>{/* marginBottom: 45 */}
 
                         <Row style={{ height: 180 }}>
-                            <NewsSlider listNews={listNews}></NewsSlider>
+                            <NewsSlider listNews={listHotNews}></NewsSlider>
                         </Row>
                         <Row style={{ paddingBottom: 6, paddingTop: 6, height: 50, borderBottomWidth: 0.5, borderBottomColor: '#cecece' }}>
                             <FlatList
@@ -260,9 +262,9 @@ class MuseumList extends Component {
             <TouchableOpacity
                 key={item.index}
                 style={
-                    dataItem.index==0?
-                    styles.item_container_new:
-                    styles.item_container_new2
+                    dataItem.index == 0 ?
+                        styles.item_container_new :
+                        styles.item_container_new2
                 }
                 onPress={() => {
                     // if (!blockAction) {

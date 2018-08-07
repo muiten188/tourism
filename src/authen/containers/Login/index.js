@@ -202,10 +202,10 @@ class login extends React.Component {
     const { loginAction } = this.props;
     GoogleSignin.signIn()
       .then(user => {
-
+        debugger;
         console.log(user)
         this.setState({ user: user })
-        loginAction.login(user);
+        loginAction.login_Socail(user,"GOOGLE");
       })
       .catch(err => {
 
@@ -326,7 +326,7 @@ class login extends React.Component {
 
                 </Form>
               </Row>
-              {/* <Row style={{ height: 50 }}>
+              <Row style={{ height: 50 }}>
                 <Col style={{ paddingRight: 2 }}>
                   <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
                     <Text>Facebook</Text>
@@ -337,7 +337,7 @@ class login extends React.Component {
                     <Text>Google</Text>
                   </Button>
                 </Col>
-              </Row> */}
+              </Row>
             </Grid>
             {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
@@ -355,12 +355,12 @@ class login extends React.Component {
   responseInfoCallback(error, result) {
     const { loginAction } = this.props;
     if (error) {
-      console.log(error)
+      alert('đăng nhập facebook thất bại.')
       //alert('Error fetching data: ' + error.toString());
     } else {
       console.log(result)
       //alert('login :' + result.name)
-      loginAction.login(result);
+      loginAction.login_Socail(result,"FACEBOOK");
       //alert('Success fetching data: ' + result.toString());
     }
   }

@@ -9,6 +9,7 @@ import productListReducer from "../../store/reducers/containers/productList_redu
 import museumProductReducer from "../../store/reducers/containers/museumProduct_reducer";
 import findGuiderReducer from "../../store/reducers/containers/findGuider_reducer";
 import profileReducer from "../../store/reducers/containers/profile_reducer";
+import commentReducer from "../../store/reducers/component/comment_reducer";
 import searchHistoryReducer from "../../store/reducers/containers/searchHistory_reducer";
 import guiderReducer from "../../store/reducers/containers/guider_reducer";
 import guiderRatingReducer from "../../store/reducers/containers/guider_rating_reducer";
@@ -34,6 +35,7 @@ const appReducer = combineReducers({
   guiderRatingReducer,
   findGuiderReducer,
   profileReducer,
+  commentReducer,
   qrCodeScannerReducer,
   searchMuseumReducer,
   museumMapReducer,
@@ -44,7 +46,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === types.LOGGED_OUT) {
-    state = undefined;
+    state.loginReducer = undefined;
   }
   return appReducer(state, action);
 };

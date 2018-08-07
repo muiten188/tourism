@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 import { Alert } from "react-native";
 export function setAsyncStorage(key, value) {
   try {
-    Jsovalue=JSON.stringify(value);
+    Jsovalue = JSON.stringify(value);
     AsyncStorage.setItem(key, Jsovalue);
   } catch (e) {
     alert("set error");
@@ -11,7 +11,7 @@ export function setAsyncStorage(key, value) {
 
 export function getAsyncStorage(key, callback) {
   try {
-    const value =AsyncStorage.getItem(key);
+    const value = AsyncStorage.getItem(key);
     callback(value)
   } catch (error) {
     alert(error);
@@ -94,4 +94,60 @@ export function getQueryString(params) {
       return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
     })
     .join("&");
+}
+let backgroundVideoSetting = null;
+let notifiSetting = null;
+export function loadSetting() {
+
+  getAsyncStorage("@backgroundVideo", (promise) => {
+    promise.done((value) => {
+      if (value != '' && value != null) {
+        var _backgroundVideo = JSON.parse(value);
+        backgroundVideoSetting = _backgroundVideo;
+      }
+    })
+  })
+  getAsyncStorage("@notifi", (promise) => {
+    promise.done((value) => {
+      if (value != '' && value != null) {
+        var _notification = JSON.parse(value);
+        notifiSetting = _notification;
+      }
+    })
+  })
+}
+
+export async function getBackgroundVideoSetting() {
+  if (backgroundVideoSetting != null) {
+    return backgroundVideoSetting;
+  }
+  else {
+    var _backgroundVideo = await AsyncStorage.getItem("@backgroundVideo");
+    
+    if (_backgroundVideo) {
+      var oBackgroundVideo = JSON.parse(_backgroundVideo);
+      backgroundVideoSetting = oBackgroundVideo;
+      return backgroundVideoSetting;
+    }
+    else {
+      return null;
+    }
+  }
+}
+
+export async function getnotifiSetting() {
+  if (notifiSetting != null) {
+    return notifiSetting;
+  }
+  else {
+    var _notifi= await AsyncStorage.getItem("@notifi");
+    if (_notifi) {
+      var oNotifi = JSON.parse(_notifi);
+      notifiSetting = oNotifi;
+      return notifiSetting;
+    }
+    else {
+      return null;
+    }
+  }
 }
