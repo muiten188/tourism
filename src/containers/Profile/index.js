@@ -24,7 +24,8 @@ import {
   Left,
   CheckBox,
   Icon,
-  Right
+  Right,
+  Picker
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -68,7 +69,7 @@ class Profile extends Component {
   async loadSetting() {
     var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
     var notifiSetting = await helper.getnotifiSetting()
-    
+
     if (backgroundVideoSetting != null) {
       this.setState({
         backgroundVideo: backgroundVideoSetting
@@ -97,6 +98,7 @@ class Profile extends Component {
       backgroundVideo: !this.state.backgroundVideo
     })
     helper.setAsyncStorage("@backgroundVideo", !this.state.backgroundVideo);
+    helper.backgroundVideoSetting = !this.state.backgroundVideo
   }
 
   settingNotifiChange() {
@@ -104,6 +106,7 @@ class Profile extends Component {
       notification: !this.state.notification
     })
     helper.setAsyncStorage("@notifi", !this.state.notification);
+    helper.notifiSetting = !this.state.notification
   }
 
   render() {
@@ -130,7 +133,7 @@ class Profile extends Component {
               <ListItem icon>
                 <Left>
                   <Button onPress={this.settingVideoChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon active name="plane" />
+                    <Icon type="Foundation" active name="play-video" />
                   </Button>
                 </Left>
                 <Body>
@@ -143,14 +146,39 @@ class Profile extends Component {
               <ListItem icon >
                 <Left>
                   <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon active name="plane" />
+                    <Icon type="MaterialIcons" active name="notifications" />
                   </Button>
                 </Left>
                 <Body>
                   <Text>Thông báo</Text>
                 </Body>
                 <Right>
-                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.notification} />
+                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{ width: 25, 
+                    height: 25, 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                    borderColor:'#cecece' }} checked={this.state.notification} />
+                </Right>
+              </ListItem>
+              <ListItem icon >
+                <Left>
+                  <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
+                    <Icon type="FontAwesome" active name="language" />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Ngôn ngữ</Text>
+                </Body>
+                <Right>
+                  <Picker
+                    note
+                    mode="dropdown"
+                    iosIcon={<Icon name="ios-arrow-down-outline" />}
+                    style={{ width: 135,marginRight:-20 }}
+                    selectedValue={'vn'}
+                  >
+                    <Picker.Item label="Tiếng việt" value="vn" />
+                  </Picker>
                 </Right>
               </ListItem>
             </Content>

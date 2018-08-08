@@ -95,8 +95,8 @@ export function getQueryString(params) {
     })
     .join("&");
 }
-let backgroundVideoSetting = null;
-let notifiSetting = null;
+export let backgroundVideoSetting = null;
+export let notifiSetting = null;
 export function loadSetting() {
 
   getAsyncStorage("@backgroundVideo", (promise) => {
@@ -118,8 +118,8 @@ export function loadSetting() {
 }
 
 export async function getBackgroundVideoSetting() {
-  if (backgroundVideoSetting != null) {
-    return backgroundVideoSetting;
+  if (this.backgroundVideoSetting != null) {
+    return this.backgroundVideoSetting;
   }
   else {
     var _backgroundVideo = await AsyncStorage.getItem("@backgroundVideo");
@@ -136,8 +136,8 @@ export async function getBackgroundVideoSetting() {
 }
 
 export async function getnotifiSetting() {
-  if (notifiSetting != null) {
-    return notifiSetting;
+  if (this.notifiSetting != null) {
+    return this.notifiSetting;
   }
   else {
     var _notifi= await AsyncStorage.getItem("@notifi");

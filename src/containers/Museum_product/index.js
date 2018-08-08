@@ -35,6 +35,7 @@ import * as meseumProductAction from "../../store/actions/containers/museumProdu
 import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import Comment from "../../components/Comment";
 import ItemResult from '../../components/Item_result';
 import ItemResultProduct from '../../components/Item_result_product';
 import HeaderContent from "../../components/Header_content";
@@ -216,7 +217,7 @@ class MuseumProduct extends Component {
                                 onEndReachedThreshold={0.7}
                             />
                         </Row>
-
+                        <Comment objectId={this.props.paramPassAction.artId} type={"ARTIFACT"}></Comment>
                     </Grid>
                     <Loading
                         ref={ref => {
