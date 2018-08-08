@@ -45,7 +45,7 @@ import * as helper from '../../helper';
 import YouTube from 'react-native-youtube'
 const blockAction = false;
 const blockLoadMoreAction = false;
-
+let _searchText='';
 class SearchMuseum extends Component {
 
     static navigationOptions = {
@@ -85,9 +85,14 @@ class SearchMuseum extends Component {
 
     onTextSearchChange(value) {
         const { searchMuseumAction } = this.props;
+        _searchText=value;
         if (!blockAction && value != '') {
             blockAction = true;
-            searchMuseumAction.QUICK_SEARCH_ALL({ text: value });
+            searchMuseumAction.QUICK_SEARCH_ALL({ 
+                text: value, 
+                searchNews: this.state.searchNews,
+                searchMuseum: this.state.searchMuseum,
+                searchArtifact: this.state.searchArtifact});
             setTimeout(() => {
                 blockAction = false;
             }, 1500);
@@ -98,6 +103,7 @@ class SearchMuseum extends Component {
         const locale = "vn";
         const { listMuseums, listNews, listArtifacts, isLoading } = this.props.searchMuseumReducer;
         const { searchNews, searchArtifact, searchMuseum } = this.state;
+        const { searchMuseumAction } = this.props;
         return (
             <Container>
                 <HeaderContent showButtonLeft={true} search={true} onSearch={this.onTextSearchChange.bind(this)} />
@@ -109,18 +115,39 @@ class SearchMuseum extends Component {
                         </Row>
                         <Row>
                             <Col style={{ width: 80 }}>
-                                <TouchableOpacity onPress={() => { this.setState({ searchNews: !this.state.searchNews }) }}>
+                                <TouchableOpacity onPress={() => { 
+                                    searchMuseumAction.QUICK_SEARCH_ALL({ 
+                                        text: _searchText, 
+                                        searchNews: !this.state.searchNews,
+                                        searchMuseum: this.state.searchMuseum,
+                                        searchArtifact: this.state.searchArtifact});
+                                    this.setState({ searchNews: !this.state.searchNews })
+                                }
+                                }>
                                     <Badge style={searchNews ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}><Text>Tin tức</Text></Badge>
                                 </TouchableOpacity>
                             </Col>
 
                             <Col style={{ width: 90 }}>
-                                <TouchableOpacity onPress={() => { this.setState({ searchMuseum: !this.state.searchMuseum }) }}>
+                                <TouchableOpacity onPress={() => { 
+                                    searchMuseumAction.QUICK_SEARCH_ALL({ 
+                                        text: _searchText, 
+                                        searchNews: this.state.searchNews,
+                                        searchMuseum: !this.state.searchMuseum,
+                                        searchArtifact: this.state.searchArtifact});
+                                    this.setState({ searchMuseum: !this.state.searchMuseum }) }}>
                                     <Badge style={searchMuseum ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}><Text>Bảo tàng</Text></Badge>
                                 </TouchableOpacity>
                             </Col>
                             <Col style={{ width: 90 }}>
-                                <TouchableOpacity onPress={() => { this.setState({ searchArtifact: !this.state.searchArtifact }) }}>
+                                <TouchableOpacity onPress={() => { 
+                                    searchMuseumAction.QUICK_SEARCH_ALL({ 
+                                        text: _searchText, 
+                                        searchNews: this.state.searchNews,
+                                        searchMuseum: this.state.searchMuseum,
+                                        searchArtifact: !this.state.searchArtifact});
+                                    this.setState({ searchArtifact: !this.state.searchArtifact }) 
+                                    }}>
                                     <Badge
                                         style={searchArtifact ? { backgroundColor: 'red' } : { backgroundColor: '#cecece' }}
                                     ><Text>Hiện vật</Text></Badge>
