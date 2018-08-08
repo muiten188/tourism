@@ -122,7 +122,7 @@ class register extends Component {
 
   componentDidUpdate() {
     const { registerReducer, registerAction } = this.props;
-    if (registerReducer.action.type != types.REGISTER_CLEAR) {
+    if (registerReducer.action && registerReducer.action.type != types.REGISTER_CLEAR) {
       if (
         registerReducer.registed != null &&
         registerReducer.registed == false &&

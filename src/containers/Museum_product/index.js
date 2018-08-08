@@ -116,7 +116,7 @@ class MuseumProduct extends Component {
         if (antifactDetail && antifactDetail.artImageProfile) {
             imgUrl = AppConfig.API_HOST + antifactDetail.artImageProfile;
         }
-
+        debugger;
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
@@ -149,7 +149,9 @@ class MuseumProduct extends Component {
                                     </Button> */}
                                 </Col>
                                 <Col>
-                                    <Button full block transparent onPress={() => Actions.museumMap()} iconRight={true} style={styles.buttonTitle}>
+                                    <Button full block transparent onPress={() => {
+                                        Actions.museumMap()
+                                    }} iconRight={true} style={styles.buttonTitle}>
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
                                             locale: "vn"
                                         })}</Text>
@@ -165,7 +167,7 @@ class MuseumProduct extends Component {
                                 </Text>
                             </ScrollView>
                         </Row>
-                        <Row style={{ flex: 1,paddingLeft:4 }}>
+                        <Row style={{ flex: 1, paddingLeft: 4 }}>
                             {antifactDetail && antifactDetail.artContent ?
                                 <AutoHeightWebView style={{ flex: 1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></AutoHeightWebView>
                                 : null}

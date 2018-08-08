@@ -71,10 +71,9 @@ export function clear_seach_CommentError() {
 }
 
 export function save_Comment(values, user) {
-    let _postData = _postData || {};
-    _postData.guestId = user.guestId;
+    let _postData = values || {};
+    _postData.guestId = user.user.guestId;
     return dispatch => {
-        debugger;
         dispatch(_saveing_Comment());
         let error = false;
         fetch(`${AppConfig.SAVE_COMMENT}`, {

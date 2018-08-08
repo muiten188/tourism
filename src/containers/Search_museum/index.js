@@ -247,7 +247,7 @@ class SearchMuseum extends Component {
                         </Row>
                         {listArtifacts && listArtifacts.length ?
                             <Row style={{ height: 35, justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 18 }}>Vật phẩm</Text>
+                                <Text style={{ fontSize: 18 }}>Hiện vật</Text>
                             </Row> : null
                         }
                         <Row>

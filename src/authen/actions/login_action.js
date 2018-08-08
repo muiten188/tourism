@@ -13,14 +13,14 @@ export function login_Socail(user, typeSocail) {
       _user.firstName = user.givenName;
       _user.lastName = user.familyName;
       _user.socialIdentification=user.id;
-      _user.loginMethod = user.typeSocail;
+      _user.loginMethod = typeSocail;
       _user.name = user.name;
     }
     else if(typeSocail=="FACEBOOK"){
       _user.firstName = user.first_name;
       _user.lastName = user.last_name;
       _user.socialIdentification=user.id;
-      _user.loginMethod = user.typeSocail;
+      _user.loginMethod = typeSocail;
       _user.name = user.name;
     }
     let error = false;
