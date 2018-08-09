@@ -5,10 +5,12 @@ const initState = {
   listAntifactByTag: [],
   searchAntifactDetailErorr: false,
   searchAntifactBytagErorr: false,
+  searchMapidErorr:false,
   valuesForm: {},
   currentPage: 1,
   pageSize: 10,
-  loadEnd: false
+  loadEnd: false,
+  mapId:null
 };
 
 export default function (state = initState, action = {}) {
@@ -67,7 +69,31 @@ export default function (state = initState, action = {}) {
         searchAntifactBytagErorr: initState.searchErorr,
         isLoading: initState.isLoading
       };
-
+    //mapid
+    case types.SEARCH_MAPID_DETAIL:
+      return {
+        ...state,
+        searchMapidErorr: initState.searchMapidErorr,
+        isLoading: false,
+        mapId: action.data
+      };
+    case types.SEARCHING_MAPID_DETAIL:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+    case types.SEARCH_MAPID_DETAIL_ERROR:
+      return {
+        ...state,
+        searchMapidErorr: true,
+        isLoading: false,
+      };
+    case types.SEARCH_MAPID_DETAIL_CLEAR_ERROR:
+      return {
+        ...state,
+        searchMapidErorr: initState.searchMapidErorr,
+        isLoading: false
+      };
 
     default:
       return state;

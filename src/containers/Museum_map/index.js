@@ -44,6 +44,7 @@ class MuseumMap extends Component {
     }
 
     render() {
+        const {mapId}=this.props;
         return (
             <Container>
                 <HeaderContent headerTitle={"Sơ đồ"}
@@ -56,7 +57,7 @@ class MuseumMap extends Component {
             ref={(ref) => {
               this.webview = ref;
             }}
-            source={{uri: AppConfig.MAP_NO_FRAME}}
+            source={{uri: `${AppConfig.MAP_NO_FRAME}mapId=${mapId}`}}
             onLoadEnd={this.onWebViewLoaded}
             onMessage={this.handleMessage}
             startInLoadingState={true}

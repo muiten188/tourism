@@ -1,4 +1,4 @@
-package com.Easylink;
+package com.Smart_tourist;
 import android.content.Intent;
 
 import com.facebook.react.ReactActivity;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "Easylink";
+        return "Smart_tourist";
     }
     
     @Override

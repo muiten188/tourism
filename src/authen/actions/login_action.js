@@ -5,7 +5,6 @@ import * as AppConfig from "../../config/app_config";
 import { Actions } from 'react-native-router-flux';
 
 export function login_Socail(user, typeSocail) {
-  debugger
   return dispatch => {
     dispatch(_loging());
     var _user = {};

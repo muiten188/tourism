@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Easylink.app"
-               BlueprintName = "Easylink"
-               ReferencedContainer = "container:Easylink.xcodeproj">
+               BuildableName = "Smart_tourist.app"
+               BlueprintName = "Smart_tourist"
+               ReferencedContainer = "container:Smart_tourist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "new_appTests.xctest"
                BlueprintName = "new_appTests"
-               ReferencedContainer = "container:Easylink.xcodeproj">
+               ReferencedContainer = "container:Smart_tourist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,7 +63,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "new_appTests.xctest"
                BlueprintName = "new_appTests"
-               ReferencedContainer = "container:Easylink.xcodeproj">
+               ReferencedContainer = "container:Smart_tourist.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Easylink.app"
-            BlueprintName = "Easylink"
-            ReferencedContainer = "container:Easylink.xcodeproj">
+            BuildableName = "Smart_tourist.app"
+            BlueprintName = "Smart_tourist"
+            ReferencedContainer = "container:Smart_tourist.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Easylink.app"
-            BlueprintName = "Easylink"
-            ReferencedContainer = "container:Easylink.xcodeproj">
+            BuildableName = "Smart_tourist.app"
+            BlueprintName = "Smart_tourist"
+            ReferencedContainer = "container:Smart_tourist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Easylink.app"
-            BlueprintName = "Easylink"
-            ReferencedContainer = "container:Easylink.xcodeproj">
+            BuildableName = "Smart_tourist.app"
+            BlueprintName = "Smart_tourist"
+            ReferencedContainer = "container:Smart_tourist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

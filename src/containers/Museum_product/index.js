@@ -66,7 +66,7 @@ class MuseumProduct extends Component {
     }
 
     componentDidMount() {
-        const { get_AntifactByID, get_AntifactByTag } = this.props.meseumProductAction;
+        const { get_AntifactByID, get_AntifactByTag, get_MapId } = this.props.meseumProductAction;
         const { paramPassAction } = this.props;
         interval = setInterval(() => {
             this.setState({
@@ -75,6 +75,9 @@ class MuseumProduct extends Component {
         }, 2000);
         if (paramPassAction && paramPassAction.artId) {
             get_AntifactByID(paramPassAction.artId, 1, 100, null);
+        }
+        if (paramPassAction && paramPassAction.beacon) {
+            get_MapId(paramPassAction.beacon, {})
         }
         if (paramPassAction && paramPassAction.tagId && paramPassAction.artId) {
             get_AntifactByTag({ tagId: paramPassAction.tagId, currId: paramPassAction.artId }, 1, 100, null);
@@ -95,7 +98,7 @@ class MuseumProduct extends Component {
 
     render() {
         const locale = "vn";
-        const { antifactDetail, listAntifactByTag, isLoading } = this.props.museumProductReducer;
+        const { antifactDetail, listAntifactByTag, isLoading, mapId } = this.props.museumProductReducer;
         var attachments = []
         if (antifactDetail && antifactDetail.attachments) {
             for (var i = 0; i < antifactDetail.attachments.length; i++) {
@@ -116,7 +119,6 @@ class MuseumProduct extends Component {
         if (antifactDetail && antifactDetail.artImageProfile) {
             imgUrl = AppConfig.API_HOST + antifactDetail.artImageProfile;
         }
-        debugger;
         return (
             <Container style={styles.container}>
                 <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
@@ -150,7 +152,7 @@ class MuseumProduct extends Component {
                                 </Col>
                                 <Col>
                                     <Button full block transparent onPress={() => {
-                                        Actions.museumMap()
+                                        Actions.museumMap({ mapId: mapId })
                                     }} iconRight={true} style={styles.buttonTitle}>
                                         <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
                                             locale: "vn"

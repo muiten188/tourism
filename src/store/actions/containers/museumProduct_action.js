@@ -2,6 +2,55 @@ import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 
+export function get_MapId(artId, user) {
+    let data = [];
+    //let dataPost = values || {};
+    //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
+    return dispatch => {
+        //dispatch(_searching_Antifact());
+        fetch(`${AppConfig.GET_MAPID_ARTID}${artId}`, {
+            headers: helper.buildHeader(user),
+            method: "GET"
+        })
+            .then(function (response) {
+                if (response.status == 401) {
+                    //dispatch(_logout());
+                    dispatch(_seach_MapId_error());
+                } else if (response.status != 200) {
+                    dispatch(_seach_MapId_error());
+                } else {
+                    return response.json();
+                }
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    data = responseJson.mapId
+                    dispatch(_search_MapID(data));
+                }
+                else {
+                    dispatch(_seach_MapId_error());
+                }
+            })
+            .catch(function (error) {
+                dispatch(_seach_MapId_error());
+            });
+    };
+}
+
+function _seach_MapId_error() {
+    return {
+        type: types.SEARCH_MAPID_DETAIL_ERROR,
+        searchErorr:false
+    }
+}
+
+function _search_MapID(data) {
+    return {
+        type: types.SEARCH_MAPID_DETAIL,
+        data: data
+    }
+}
+
 export function get_AntifactByID(id, currentPage, pageSize, user) {
     let data = [];
 

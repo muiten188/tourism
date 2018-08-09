@@ -202,7 +202,6 @@ class login extends React.Component {
     const { loginAction } = this.props;
     GoogleSignin.signIn()
       .then(user => {
-        debugger;
         console.log(user)
         this.setState({ user: user })
         loginAction.login_Socail(user,"GOOGLE");

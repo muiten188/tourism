@@ -2,7 +2,7 @@ import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 //hot news
-export function search_HOT_NEWS(values, currentPage, pageSize,user) {
+export function search_HOT_NEWS(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
@@ -63,7 +63,7 @@ function _seach_HOT_NEWSError() {
     };
 }
 //news
-export function search_News(values, currentPage, pageSize,user) {
+export function search_News(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
@@ -129,7 +129,7 @@ export function get_Area(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    
+
     return dispatch => {
         //dispatch(_searching_Museum());
         fetch(`${AppConfig.GET_AREA}?${helper.getQueryString(dataPost)}`, {
@@ -147,14 +147,9 @@ export function get_Area(values, currentPage, pageSize, user) {
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    if (responseJson.data) {
-                        data = responseJson.data;
-                        dispatch(_search_Area(data, dataPost));
-                    } else {
-                        dispatch(_seach_AreaError());
-                    }
-                }
-                else {
+                    data = responseJson;
+                    dispatch(_search_Area(data, dataPost));
+                } else {
                     dispatch(_seach_AreaError());
                 }
             })
@@ -168,7 +163,7 @@ export function search_Museum(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    
+
     return dispatch => {
         dispatch(_searching_Museum());
         fetch(`${AppConfig.GET_MUSEUMLIST}?${helper.getQueryString(dataPost)}`, {

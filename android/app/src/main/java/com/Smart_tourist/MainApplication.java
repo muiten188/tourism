@@ -1,4 +1,4 @@
-package com.Easylink;
+package com.Smart_tourist;
 
 import android.app.Application;
 
