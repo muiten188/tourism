@@ -3,6 +3,7 @@ package com.Smart_tourist;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.iou90.autoheightwebview.AutoHeightWebViewPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
@@ -47,6 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNGoogleSigninPackage(),
             new AutoHeightWebViewPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
           new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNGoogleSigninPackage(), new RNI18nPackage(),
           new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
