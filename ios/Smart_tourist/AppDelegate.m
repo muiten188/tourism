@@ -11,6 +11,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "RNGoogleSignin.h"
 @implementation AppDelegate
 
@@ -33,19 +34,24 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-
-  return
-          [[FBSDKApplicationDelegate sharedInstance] application:application
+  
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                         openURL:url
                                               sourceApplication:sourceApplication
                                                      annotation:annotation
-         ]
-         || [RNGoogleSignin application:application
-                                openURL:url
-                      sourceApplication:sourceApplication
-                             annotation:annotation
-            ];
+          ]
+  || [RNGoogleSignin application:application
+                         openURL:url
+               sourceApplication:sourceApplication
+                      annotation:annotation
+      ];
+}
+
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
 }
 @end

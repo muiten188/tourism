@@ -7,7 +7,10 @@ import {
     TouchableOpacity,
     Alert,
     ScrollView,
-    WebView
+    WebView,
+    Platform,
+    Dimensions,
+    Easing
 } from "react-native";
 import {
     Container,

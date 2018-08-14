@@ -145,7 +145,7 @@ class login extends React.Component {
   componentWillMount() {
     GoogleSignin.hasPlayServices({ autoResolve: true });
     GoogleSignin.configure({
-      iosClientId: '617324734115-od9b4l2mf95331gg9m4u0a4gggq0fpjo.apps.googleusercontent.com',
+      iosClientId: '229107549229-aqk0kgvqoa6ke3e7il56mcrvtqh3q3n8.apps.googleusercontent.com',
       webClientId: '229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com'
     })
   }

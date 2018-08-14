@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "new_appTests.xctest"
-               BlueprintName = "new_appTests"
+               BuildableName = "Smart_touristTests.xctest"
+               BlueprintName = "Smart_touristTests"
                ReferencedContainer = "container:Smart_tourist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,8 +61,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "new_appTests.xctest"
-               BlueprintName = "new_appTests"
+               BuildableName = "Smart_touristTests.xctest"
+               BlueprintName = "Smart_touristTests"
                ReferencedContainer = "container:Smart_tourist.xcodeproj">
             </BuildableReference>
          </TestableReference>

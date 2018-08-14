@@ -2,7 +2,7 @@ export default {
   header: {
     width: '100%',
     backgroundColor: "#007db7",
-    height:45,
+    
     paddingLeft:0,
     paddingRight:0,
   },

@@ -49,10 +49,10 @@ export default class extends Component {
       _onBack = onBack;
     }
     return (
-      <Header style={styles.header}>
+      <Header style={[styles.header, Platform.OS === 'ios' ? { height: 65 } : { height: 45 }]}>
         {/* <StatusBar backgroundColor="#007db7"></StatusBar> */}
         <Grid>
-          {showButtonLeft == true || Platform.OS === 'ios' ? (
+          {showButtonLeft == true ? (
             <Col style={styles.itemButtonHeader}>
               <Button transparent onPress={_onBack} style={{ width: '100%' }}>
                 <IconVector name="chevron-circle-left" size={20} style={styles.whileText} />
@@ -77,7 +77,7 @@ export default class extends Component {
                 <Row>
                   <Input style={{ color: '#fff' }} placeholder={I18n.t("find", {
                     locale: "vn"
-                  })} placeholderTextColor={"#fff"} value={this.state.textSearch} onChangeText={(value) => { this.setState({ textSearch: value }); onSearch(value) }}/>
+                  })} placeholderTextColor={"#fff"} value={this.state.textSearch} onChangeText={(value) => { this.setState({ textSearch: value }); onSearch(value) }} />
                 </Row>
 
               </Col>
