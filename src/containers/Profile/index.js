@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+const FBSDK = require('react-native-fbsdk');
+const { LoginManager } = FBSDK;
+import { GoogleSignin } from 'react-native-google-signin';
 import {
   Container,
   Text,
@@ -90,6 +93,12 @@ class Profile extends Component {
     const { loginAction } = this.props;
     helper.clearAsyncStorage();
     loginAction.logout();
+    try {
+      LoginManager.logOut();
+      GoogleSignin.signOut();
+    } catch (error) {
+
+    }
     // Actions.reset('login');
   }
 
@@ -153,11 +162,13 @@ class Profile extends Component {
                   <Text>Thông báo</Text>
                 </Body>
                 <Right>
-                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{ width: 25, 
-                    height: 25, 
-                    justifyContent: 'center', 
+                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{
+                    width: 25,
+                    height: 25,
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    borderColor:'#cecece' }} checked={this.state.notification} />
+                    borderColor: '#cecece'
+                  }} checked={this.state.notification} />
                 </Right>
               </ListItem>
               <ListItem icon >
@@ -174,7 +185,7 @@ class Profile extends Component {
                     note
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
-                    style={{ width: 135,marginRight:-20 }}
+                    style={{ width: 135, marginRight: -20 }}
                     selectedValue={'vn'}
                   >
                     <Picker.Item label="Tiếng việt" value="vn" />

@@ -17,6 +17,6 @@ export default {
         width: 25,
     },
     listResult: {
-        flex: 1
+        flex: 1,
     }
 }

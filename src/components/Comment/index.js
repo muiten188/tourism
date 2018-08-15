@@ -71,17 +71,17 @@ class Comment extends React.Component {
     return (
       <View style={styles.viewContain}>
         <Grid>
-          <Row style={{ height: 30,justifyContent:'flex-start',alignItems:'center' }}>
+          <Row style={{ height: 30, justifyContent: 'flex-start', alignItems: 'center' }}>
             <H3>Bình luận</H3>
           </Row>
-          <FlatList
+          {(listComment && listComment.length > 0) ? <FlatList
             style={styles.listResult}
             data={listComment ? listComment : []}
             keyExtractor={this._keyExtractor}
             renderItem={this.renderItemComment.bind(this)}
             horizontal={false}
             numColumns={1}
-          />
+          /> : null}
           {loginReducer.user != null ? <Row style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -129,7 +129,18 @@ class Comment extends React.Component {
                 </Col>
               </Row>
             </Col>
-          </Row> : null}
+          </Row> : <Row style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            borderBottomWidth: 0.5,
+            borderBottomColor: '#cecece',
+            height: 50
+          }}>
+              <Button onPress={()=>{Actions.login()}}>
+                <Text>Đăng nhập để bình luận</Text>
+              </Button>
+            </Row>}
         </Grid>
       </View>
     );

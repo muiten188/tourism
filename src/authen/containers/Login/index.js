@@ -234,7 +234,8 @@ class login extends React.Component {
     }
     else if (loginReducer.Logged == true) {
       helper.setAsyncStorage("@userLogin", loginReducer.user);
-      Actions.reset('home');
+      // Actions.reset('home');
+      Actions.pop();
     }
   }
   render() {
