@@ -185,7 +185,7 @@ class Profile extends Component {
                     note
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
-                    style={{ width: 135, marginRight: -20 }}
+                    style={{ width: 135}}
                     selectedValue={'vn'}
                   >
                     <Picker.Item label="Tiếng việt" value="vn" />

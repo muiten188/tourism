@@ -237,16 +237,14 @@ class MuseumProduct extends Component {
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
         return (
-            <View
+            <TouchableOpacity
                 key={item.index}
                 style={
                     styles.item_container_half
                 }
                 onPress={() => {
-                    // if (!blockAction) {
-                    //     blockAction = true;
-
-                    // }
+                    Actions.pop();
+                    Actions.museumProduct({ paramPassAction: item });
                 }}
             >
                 <ItemResultProduct
@@ -255,7 +253,7 @@ class MuseumProduct extends Component {
                     item={item}>
                 </ItemResultProduct>
 
-            </View>
+            </TouchableOpacity>
         );
     }
 

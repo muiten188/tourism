@@ -21,12 +21,12 @@ export default {
     color: '#007db7'
   },
   rowItem: {
-    height: 22,
+    minHeight: 22,
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
   rowItemDes:{
-    maxHeight: 65,
+    minHeight: 65,
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
