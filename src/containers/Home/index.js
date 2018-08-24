@@ -96,11 +96,13 @@ class Home extends Component {
         }
       })
     })
-    this.detectBeacons();
+    
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+      console.log('Tìm thấy beacon:', data.beacons)
       if (data.beacons && data.beacons.length > 0) {
 
         if (data.beacons[0].uuid != current_uuid) {
+          alert('Tìm thấy beacon:', data.beacons[0].uuid)
           current_uuid = data.beacons[0].uuid;
           if (Actions.currentScene == 'productList') {
             Actions.pop();
@@ -114,12 +116,12 @@ class Home extends Component {
           // setTimeout(() => {
           //   current_uuid = null;
           // }, 30000);
-          alert('Tìm thấy beacon:', data.beacons[0].uuid)
+          
         }
          console.log('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
-    
+    this.detectBeacons();
   }
 
   componentWillUnmount() {
