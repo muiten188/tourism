@@ -1,4 +1,4 @@
-package com.Smart_tourist;
+package com.Smart_tourist2;
 
 import android.app.Application;
 

@@ -95,12 +95,12 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '26.0.1'
     dexOptions {
         jumboMode = true
     }
     defaultConfig {
-        applicationId "com.Smart_tourist"
+        applicationId "com.Smart_tourist2"
         minSdkVersion 16
         targetSdkVersion 22
         multiDexEnabled true

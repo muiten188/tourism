@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "229107549229-rc48cpv2e4jg4j9lvvlcpe75bnv6tp2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Easylink",
+            "certificate_hash": "46a77cb91f44e7e5e6190533e0dd947e3e2584bb"
+          }
+        },
+        {
           "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -50,6 +58,13 @@
             {
               "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "229107549229-aqk0kgvqoa6ke3e7il56mcrvtqh3q3n8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Smart-tourist"
+              }
             }
           ]
         },
@@ -75,6 +90,22 @@
           }
         },
         {
+          "client_id": "229107549229-r7dr1ou9o1mnp8uf8b0petek8v1r9tqq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Smart_tourist",
+            "certificate_hash": "a86cfdd669ec26c1d547015522e6ba0aa80683c0"
+          }
+        },
+        {
+          "client_id": "229107549229-s9bs7nrfh327mgnnq86plmp73nihmaos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Smart_tourist",
+            "certificate_hash": "46a77cb91f44e7e5e6190533e0dd947e3e2584bb"
+          }
+        },
+        {
           "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -94,8 +125,46 @@
             {
               "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "229107549229-aqk0kgvqoa6ke3e7il56mcrvtqh3q3n8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Smart-tourist"
+              }
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229107549229:android:a6058607fc9802bd",
+        "android_client_info": {
+          "package_name": "com.Smart_tourist2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5kBQtHbhB5M-PJdTpO9asfuUT3TGlQYc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
@@ -154,6 +223,13 @@
             {
               "client_id": "229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "229107549229-aqk0kgvqoa6ke3e7il56mcrvtqh3q3n8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Smart-tourist"
+              }
             }
           ]
         },
