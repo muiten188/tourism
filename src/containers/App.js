@@ -15,6 +15,8 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 import RootNavigaion from "../routers/root_navigation";
 import * as appAction from "../store/actions/app_action";
 import PropTypes from 'prop-types';
+
+// Tells the library to detect iBeacon
 class App extends Component {
   constructor(props) {
     super(props);
@@ -56,10 +58,10 @@ class App extends Component {
   }
 }
 
-App.propTypes ={
-  appAction:PropTypes.object,
-  app_Reducer:PropTypes.object,
-  loginReducer:PropTypes.object
+App.propTypes = {
+  appAction: PropTypes.object,
+  app_Reducer: PropTypes.object,
+  loginReducer: PropTypes.object
 }
 
 function mapStateToProps(state, props) {

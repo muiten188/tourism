@@ -102,10 +102,10 @@ android {
     defaultConfig {
         applicationId "com.Smart_tourist"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 25
         multiDexEnabled true
-        versionCode 1
-        versionName "1.1"
+        versionCode 4
+        versionName "1.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

@@ -243,10 +243,7 @@ class MuseumProduct extends Component {
                     styles.item_container_half
                 }
                 onPress={() => {
-                    // if (!blockAction) {
-                    //     blockAction = true;
-
-                    // }
+                    Actions.museumProduct({ paramPassAction: item });
                 }}
             >
                 <ItemResultProduct

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -51,7 +50,6 @@
 		6B5CAF7FE82D4E8B93B686BC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E5BDDC243644FF38C489475 /* Octicons.ttf */; };
 		6D5B9676D7574BEA8030691C /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 272880DE581F4756AADDC95B /* libRNVectorIcons.a */; };
 		734E7695CA9C4E87A6BE1D3D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA6CE3CE040415AB8886F74 /* libz.tbd */; };
-		7C9F607B58EE438FB903D071 /* libRNiBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41069219BB7C44CE9785F999 /* libRNiBeacon.a */; };
 		823DFA612ED14F2FB45DA7DA /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF4AB4D97D764374BBC2C4A3 /* libReactNativePermissions.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		851CD48975D34FAE9496C322 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CB00765FA7418BA5A38EF8 /* SafariServices.framework */; };
@@ -78,6 +76,7 @@
 		F16FBA6C7A75423BBE97C02A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 038F03643C5D41F3962C6AE5 /* Feather.ttf */; };
 		F24A249EC69D4443B1955AD6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C885AE3CCE84FFFAE329085 /* SystemConfiguration.framework */; };
 		F8983082578A43D8ABEC3C53 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97377856E08B4373972EECE9 /* SimpleLineIcons.ttf */; };
+		A20EB7BC5EF14F1E9CD21205 /* libRNiBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F2D1113026435ABD2651D3 /* libRNiBeacon.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,13 +297,6 @@
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
-		CF06D69E2122927500D39EE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49414EFF2D7D4580AB121FEE /* RNiBeacon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D03EBDE1E56B1E700C55E6B;
-			remoteInfo = RNiBeacon;
-		};
 		CF06D6A12122927500D39EE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86370A3921ED41AA995C897C /* RNVectorIcons.xcodeproj */;
@@ -448,9 +440,7 @@
 		2D02E4901E0B4A5D006451C7 /* Smart_tourist-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Smart_tourist-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32B17EB359124F1DBF10F6CF /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		33CB00765FA7418BA5A38EF8 /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		41069219BB7C44CE9785F999 /* libRNiBeacon.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNiBeacon.a; sourceTree = "<group>"; };
 		48CF61B68E8C4F5C83D270F9 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
-		49414EFF2D7D4580AB121FEE /* RNiBeacon.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNiBeacon.xcodeproj; path = "../node_modules/react-native-beacons-manager/ios/RNiBeacon/RNiBeacon.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		62A11A031F654204BE12CC40 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		6329F7DCCDBD4FAE87D43579 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -495,6 +485,8 @@
 		EE5F277F7D4142FD98DE94BA /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		F7D0EAD9DA164BECA0030519 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		FF8694A8487D479481E88377 /* libRCTYouTube.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTYouTube.a; sourceTree = "<group>"; };
+		CC0BA47223FA4800A8D850A3 /* RNiBeacon.xcodeproj */ = {isa = PBXFileReference; name = "RNiBeacon.xcodeproj"; path = "../node_modules/react-native-beacons-manager/ios/RNiBeacon/RNiBeacon.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		07F2D1113026435ABD2651D3 /* libRNiBeacon.a */ = {isa = PBXFileReference; name = "libRNiBeacon.a"; path = "libRNiBeacon.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,7 +528,6 @@
 				CF28D3AD2122DBFD003DF1BE /* GoogleUtilities.framework in Frameworks */,
 				CF28D2C42122B7F7003DF1BE /* FBSDKCoreKit.framework in Frameworks */,
 				D63454E6EB214886B168CF39 /* libRCTYouTube.a in Frameworks */,
-				7C9F607B58EE438FB903D071 /* libRNiBeacon.a in Frameworks */,
 				69CD899E23634184AE0A259A /* libRNCamera.a in Frameworks */,
 				823DFA612ED14F2FB45DA7DA /* libReactNativePermissions.a in Frameworks */,
 				CF28D2C32122B7F7003DF1BE /* FBSDKLoginKit.framework in Frameworks */,
@@ -546,6 +537,7 @@
 				851CD48975D34FAE9496C322 /* SafariServices.framework in Frameworks */,
 				F24A249EC69D4443B1955AD6 /* SystemConfiguration.framework in Frameworks */,
 				DB451064C75D4E1595148C16 /* AddressBook.framework in Frameworks */,
+				A20EB7BC5EF14F1E9CD21205 /* libRNiBeacon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,11 +718,11 @@
 				0F2DE83AD5524D319253640D /* RCTVideo.xcodeproj */,
 				48CF61B68E8C4F5C83D270F9 /* RNI18n.xcodeproj */,
 				B3FD06F6BD9A4A3BAD98D5DF /* RCTYouTube.xcodeproj */,
-				49414EFF2D7D4580AB121FEE /* RNiBeacon.xcodeproj */,
 				99E90FC726F246BBBAE5116D /* RNCamera.xcodeproj */,
 				9D5D184544EA46D788359792 /* ReactNativePermissions.xcodeproj */,
 				BFBB3F340B1C4B3E80F676F8 /* RCTFBSDK.xcodeproj */,
 				7B788846B9634B368B3BD46F /* RNGoogleSignin.xcodeproj */,
+				CC0BA47223FA4800A8D850A3 /* RNiBeacon.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -839,14 +831,6 @@
 				7E6ADFD72257480E9B4E4509 /* libRNGoogleSignin.a */,
 			);
 			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		CF06D6992122927500D39EE2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CF06D69F2122927500D39EE2 /* libRNiBeacon.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CF06D69B2122927500D39EE2 /* Products */ = {
@@ -1103,10 +1087,6 @@
 					ProjectRef = 48CF61B68E8C4F5C83D270F9 /* RNI18n.xcodeproj */;
 				},
 				{
-					ProductGroup = CF06D6992122927500D39EE2 /* Products */;
-					ProjectRef = 49414EFF2D7D4580AB121FEE /* RNiBeacon.xcodeproj */;
-				},
-				{
 					ProductGroup = CF06D69B2122927500D39EE2 /* Products */;
 					ProjectRef = 86370A3921ED41AA995C897C /* RNVectorIcons.xcodeproj */;
 				},
@@ -1323,13 +1303,6 @@
 			fileType = archive.ar;
 			path = "libfishhook-tvOS.a";
 			remoteRef = CF06D6972122927500D39EE2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CF06D69F2122927500D39EE2 /* libRNiBeacon.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNiBeacon.a;
-			remoteRef = CF06D69E2122927500D39EE2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CF06D6A22122927500D39EE2 /* libRNVectorIcons.a */ = {
@@ -1612,6 +1585,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-permissionsios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 				);
 				INFOPLIST_FILE = Smart_touristTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1646,6 +1620,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-permissionsios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 				);
 				INFOPLIST_FILE = Smart_touristTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1675,7 +1650,10 @@
 					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
 					"\"$(SRCROOT)/../node_modules/react-native-google-signin/ios/GoogleSdk\"",
 				);
-				HEADER_SEARCH_PATHS = " $(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**";
+				HEADER_SEARCH_PATHS = (
+					" $(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+				);
 				INFOPLIST_FILE = Smart_tourist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1699,7 +1677,10 @@
 					"\"$(SRCROOT)/../../../Documents/FacebookSDK\"",
 					"\"$(SRCROOT)/../node_modules/react-native-google-signin/ios/GoogleSdk\"",
 				);
-				HEADER_SEARCH_PATHS = " $(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**";
+				HEADER_SEARCH_PATHS = (
+					" $(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+				);
 				INFOPLIST_FILE = Smart_tourist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1736,6 +1717,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-permissionsios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 				);
 				INFOPLIST_FILE = "Smart_tourist-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1779,6 +1761,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-permissionsios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
 				);
 				INFOPLIST_FILE = "Smart_tourist-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
