@@ -146,7 +146,7 @@ class ProductList extends Component {
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
         return (
-            <View
+            <TouchableOpacity
                 key={item.index}
                 style={
                     styles.item_container_half
@@ -159,7 +159,7 @@ class ProductList extends Component {
                     
                     data={item}></ItemResultProductDevider>
 
-            </View>
+            </TouchableOpacity>
         );
     }
 

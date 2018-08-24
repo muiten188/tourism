@@ -112,7 +112,7 @@ class MuseumDetail extends Component {
                 <HeaderContent showButtonLeft={true} headerTitle={paramPassAction.museumName} />
                 <Content>
                     <Grid style={{}}>
-                        <Row style={styles.rowYoutube}>
+                        {videoUrl ? <Row style={styles.rowYoutube}>
                             <VideoPlayer video={{ uri: videoUrl }}
                                 volume={0.7}
                                 onClosePressed={() => { }}
@@ -146,7 +146,7 @@ class MuseumDetail extends Component {
 
                             style={{ alignSelf: 'stretch', height: 180, width: '100%' }}
                         /> */}
-                        </Row>
+                        </Row> : null}
                         <Row style={styles.rowBar}>
                             <Grid>
                                 <Col>
