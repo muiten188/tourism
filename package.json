@@ -13,7 +13,7 @@
     "react": "16.0.0-alpha.12",
     "react-native": "0.51.0",
     "react-native-autoheight-webview": "git+https://github.com/muiten188/auto_height_webview_rn",
-    "react-native-beacons-manager": "^1.0.7",
+    "react-native-beacons-manager": "git+https://github.com/muiten188/react-native-beacons-manager-custom",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-easy-grid": "^0.1.15",
     "react-native-fbsdk": "^0.7.0",
