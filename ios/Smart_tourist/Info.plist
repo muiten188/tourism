@@ -42,10 +42,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.reactjs.native.example.Smart-tourist</string>
+			<string>com.SmartTourist</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.reactjs.native.example.Smart-tourist</string>
+				<string>com.SmartTourist</string>
 			</array>
 		</dict>
 	</array>
