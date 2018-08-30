@@ -72,13 +72,13 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Play using while you are hiking</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>$(PRODUCT_NAME) bluetooth use.</string>
+	<string>$(PRODUCT_NAME) bluetooth use for find beacon near around.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>$(PRODUCT_NAME) user your calendar.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) camera use.</string>
+	<string>Camera use for scan QR Code to find artifact.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Use dectect location beacon.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) motion use.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
