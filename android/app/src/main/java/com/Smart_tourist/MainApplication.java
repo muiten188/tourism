@@ -5,7 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.iou90.autoheightwebview.AutoHeightWebViewPackage;
 import com.brentvatne.react.ReactVideoPackage;
-
+import com.solinor.bluetoothstatus.RNBluetoothManagerPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.CallbackManager;
@@ -49,7 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
             new AutoHeightWebViewPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
           new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNGoogleSigninPackage(), new RNI18nPackage(),
-          new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
+          new VectorIconsPackage(), new FBSDKPackage(mCallbackManager),new RNBluetoothManagerPackage());
     }
 
     // @Override

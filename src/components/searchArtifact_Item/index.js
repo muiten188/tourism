@@ -54,14 +54,22 @@ export default class extends PureComponent {
         <Grid>
           <Row style={{ width: '100%' }}>
             <Col style={styles.avatar}>
-              <Thumbnail square style={{
+              {avatarUrl ? <Thumbnail square style={{
                 borderColor: '#e8eff5',
                 borderWidth: 0.5,
                 width: 100,
                 height: 80,
                 resizeMode: 'cover'
               }}
-                source={{ uri: avatarUrl ? avatarUrl : 'https://cdn.washingtoncitypaper.com/files/base/scomm/wcp/image/2009/04/640w/__contexts.org_socimages_files_2009_04_d_silhouette.jpg' }} />
+                source={{ uri: avatarUrl }} /> : <Thumbnail square style={{
+                  borderColor: '#e8eff5',
+                  borderWidth: 0.5,
+                  width: 100,
+                  height: 80,
+                  resizeMode: 'cover'
+                }}
+                  source={require('../../resources/assets/artifact.png')} />}
+
             </Col>
             <Col style={{
               paddingLeft: 6,
