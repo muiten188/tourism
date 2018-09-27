@@ -6,10 +6,11 @@ export function search_HOT_NEWS(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    return dispatch => {
+    return async dispatch => {
         dispatch(_searching_HOT_NEWS());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_HOT_NEWS}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -67,10 +68,11 @@ export function search_News(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    return dispatch => {
+    return async dispatch => {
         dispatch(_searching_News());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_NEWS}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -130,10 +132,11 @@ export function get_Area(values, currentPage, pageSize, user) {
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
 
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Museum());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_AREA}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -164,10 +167,11 @@ export function search_Museum(values, currentPage, pageSize, user) {
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
 
-    return dispatch => {
+    return async dispatch => {
         dispatch(_searching_Museum());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_MUSEUMLIST}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {

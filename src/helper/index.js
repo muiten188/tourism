@@ -27,10 +27,24 @@ export function clearAsyncStorage() {
   }
 }
 
-export function buildHeader(user) {
-  return {
-    //JSESSIONID: user ? user.jSessionId : null
-  };
+export async function buildHeader(user) {
+  // return {
+  //   //JSESSIONID: user ? user.jSessionId : null
+  // };
+  var _lang = await this.getLangSetting();
+  var header = {};
+  if (_lang == 'vn') {
+    _lang = 'vi';
+    header.language = _lang;
+  }
+  else{
+    _lang = 'en_US';
+    header.language = _lang;
+  }
+  // if (user) {
+  //   header.JSESSIONID = user.jSessionId
+  // }
+  return header;
 }
 
 export function formatDate(date) {
@@ -148,6 +162,24 @@ export async function getnotifiSetting() {
     }
     else {
       return null;
+    }
+  }
+}
+
+export async function getLangSetting() {
+  if (this.lang != null) {
+    return this.lang;
+  }
+  else {
+
+    var _lang = await AsyncStorage.getItem("@lang");
+    if (_lang) {
+      var olang = JSON.parse(_lang);
+      lang = olang;
+      return lang;
+    }
+    else {
+      return 'vn';
     }
   }
 }

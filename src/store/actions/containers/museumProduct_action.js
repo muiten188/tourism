@@ -6,10 +6,11 @@ export function get_MapId(artId, user) {
     let data = [];
     //let dataPost = values || {};
     //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_MAPID_ARTID}${artId}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -56,10 +57,11 @@ export function get_AntifactByID(id, currentPage, pageSize, user) {
 
     //let dataPost = values || {};
     //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_ANTIFACT_BYID}${id}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -121,10 +123,11 @@ export function get_AntifactByTag(values, currentPage, pageSize, user) {
 
     let dataPost = values || {};
     //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_ANTIFACT_BYTAG}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {

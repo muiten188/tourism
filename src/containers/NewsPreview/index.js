@@ -24,6 +24,7 @@ import HeaderContent from "../../components/Header_content";
 import AutoHeightWebView from 'react-native-autoheight-webview';
 import Comment from "../../components/Comment";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
+import * as helper from '../../helper';
 class newPreview extends Component {
 
     static navigationOptions = {
@@ -32,7 +33,21 @@ class newPreview extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            languageSelect: 'vn'
+        }
+        this.loadSetting();
+    }
 
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
@@ -47,10 +62,11 @@ class newPreview extends Component {
         return (
             <Container>
                 <HeaderContent headerTitle={news.title ? news.title : "Tin tức"}
-                        showButtonLeft={true}
-                        hideRightButton={true}></HeaderContent>
+                    showButtonLeft={true}
+                    hideRightButton={true}></HeaderContent>
                 <Content>
-                    <AutoHeightWebView style={{ flex: 1 }} source={{ html: `<html>${news.content}</html>` }} ></AutoHeightWebView>
+                    {news.content ? <AutoHeightWebView source={{ html: `<html>${news.content}</html>` }} ></AutoHeightWebView> : null}
+
                     <Comment objectId={news.id} type={"NEWS"}></Comment>
                 </Content>
             </Container>

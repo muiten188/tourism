@@ -6,10 +6,11 @@ export function QUICK_SEARCH_ALL(values, user) {
     let listMuseums=[];
     let listNews=[];
     let dataPost = values || {};
-    return dispatch => {
+    return async dispatch => {
         dispatch(_QUICK_SEARCHing_ALL());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_ALLLIST}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {

@@ -61,11 +61,20 @@ class MuseumDetail extends Component {
         super(props);
         this.state = {
             isSummary: true,
-            backgroundVideo: false
+            backgroundVideo: false,
+            languageSelect: 'vn',
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+            })
+        }
     }
 
     componentDidMount() {
@@ -195,9 +204,10 @@ class MuseumDetail extends Component {
                                         locale: "vn"
                                     })}
                                 </Text> */}
-                            <AutoHeightWebView
-                                source={{ html: `<html>${museumDetail.content}</html>` }}
-                            />
+                            {museumDetail.content ?
+                                <AutoHeightWebView
+                                    source={{ html: `<html>${museumDetail.content}</html>` }}
+                                /> : null}
                             {/* <WebView style={{}} source={{ html: `<html>${museumDetail.content}</html>` }} ></WebView> */}
                             {/* <Button onPress={() => { this.setState({ isSummary: true }) }} style={{ position: 'absolute', bottom: -5, right: 0, height: 30, backgroundColor: '#fff', borderWidth: 0 }}>
                                     <Text uppercase={false} style={{ color: '#007db7' }}>

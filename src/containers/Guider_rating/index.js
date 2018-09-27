@@ -55,15 +55,25 @@ class GuiderRating extends Component {
         super(props);
         this.state = {
             isSummary: true,
-            position: 1
+            position: 1,
+            languageSelect: 'vn',
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
-       
+
     }
     componentDidUpdate(prevProps, prevState) {
 

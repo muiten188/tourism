@@ -39,7 +39,7 @@ import ItemDivider from '../../components/Item_divider';
 import ItemNews from '../../components/Item_news';
 import Comment from "../../components/Comment";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-
+import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -52,15 +52,24 @@ class MuseumList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            areaId: null
+            areaId: null,
+            languageSelect: 'vn',
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+            })
+        }
     }
 
     componentDidMount() {
-        const { search_Museum, get_Area, search_News,search_HOT_NEWS } = this.props.meseumListAction;
+        const { search_Museum, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
         get_Area(null, 1, 1000, null);
         search_HOT_NEWS(null, 1, 1000, null)
         search_Museum(null, 1, 1000, null);
@@ -100,7 +109,7 @@ class MuseumList extends Component {
                         <Row style={{ paddingBottom: 6, paddingTop: 6, height: 50, borderBottomWidth: 0.5, borderBottomColor: '#cecece' }}>
                             <FlatList
                                 style={styles.listResult}
-                                data={[{ areaName: "Tất cả", areaId: null }, ...listArea]}
+                                data={[{ areaName: I18n.t('all'), areaId: null }, ...listArea]}
                                 keyExtractor={this._keyExtractor}
                                 renderItem={(dataItem) => {
                                     var item = dataItem.item;
@@ -198,7 +207,7 @@ class MuseumList extends Component {
                         </Row>
                         {(listNews && listNews.length > 0) ?
                             <Row style={{ height: 40 }}>
-                                <Col><Text style={styles.textSide}>Tin tức</Text></Col>
+                                <Col><Text style={styles.textSide}>{I18n.t('news')}</Text></Col>
                             </Row>
                             : null
                         }

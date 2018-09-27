@@ -1,4 +1,4 @@
-export const API_HOST = 'http://tourist.easylink.vn/smart-tourist/';
+export const API_HOST = 'http://113.171.23.142:8090/smart-tourist/';
 
 export const GET_MUSEUMLIST = `${API_HOST}api/mobile/museum/`;
 export const GET_NEWS = `${API_HOST}api/mobile/news/top4`;

@@ -3,10 +3,11 @@ import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 
 export function get_MuseumDetail(values, user) {
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_MUSEUM_DETAIL}${values.museumId}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
@@ -40,10 +41,11 @@ export function get_Antifact(values, currentPage, pageSize, user) {
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
     var error = false;
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_ANTIFACT}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {

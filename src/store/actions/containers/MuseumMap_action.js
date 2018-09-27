@@ -8,10 +8,11 @@ export function get_AntifactByQRCODE(values, user) {
 
     let dataPost = values || {};
     //dataPost = { ...dataPost };
-    return dispatch => {
+    return async dispatch => {
         //dispatch(_searching_Antifact());
+        var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_ANTIFACT_BY_QRCODE}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {

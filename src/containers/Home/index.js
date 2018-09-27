@@ -89,11 +89,20 @@ class Home extends Component {
     this.listBeacons = [];
     this.indexScanerBeacon = 0;
     this.state = {
-
+      languageSelect: 'vn',
     };
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
-    I18n.currentLocale();
+    this.loadSetting();
+  }
+
+  async loadSetting() {
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
+      this.setState({
+        languageSelect: lang
+
+      })
+    }
   }
 
   containsObject(obj, list) {
@@ -322,9 +331,7 @@ class Home extends Component {
                           <IconVector name="home" size={20} />
                         </Row>
                         <Row style={styles.textHeadingTab}>
-                          <Text style={styles.textHeaderTab}>{I18n.t("home", {
-                            locale: "vn"
-                          })}</Text>
+                          <Text style={styles.textHeaderTab}>{I18n.t("home")}</Text>
                         </Row>
                       </Grid>
                     </TabHeading>}>
@@ -352,9 +359,7 @@ class Home extends Component {
                         <IconVector name="user" size={20} />
                       </Row>
                       <Row style={styles.textHeadingTab}>
-                        <Text style={styles.textHeaderTab}>{I18n.t("profile", {
-                          locale: "vn"
-                        })}</Text>
+                        <Text style={styles.textHeaderTab}>{I18n.t("profile")}</Text>
                       </Row>
                     </Grid>
                   </TabHeading>}>

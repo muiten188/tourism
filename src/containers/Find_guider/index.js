@@ -36,7 +36,7 @@ import PickerGuider from '../../components/picker_guider';
 import PickerLanguage from '../../components/picker_language';
 import Loading from "../../components/Loading";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-
+import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -48,9 +48,21 @@ class FindGuider extends Component {
 
   constructor(props) {
     super(props);
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
-    I18n.currentLocale();
+    this.state = {
+      languageSelect: 'vn',
+    }
+    this.loadSetting();
+  }
+
+  async loadSetting() {
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
+      this.setState({
+        languageSelect: lang
+
+      })
+    }
   }
 
   componentDidMount() {

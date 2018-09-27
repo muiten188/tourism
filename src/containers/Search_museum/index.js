@@ -59,12 +59,23 @@ class SearchMuseum extends Component {
             position: 1,
             searchNews: false,
             searchMuseum: false,
-            searchArtifact: false
+            searchArtifact: false,
+            languageSelect: 'vn',
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
     }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
+    }
+
 
     componentDidMount() {
 

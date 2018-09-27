@@ -58,11 +58,21 @@ class MuseumProduct extends Component {
         super(props);
         this.state = {
             isSummary: true,
-            position: 1
+            position: 1,
+            languageSelect: 'vn'
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
@@ -154,9 +164,7 @@ class MuseumProduct extends Component {
                                     <Button full block transparent onPress={() => {
                                         Actions.museumMap({ mapId: mapId })
                                     }} iconRight={true} style={styles.buttonTitle}>
-                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram", {
-                                            locale: "vn"
-                                        })}</Text>
+                                        <Text uppercase={false} style={styles.textWhile}>{I18n.t("diagram")}</Text>
                                         <Icon name="map" size={15} style={styles.textWhile} />
                                     </Button>
                                 </Col>
@@ -171,13 +179,11 @@ class MuseumProduct extends Component {
                         </Row>
                         <Row style={{ flex: 1, paddingLeft: 4 }}>
                             {antifactDetail && antifactDetail.artContent ?
-                                <AutoHeightWebView style={{ flex: 1 }} source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></AutoHeightWebView>
+                                <AutoHeightWebView source={{ html: `<html>${antifactDetail.artContent}</html>` }} ></AutoHeightWebView>
                                 : null}
                         </Row>
                         <Row style={{ height: 30 }}>
-                            <Text style={styles.titleProduct}>{I18n.t("similar_product", {
-                                locale: "vn"
-                            })}</Text>
+                            <Text style={styles.titleProduct}>{I18n.t("similar_product")}</Text>
                         </Row>
 
                         <Row>

@@ -114,8 +114,8 @@ class login extends React.Component {
         items: []
       }
     };
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
+    I18n.defaultLocale = "vn";
+    I18n.locale = "vn";
     I18n.currentLocale();
     // AccessToken.getCurrentAccessToken().then(
     //   (data) => {
@@ -265,7 +265,7 @@ class login extends React.Component {
                       icon="user-circle-o"
                       name="username"
                       placeholder={I18n.t("account", {
-                        locale: locale ? locale : "vi"
+                        locale: locale ? locale : "vn"
                       })}
                       component={InputField}
                     />
@@ -276,7 +276,7 @@ class login extends React.Component {
                       icon="key"
                       name="password"
                       placeholder={I18n.t("password", {
-                        locale: locale ? locale : "vi"
+                        locale: locale ? locale : "vn"
                       })}
                       secureTextEntry={true}
                       component={InputField}
@@ -291,7 +291,7 @@ class login extends React.Component {
                       {I18n.t("login", {
                         locale: this.state.languageSelect
                           ? this.state.languageSelect
-                          : "vi"
+                          : "vn"
                       })}
                     </Text>
                   </Button>
@@ -305,7 +305,7 @@ class login extends React.Component {
                           {I18n.t("register", {
                             locale: this.state.languageSelect
                               ? this.state.languageSelect
-                              : "vi"
+                              : "vn"
                           })}
                         </Text>
                       </Button>
@@ -316,7 +316,7 @@ class login extends React.Component {
                           {I18n.t("forgotPassword", {
                             locale: this.state.languageSelect
                               ? this.state.languageSelect
-                              : "vi"
+                              : "vn"
                           })}
                         </Text>
                       </Button>

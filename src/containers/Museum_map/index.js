@@ -26,6 +26,7 @@ import * as museumMapAction from '../../store/actions/containers/MuseumMap_actio
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import Header_content from "../../components/Header_content";
 import * as AppConfig from '../../config/app_config';
+import * as helper from '../../helper';
 class MuseumMap extends Component {
 
     static navigationOptions = {
@@ -34,6 +35,21 @@ class MuseumMap extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            languageSelect: 'vn'
+        }
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {

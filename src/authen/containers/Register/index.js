@@ -104,8 +104,8 @@ class register extends Component {
         items: []
       }
     };
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
+    I18n.defaultLocale = "vn";
+    I18n.locale = "vn";
     I18n.currentLocale();
   }
 
@@ -187,7 +187,7 @@ class register extends Component {
                           icon="user-circle-o"
                           name="firstName"
                           placeholder={I18n.t("firstName", {
-                            locale: locale ? locale : "vi"
+                            locale: locale ? locale : "vn"
                           })}
                           component={InputField}
                         />
@@ -197,7 +197,7 @@ class register extends Component {
                           icon="user-circle-o"
                           name="lastName"
                           placeholder={I18n.t("lastName", {
-                            locale: locale ? locale : "vi"
+                            locale: locale ? locale : "vn"
                           })}
                           component={InputField}
                         />
@@ -210,7 +210,7 @@ class register extends Component {
                       icon="user-circle-o"
                       name="username"
                       placeholder={I18n.t("account", {
-                        locale: locale ? locale : "vi"
+                        locale: locale ? locale : "vn"
                       })}
                       component={InputField}
                     />
@@ -221,7 +221,7 @@ class register extends Component {
                       icon="key"
                       name="password"
                       placeholder={I18n.t("password", {
-                        locale: locale ? locale : "vi"
+                        locale: locale ? locale : "vn"
                       })}
                       secureTextEntry={true}
                       component={InputField}
@@ -233,7 +233,7 @@ class register extends Component {
                       icon="key"
                       name="confirmPassword"
                       placeholder={I18n.t("confirmPassword", {
-                        locale: locale ? locale : "vi"
+                        locale: locale ? locale : "vn"
                       })}
                       secureTextEntry={true}
                       component={InputField}
@@ -248,7 +248,7 @@ class register extends Component {
                       {I18n.t("register", {
                         locale: this.state.languageSelect
                           ? this.state.languageSelect
-                          : "vi"
+                          : "vn"
                       })}
                     </Text>
                   </Button>
@@ -262,7 +262,7 @@ class register extends Component {
                           {I18n.t("login", {
                             locale: this.state.languageSelect
                               ? this.state.languageSelect
-                              : "vi"
+                              : "vn"
                           })}
                         </Text>
                       </Button>

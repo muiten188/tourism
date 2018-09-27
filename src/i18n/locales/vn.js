@@ -48,5 +48,8 @@ export default {
   diagram:'Sơ đồ',
   firstName:'Họ',
   lastName:'Tên',
-  setting:'Cài đặt'
+  setting:'Cài đặt',
+  news:"Tin tức",
+  all:'Tất cả',
+  report:'Thông báo'
 };

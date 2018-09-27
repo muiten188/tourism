@@ -58,10 +58,19 @@ class Profile extends Component {
     this.state = {
       backgroundVideo: false,
       notification: false,
+      languageSelect: 'vn',
     }
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
-    I18n.currentLocale();
+    this.loadLangSetting();
+  }
+
+  async loadLangSetting() {
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
+      this.setState({
+        languageSelect: lang
+      })
+    }
   }
 
   componentDidMount() {
@@ -110,6 +119,17 @@ class Profile extends Component {
     helper.backgroundVideoSetting = !this.state.backgroundVideo
   }
 
+
+  onLanguageValueChange(value) {
+    I18n.locale = value;
+    this.setState({
+      languageSelect: value
+    });
+    helper.setAsyncStorage('@lang',value);
+    Actions.push('login');
+    Actions.reset('home');
+  }
+
   settingNotifiChange() {
     this.setState({
       notification: !this.state.notification
@@ -133,9 +153,7 @@ class Profile extends Component {
           </Button>}
         <Grid style={styles.Grid}>
           <Row style={styles.gridTitleRow}>
-            <Text style={{ fontWeight: '500' }}>{I18n.t("setting", {
-              locale: "vn"
-            })}</Text>
+            <Text style={{ fontWeight: '500' }}>{I18n.t("setting")}</Text>
           </Row>
           <Row>
             <Content>
@@ -182,13 +200,14 @@ class Profile extends Component {
                 </Body>
                 <Right>
                   <Picker
-                    note
                     mode="dropdown"
                     iosIcon={<Icon name="ios-arrow-down-outline" />}
                     style={{ width: 135}}
-                    selectedValue={'vn'}
+                    selectedValue={this.state.languageSelect}
+                    onValueChange={this.onLanguageValueChange.bind(this)}
                   >
                     <Picker.Item label="Tiếng việt" value="vn" />
+                    <Picker.Item label="English" value="en" />
                   </Picker>
                 </Right>
               </ListItem>

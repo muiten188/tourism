@@ -23,6 +23,7 @@ import * as qrCodeScannerAction from '../../store/actions/containers/qrCodeScann
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Header_content from "../../components/Header_content";
+import * as helper from '../../helper';
 const currentQrCode = null;
 class qrCodeScanner extends Component {
 
@@ -32,7 +33,21 @@ class qrCodeScanner extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            languageSelect: 'vn',
+        };
+        this.loadSetting();
+    }
 
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
@@ -44,12 +59,18 @@ class qrCodeScanner extends Component {
     onSuccess(e) {
         const { get_AntifactByQRCODE } = this.props.qrCodeScannerAction;
         if (e.data != currentQrCode) {
-            currentQrCode=e.data;
-            Alert.alert("Thông báo", e.data);
-            get_AntifactByQRCODE({ qrCode: e.data })
-            setTimeout(()=>{
-                currentQrCode=null;
-            },1000)
+            currentQrCode = e.data;
+            Alert.alert(I18n.t('report'), e.data);
+            if (e.data && e.data.startsWith('G')) {
+                Actions.productList({ qrGroup: e.data })
+            }
+            else {
+                get_AntifactByQRCODE({ qrCode: e.data })
+            }
+
+            setTimeout(() => {
+                currentQrCode = null;
+            }, 1000)
         }
         // Linking
         //     .openURL(e.data)

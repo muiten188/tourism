@@ -39,7 +39,7 @@ import ItemResult from '../../components/Item_result';
 import Video from "react-native-video";
 import ItemResultProductDevider from '../../components/Item_divider_product';
 import ItemResultProduct from '../../components/Item_result_product';
-
+import * as helper from '../../helper';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 // import YouTube from 'react-native-youtube'
@@ -57,22 +57,35 @@ class ProductList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSummary: true
+            isSummary: true,
+            languageSelect: 'vn'
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
         const { get_Antifact } = this.props.productListAction;
-        const { paramPassAction, beaconUUID } = this.props;
+        const { paramPassAction, beaconUUID, qrGroup } = this.props;
         var objGetAntifact = {};
         if (paramPassAction && paramPassAction.museumId) {
             objGetAntifact = { museumId: paramPassAction.museumId };
         }
         if (beaconUUID) {
             objGetAntifact.beaconUUID = beaconUUID;
+        }
+        if (qrGroup) {
+            objGetAntifact.qrGroup = qrGroup;
         }
         get_Antifact(objGetAntifact, 1, 100000, null);
     }
@@ -85,7 +98,7 @@ class ProductList extends Component {
         const { paramPassAction } = this.props;
         const { get_Antifact } = this.props.productListAction;
         const { listAntifact, searchAntifactErorr, isLoading } = this.props.productListReducer;
-        
+
         if (searchAntifactErorr) {
             Alert.alert("Thông báo", "Lấy danh sách hiện vật thất bại", [{
                 text: 'Ok',
@@ -101,9 +114,7 @@ class ProductList extends Component {
                 <ScrollView>
                     <Grid style={{}}>
                         <Row style={{ height: 30 }}>
-                            <Text style={styles.titleProduct}>{I18n.t("product", {
-                                locale: "vn"
-                            })}</Text>
+                            <Text style={styles.titleProduct}>{I18n.t("product")}</Text>
                         </Row>
                         <Row>
                             <FlatList
@@ -156,7 +167,7 @@ class ProductList extends Component {
                 }}
             >
                 <ItemResultProductDevider key={item.index}
-                    
+
                     data={item}></ItemResultProductDevider>
 
             </TouchableOpacity>

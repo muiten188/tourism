@@ -54,11 +54,21 @@ class SearchHistory extends Component {
         super(props);
         this.state = {
             isSummary: true,
-            position: 1
+            position: 1,
+            languageSelect: 'vn',
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
+    }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+
+            })
+        }
     }
 
     componentDidMount() {
@@ -72,9 +82,7 @@ class SearchHistory extends Component {
         const locale = "vn";
         return (
             <ScrollView style={styles.container}>
-                <HeaderContent showButtonLeft={true} headerTitle={I18n.t("searchHistory", {
-                    locale: "vn"
-                })} />
+                <HeaderContent showButtonLeft={true} headerTitle={I18n.t("searchHistory")} />
                 <Grid style={{}}>
                     <Row>
                         <FlatList
