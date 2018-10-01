@@ -131,7 +131,7 @@ class MuseumProduct extends Component {
         }
         return (
             <Container style={styles.container}>
-                <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? antifactDetail.artName : "..."} />
+                <HeaderContent showButtonLeft={true} headerTitle={antifactDetail ? this.textEclipse(antifactDetail.artName) : "..."} />
                 <Content>
                     <Grid style={{ flex: 1 }}>
                         {
@@ -268,8 +268,11 @@ class MuseumProduct extends Component {
     }
 
     textEclipse(text) {
-        return (((text).length > 125) ?
-            (((text).substring(0, 125)) + '...') :
+        if(!text){
+            return ''
+        }
+        return (((text).length > 35) ?
+            (((text).substring(0, 35)) + '...') :
             text)
     }
 }

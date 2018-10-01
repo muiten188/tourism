@@ -51,6 +51,12 @@ export default {
   setting:'Setting',
   news:"News",
   all:'All',
-  report:'Report'
+  report:'Report',
+  backgroundVideo:'Background Video',
+  profile:'Profile',
+  changePassword:'Change Password',
+  newPassword:'New Password',
+  changePasswordError:'Change password error!',
+  changePasswordSuccess:'Change password success.'
   };
   

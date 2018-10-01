@@ -61,8 +61,15 @@ class qrCodeScanner extends Component {
         if (e.data != currentQrCode) {
             currentQrCode = e.data;
             Alert.alert(I18n.t('report'), e.data);
-            if (e.data && e.data.startsWith('G')) {
-                Actions.productList({ qrGroup: e.data })
+            var objQRcode = null;
+            try {
+                objQRcode = JSON.parse(e.data);
+            }
+            catch (e) {
+                objQRcode = null;
+            }
+            if (objQRcode != null && objQRcode.code && objQRcode.code.startsWith('G')) {
+                Actions.productList({ qrGroup: objQRcode.code })
             }
             else {
                 get_AntifactByQRCODE({ qrCode: e.data })

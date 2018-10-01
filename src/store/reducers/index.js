@@ -15,6 +15,7 @@ import guiderReducer from "../../store/reducers/containers/guider_reducer";
 import guiderRatingReducer from "../../store/reducers/containers/guider_rating_reducer";
 import app_Reducer from "../../store/reducers/app_reducer";
 import qrCodeScannerReducer from '../../store/reducers/containers/qrCodeScanner_reducer';
+import changePasswordReducer from '../../store/reducers/containers/changePassword_reducer';
 import searchMuseumReducer from '../../store/reducers/containers/searchMuseum_reducer';
 import museumMapReducer from '../../store/reducers/containers/MuseumMap_reducer';
 import router_Reducer from "../../store/reducers/router/router_reducer";
@@ -37,6 +38,7 @@ const appReducer = combineReducers({
   profileReducer,
   commentReducer,
   qrCodeScannerReducer,
+  changePasswordReducer,
   searchMuseumReducer,
   museumMapReducer,
   app_Reducer,

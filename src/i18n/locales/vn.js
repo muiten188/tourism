@@ -51,5 +51,11 @@ export default {
   setting:'Cài đặt',
   news:"Tin tức",
   all:'Tất cả',
-  report:'Thông báo'
+  report:'Thông báo',
+  backgroundVideo:'Chạy video ngầm',
+  profile:'Thông tin',
+  changePassword:'Đổi mật khẩu',
+  newPassword:'Mật khẩu mới',
+  changePasswordError:"Đổi mật khẩu thất bại!",
+  changePasswordSuccess:'Đổi mật khẩu thành công.'
 };

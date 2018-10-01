@@ -16,6 +16,7 @@ import Search_history from '../containers/Search_history';
 import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
 import QrCodeScanner from '../containers/QrScanner';
+import ChangePassword from '../containers/ChangePassword';
 import NewsPreview from '../containers/NewsPreview';
 import SearchMuseum from '../containers/Search_museum';
 import MuseumMap from '../containers/Museum_map';
@@ -104,6 +105,11 @@ class RootNavigation extends React.Component {
                     <Scene key="qrScanner"
                         component={QrCodeScanner}
                         title="qrScanner"
+                        initial={false}>
+                    </Scene>
+                    <Scene key="changePassword"
+                        component={ChangePassword}
+                        title="changePassword"
                         initial={false}>
                     </Scene>
                     <Scene key="searchMuseum"

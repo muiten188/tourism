@@ -28,7 +28,9 @@ import {
   CheckBox,
   Icon,
   Right,
-  Picker
+  Picker,
+  Card,
+  CardItem
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -36,7 +38,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import { InputField } from "../../components/Element/Form/index";
 import IconVector from "react-native-vector-icons/FontAwesome";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import IconFeather from 'react-native-vector-icons/Feather';
 import * as profileAction from "../../store/actions/containers/profile_action";
 import Loading from "../../components/Loading";
 import User from "../../components/User";
@@ -125,7 +127,7 @@ class Profile extends Component {
     this.setState({
       languageSelect: value
     });
-    helper.setAsyncStorage('@lang',value);
+    helper.setAsyncStorage('@lang', value);
     Actions.push('login');
     Actions.reset('home');
   }
@@ -141,6 +143,7 @@ class Profile extends Component {
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
+    debugger;
     return (
       <Container style={styles.container}>
         {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
@@ -148,29 +151,62 @@ class Profile extends Component {
             onPress={() => {
               Actions.login();
             }}
-            style={{ margin: 15 }}>
-            <Text>Đăng nhập</Text>
+            style={{ margin: 15, backgroundColor: '#007db7' }}>
+            <Text>{I18n.t('login')}</Text>
           </Button>}
         <Grid style={styles.Grid}>
-          <Row style={styles.gridTitleRow}>
-            <Text style={{ fontWeight: '500' }}>{I18n.t("setting")}</Text>
-          </Row>
-          <Row>
-            <Content>
-              <ListItem icon>
-                <Left>
-                  <Button onPress={this.settingVideoChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon type="Foundation" active name="play-video" />
-                  </Button>
-                </Left>
-                <Body>
-                  <Text>Chạy video ngầm</Text>
-                </Body>
-                <Right>
-                  <CheckBox onPress={this.settingVideoChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.backgroundVideo} />
-                </Right>
-              </ListItem>
-              <ListItem icon >
+          <Content>
+            {user && user.user.email ?
+              <Row style={styles.gridTitleRow}>
+                <Text style={{ fontWeight: '500' }}>{I18n.t("profile")}</Text>
+              </Row> : null}
+            {user && user.user.email ? <Row>
+              <Card>
+                <CardItem>
+                  <IconFeather active name="mail" size={18} style={{ marginRight: 6 }} />
+                  <Text>{user.user.email}</Text>
+                </CardItem>
+                {/* <CardItem>
+                  <Icon active name="logo-googleplus" />
+                  <Text>Google Plus</Text>
+                </CardItem>
+                <CardItem>
+                  <Icon active name="logo-googleplus" />
+                  <Text>Google Plus</Text>
+                </CardItem>
+                <CardItem>
+                  <Icon active name="logo-googleplus" />
+                  <Text>Google Plus</Text>
+                </CardItem>
+                <CardItem>
+                  <Icon active name="logo-googleplus" />
+                  <Text>Google Plus</Text>
+                </CardItem>
+                <CardItem>
+                  <Icon active name="logo-googleplus" />
+                  <Text>Google Plus</Text>
+                </CardItem>*/}
+              </Card>
+            </Row> : null}
+            <Row style={styles.gridTitleRow}>
+              <Text style={{ fontWeight: '500' }}>{I18n.t("setting")}</Text>
+            </Row>
+            <Row>
+              <Content>
+                <ListItem icon>
+                  <Left>
+                    <Button onPress={this.settingVideoChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
+                      <Icon type="Foundation" active name="play-video" />
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Text>{I18n.t('backgroundVideo')}</Text>
+                  </Body>
+                  <Right>
+                    <CheckBox onPress={this.settingVideoChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.backgroundVideo} />
+                  </Right>
+                </ListItem>
+                {/* <ListItem icon >
                 <Left>
                   <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
                     <Icon type="MaterialIcons" active name="notifications" />
@@ -188,32 +224,32 @@ class Profile extends Component {
                     borderColor: '#cecece'
                   }} checked={this.state.notification} />
                 </Right>
-              </ListItem>
-              <ListItem icon >
-                <Left>
-                  <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon type="FontAwesome" active name="language" />
-                  </Button>
-                </Left>
-                <Body>
-                  <Text>Ngôn ngữ</Text>
-                </Body>
-                <Right>
-                  <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon name="ios-arrow-down-outline" />}
-                    style={{ width: 135}}
-                    selectedValue={this.state.languageSelect}
-                    onValueChange={this.onLanguageValueChange.bind(this)}
-                  >
-                    <Picker.Item label="Tiếng việt" value="vn" />
-                    <Picker.Item label="English" value="en" />
-                  </Picker>
-                </Right>
-              </ListItem>
-            </Content>
-          </Row>
-          {/* <Row style={styles.gridContent}>
+              </ListItem> */}
+                <ListItem icon >
+                  <Left>
+                    <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
+                      <Icon type="FontAwesome" active name="language" />
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Text>{I18n.t('language')}</Text>
+                  </Body>
+                  <Right>
+                    <Picker
+                      mode="dropdown"
+                      iosIcon={<Icon name="ios-arrow-down-outline" />}
+                      style={{ width: 135 }}
+                      selectedValue={this.state.languageSelect}
+                      onValueChange={this.onLanguageValueChange.bind(this)}
+                    >
+                      <Picker.Item label="Tiếng việt" value="vn" />
+                      <Picker.Item label="English" value="en" />
+                    </Picker>
+                  </Right>
+                </ListItem>
+              </Content>
+            </Row>
+            {/* <Row style={styles.gridContent}>
             <Col>
               <Row style={styles.gridContentItem}>
                 <Col>
@@ -256,6 +292,14 @@ class Profile extends Component {
               </Row>
             </Col>
           </Row> */}
+          </Content>
+          {user && user.user.loginMethod == "MANUAL" ? <Row style={{ height: 50, paddingLeft: 6, paddingRight: 6 }}>
+            <Button onPress={() => {
+              Actions.changePassword();
+            }} block full style={{ width: '100%', backgroundColor: '#007db7' }}>
+              <Text>{I18n.t('changePassword')}</Text>
+            </Button>
+          </Row> : null}
 
         </Grid>
       </Container>
