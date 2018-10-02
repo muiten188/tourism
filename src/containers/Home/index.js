@@ -178,7 +178,7 @@ class Home extends Component {
               console.log('Cancel Pressed') 
               setTimeout(() => {
                 this.current_uuid = {};
-              }, 15000);
+              }, 30000);
             }
               , style: 'cancel'
           }],
