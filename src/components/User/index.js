@@ -65,21 +65,19 @@ class user extends React.Component {
             alignItems: "flex-start",
             paddingTop: 10
           }}>
-            <Row>
+            <Row  style={{ marginTop: 15 }}>
               <Text>{`${oUser.firstName} ${oUser.lastName}`}</Text>
             </Row>
-            <Row>
+            {/* <Row>
               <Badge primary>
                 <Text>{oUser.accountType?oUser.accountType:'NORMAL'}</Text>
               </Badge>
-            </Row>
-            <Row style={{ marginTop: 10 }}>
+            </Row> */}
+            <Row style={{ marginBottom: 20 }}>
               {/* <Text>Ngày hết hạn:10/10/2018</Text> */}
               <Button onPress={onLogout} small={true}><Text>Đăng xuất</Text></Button>
             </Row>
-            <Row>
 
-            </Row>
           </Col>
           {/* <Col style={styles.editCol}>
             <Row style={{ height: 15 }}>

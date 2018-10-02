@@ -118,6 +118,10 @@ class Home extends Component {
   }
 
   onEventBeacon() {
+    if (eventBeacons) {
+      eventBeacons.remove();
+      // this.stopDetectBeacon();
+    }
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', async (data) => {
       console.log('Tìm thấy beacon:', data.beacons)
       if (Actions.currentScene == 'productList') {
@@ -126,6 +130,7 @@ class Home extends Component {
       if (AppState.currentState != "active") {
         return;
       }
+      
       if (data.beacons && data.beacons.length > 0 && blockAction == false) {
         const isEnabled = await BluetoothStatus.state();
         if (!isEnabled) {
@@ -147,6 +152,7 @@ class Home extends Component {
         }
         var objectBeacon = { uuid: this.listBeacons[0].uuid, major: this.listBeacons[0].major, minor: this.listBeacons[0].minor }
         console.log('array merge', this.listBeacons)
+        debugger;
         if (JSON.stringify(this.current_uuid) != JSON.stringify(objectBeacon)) {
           this.current_uuid = objectBeacon;
           if (this.showMessage) {
@@ -161,20 +167,27 @@ class Home extends Component {
               Actions.productList({ beaconUUID: this.current_uuid.uuid + this.current_uuid.major + this.current_uuid.minor })
               setTimeout(() => {
                 this.current_uuid = {};
-              }, 10000);
+              }, 30000);
               this.showMessage = false;
             }
           },
           {
             text: 'Cancel',
-            onPress: () => { this.showMessage = false; console.log('Cancel Pressed') }, style: 'cancel'
+            onPress: () => { 
+              this.showMessage = false; 
+              console.log('Cancel Pressed') 
+              setTimeout(() => {
+                this.current_uuid = {};
+              }, 15000);
+            }
+              , style: 'cancel'
           }],
             { cancelable: false });
         }
         //console.log('Tìm thấy beacon:', this.listBeacons[0].uuid)
         setTimeout(() => {
           blockAction = false;
-        }, 8000);
+        }, 4000);
         this.listBeacons = [];
         
         this.indexScanerBeacon = 0;
@@ -237,10 +250,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    if (eventBeacons) {
-      eventBeacons.remove();
-      this.stopDetectBeacon();
-    }
+    
     AppState.removeEventListener('change', this._handleAppStateChange.bind(this));
   }
 
