@@ -6,6 +6,7 @@ import { Router, Scene, Stack } from 'react-native-router-flux';
 //list screen
 import Login from '../authen/containers/Login';
 import Register from '../authen/containers/Register';
+import ForgotPassword from '../authen/containers/ForgotPassword';
 import Home from '../containers/Home';
 import Museumlist from '../containers/Museum_list';
 import Profile from '../containers/Profile';
@@ -61,6 +62,11 @@ class RootNavigation extends React.Component {
                         key="register"
                         component={Register}
                         title="Register"
+                    />
+                    <Scene
+                        key="forgotPassword"
+                        component={ForgotPassword}
+                        title="forgotPassword"
                     />
                     <Scene key="home"
                         component={Home}

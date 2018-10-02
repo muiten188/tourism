@@ -34,7 +34,7 @@ export async function buildHeader(user) {
   var _lang = await this.getLangSetting();
   var header = {};
   if (_lang == 'vn') {
-    _lang = 'vi';
+    _lang = 'vn';
     header.language = _lang;
   }
   else{

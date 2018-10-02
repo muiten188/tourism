@@ -19,3 +19,4 @@ export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;
 export const GET_MAPID_ARTID=`${API_HOST}api/mobile/beacon/get/`;
 export const CHANGE_PASSWORD=`${API_HOST}api/mobile/users/update/password`;
+export const FORGOT_PASSWORD=`${API_HOST}api/mobile/users/forgot/password`;

@@ -8,7 +8,8 @@ import {
   Alert,
   Image,
   AppState,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  Vibration
 } from "react-native";
 import {
   Container,
@@ -118,7 +119,7 @@ class Home extends Component {
 
   onEventBeacon() {
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', async (data) => {
-       console.log('Tìm thấy beacon:', data.beacons)
+      console.log('Tìm thấy beacon:', data.beacons)
       if (Actions.currentScene == 'productList') {
         return;
       }
@@ -132,15 +133,18 @@ class Home extends Component {
         }
         //blockAction = true;
         for (var i = 0; i < data.beacons.length; i++) {
-          if (!this.containsObject(data.beacons[i], this.listBeacons)) {
+          if (!this.containsObject(data.beacons[i], this.listBeacons) && data.beacons[i].distance < 1.2) {
             this.listBeacons.push(data.beacons[i]);
           }
         }
         this.indexScanerBeacon = this.indexScanerBeacon + 1;
-        if (this.indexScanerBeacon <= 5) {
+        if (this.indexScanerBeacon <= 3) {
           return;
         }
         this.listBeacons.sort(function (a, b) { return a.distance > b.distance });
+        if (this.listBeacons.length == 0) {
+          return;
+        }
         var objectBeacon = { uuid: this.listBeacons[0].uuid, major: this.listBeacons[0].major, minor: this.listBeacons[0].minor }
         console.log('array merge', this.listBeacons)
         if (JSON.stringify(this.current_uuid) != JSON.stringify(objectBeacon)) {
@@ -150,13 +154,14 @@ class Home extends Component {
           }
 
           this.showMessage = true;
-          Alert.alert('Thông báo', 'Tìm thấy beacon bạn có muốn lấy thông tin hiện vật.', [{
+          Vibration.vibrate(500)
+          Alert.alert(I18n.t('report'), I18n.t('foundBeacon'), [{
             text: 'Ok',
             onPress: (e) => {
               Actions.productList({ beaconUUID: this.current_uuid.uuid + this.current_uuid.major + this.current_uuid.minor })
               setTimeout(() => {
                 this.current_uuid = {};
-              }, 20000);
+              }, 10000);
               this.showMessage = false;
             }
           },
@@ -166,11 +171,12 @@ class Home extends Component {
           }],
             { cancelable: false });
         }
-        console.log('Tìm thấy beacon:', this.listBeacons[0].uuid)
+        //console.log('Tìm thấy beacon:', this.listBeacons[0].uuid)
         setTimeout(() => {
           blockAction = false;
         }, 8000);
         this.listBeacons = [];
+        
         this.indexScanerBeacon = 0;
       }
 

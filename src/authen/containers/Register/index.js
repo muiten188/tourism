@@ -41,14 +41,24 @@ const password = "";
 const confirmPassword = "";
 const firstName = "";
 const lastName = "";
+
+const validationEmail = value => {
+  let result = emailError = value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? true
+    : false;
+  return result;
+};
+
 const validate = values => {
   const error = {};
   error.username = "";
+  error.email = "";
   error.password = "";
   error.confirmPassword = "";
   error.firstName = "";
   error.lastName = "";
   var username = values.username;
+  var email = values.email;
   var password = values.password;
   var confirmPassword = values.confirmPassword;
   var firstName = values.firstName;
@@ -56,6 +66,10 @@ const validate = values => {
   if (values.username === undefined) {
     username = "";
   }
+  if (values.email === undefined) {
+    email = "";
+  }
+  
   if (values.password === undefined) {
     password = "";
   }
@@ -70,6 +84,13 @@ const validate = values => {
   }
   if (username.length == 0 || username == "") {
     error.username = "trống";
+  }
+  if (email.length == 0 || email == "") {
+    error.email = "trống";
+  }
+
+  if(validationEmail(email)){
+    error.email = "không phải email";
   }
   if (password.length == 0 || password == "") {
     error.password = "trống";
@@ -102,11 +123,21 @@ class register extends Component {
       selected1: "key1",
       results: {
         items: []
-      }
+      },
+      languageSelect: 'vn',
     };
-    I18n.defaultLocale = "vn";
-    I18n.locale = "vn";
-    I18n.currentLocale();
+    this.loadSetting();
+  }
+
+  async loadSetting() {
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
+      this.setState({
+        languageSelect: lang
+
+      })
+    }
   }
 
   componentDidMount() {
@@ -128,7 +159,7 @@ class register extends Component {
         registerReducer.registed == false &&
         registerReducer.registed == false
       ) {
-        Alert.alert("Thông báo", "Đăng ký thất bại", [{
+        Alert.alert(I18n.t('report'),I18n.t('registerFail'), [{
           text: 'Ok',
           onPress: (e) => {
             registerAction.clearRegister();
@@ -137,7 +168,7 @@ class register extends Component {
           { cancelable: false });
       }
       else if (registerReducer.registed == true) {
-        Alert.alert("Thông báo", "Đăng ký thành công", [{
+        Alert.alert(I18n.t('report'), I18n.t('registerSuccess'), [{
           text: 'Ok',
           onPress: (e) => {
             registerAction.clearRegister();
@@ -152,16 +183,6 @@ class register extends Component {
 
   render() {
     const { registerAction, handleSubmit, submitting, registerReducer } = this.props;
-    const locale = "vn";
-    // if (
-    //   registerReducer.Logged != null &&
-    //   registerReducer.Logged == false &&
-    //   registerReducer.registing == false
-    // ) {
-    //   Alert.alert("Thông báo", "Đăng nhập thất bại");
-    //   registerReducer.Logged = null;
-    // }
-
     return (
       <Container
 
@@ -186,9 +207,7 @@ class register extends Component {
                         <Field
                           icon="user-circle-o"
                           name="firstName"
-                          placeholder={I18n.t("firstName", {
-                            locale: locale ? locale : "vn"
-                          })}
+                          placeholder={I18n.t("firstName")}
                           component={InputField}
                         />
                       </Col>
@@ -196,9 +215,7 @@ class register extends Component {
                         <Field
                           icon="user-circle-o"
                           name="lastName"
-                          placeholder={I18n.t("lastName", {
-                            locale: locale ? locale : "vn"
-                          })}
+                          placeholder={I18n.t("lastName")}
                           component={InputField}
                         />
                       </Col>
@@ -209,9 +226,16 @@ class register extends Component {
                     <Field
                       icon="user-circle-o"
                       name="username"
-                      placeholder={I18n.t("account", {
-                        locale: locale ? locale : "vn"
-                      })}
+                      placeholder={I18n.t("account")}
+                      component={InputField}
+                    />
+                  </View>
+                  <View style={styles.item}>
+                    {/* <Icon active name="lock" /> */}
+                    <Field
+                      icon="inbox"
+                      name="email"
+                      placeholder={I18n.t("email")}
                       component={InputField}
                     />
                   </View>
@@ -220,9 +244,7 @@ class register extends Component {
                     <Field
                       icon="key"
                       name="password"
-                      placeholder={I18n.t("password", {
-                        locale: locale ? locale : "vn"
-                      })}
+                      placeholder={I18n.t("password")}
                       secureTextEntry={true}
                       component={InputField}
                     />
@@ -232,9 +254,7 @@ class register extends Component {
                     <Field
                       icon="key"
                       name="confirmPassword"
-                      placeholder={I18n.t("confirmPassword", {
-                        locale: locale ? locale : "vn"
-                      })}
+                      placeholder={I18n.t("confirmPassword")}
                       secureTextEntry={true}
                       component={InputField}
                     />
@@ -245,11 +265,7 @@ class register extends Component {
                     onPress={handleSubmit(registerAction.register)}
                   >
                     <Text>
-                      {I18n.t("register", {
-                        locale: this.state.languageSelect
-                          ? this.state.languageSelect
-                          : "vn"
-                      })}
+                      {I18n.t("register")}
                     </Text>
                   </Button>
                   <Grid>
@@ -259,11 +275,7 @@ class register extends Component {
                           Actions.reset('login');
                         }}>
                         <Text uppercase={false} >
-                          {I18n.t("login", {
-                            locale: this.state.languageSelect
-                              ? this.state.languageSelect
-                              : "vn"
-                          })}
+                          {I18n.t("login")}
                         </Text>
                       </Button>
                     </Row>
@@ -287,16 +299,7 @@ class register extends Component {
 
 function mapStateToProps(state, props) {
   return {
-    registerReducer: state.registerReducer,
-    initialValues: state.registerReducer.userForm
-      ? state.registerReducer.userForm
-      : {
-        firstName: "",//"Bùi đình"
-        lastName: "",//'Bách'
-        username: "",//"bachbd"
-        password: "",//"123456a@"
-        confirmPassword: ""//'123456a@'
-      }
+    registerReducer: state.registerReducer
   };
 }
 function mapToDispatch(dispatch) {
@@ -306,7 +309,7 @@ function mapToDispatch(dispatch) {
 }
 
 register = reduxForm({
-  form: "LoginForm",
+  form: "RegisterForm",
   validate,
   enableReinitialize: true
 })(register);

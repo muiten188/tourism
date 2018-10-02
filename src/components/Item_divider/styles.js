@@ -11,7 +11,7 @@ export default {
     height: 'auto'
   },
   item_container_half: {
-    width: "50%",
+    width: "48%",
     justifyContent: "center",
     alignItems: "center",
     margin: 3,

@@ -112,11 +112,10 @@ class login extends React.Component {
       selected1: "key1",
       results: {
         items: []
-      }
+      },
+      languageSelect: 'vn',
     };
-    I18n.defaultLocale = "vn";
-    I18n.locale = "vn";
-    I18n.currentLocale();
+    this.loadSetting();
     // AccessToken.getCurrentAccessToken().then(
     //   (data) => {
     //     if (data) {
@@ -140,6 +139,17 @@ class login extends React.Component {
     //     }
     //   })
 
+  }
+
+  async loadSetting() {
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
+      this.setState({
+        languageSelect: lang
+
+      })
+    }
   }
 
   componentWillMount() {
@@ -204,7 +214,7 @@ class login extends React.Component {
       .then(user => {
         console.log(user)
         this.setState({ user: user })
-        loginAction.login_Socail(user,"GOOGLE");
+        loginAction.login_Socail(user, "GOOGLE");
       })
       .catch(err => {
 
@@ -229,7 +239,7 @@ class login extends React.Component {
       loginReducer.Logged == false &&
       loginReducer.Loging == false
     ) {
-      Alert.alert("Thông báo", "Đăng nhập thất bại");
+      Alert.alert(I18n.t('report'), I18n.t('loginFail'));
       loginReducer.Logged = null;
     }
     else if (loginReducer.Logged == true) {
@@ -264,9 +274,7 @@ class login extends React.Component {
                     <Field
                       icon="user-circle-o"
                       name="username"
-                      placeholder={I18n.t("account", {
-                        locale: locale ? locale : "vn"
-                      })}
+                      placeholder={I18n.t("account")}
                       component={InputField}
                     />
                   </View>
@@ -275,9 +283,7 @@ class login extends React.Component {
                     <Field
                       icon="key"
                       name="password"
-                      placeholder={I18n.t("password", {
-                        locale: locale ? locale : "vn"
-                      })}
+                      placeholder={I18n.t("password")}
                       secureTextEntry={true}
                       component={InputField}
                     />
@@ -288,11 +294,7 @@ class login extends React.Component {
                     onPress={handleSubmit(loginAction.login)}
                   >
                     <Text>
-                      {I18n.t("login", {
-                        locale: this.state.languageSelect
-                          ? this.state.languageSelect
-                          : "vn"
-                      })}
+                      {I18n.t("login")}
                     </Text>
                   </Button>
                   <Grid>
@@ -302,22 +304,16 @@ class login extends React.Component {
                           Actions.register();
                         }}>
                         <Text uppercase={false} >
-                          {I18n.t("register", {
-                            locale: this.state.languageSelect
-                              ? this.state.languageSelect
-                              : "vn"
-                          })}
+                          {I18n.t("register")}
                         </Text>
                       </Button>
                     </Col>
                     <Col size={1.5}>
-                      <Button transparent dark style={[styles.buttonLogin]} >
+                      <Button onPress={() => {
+                        Actions.forgotPassword();
+                      }} transparent dark style={[styles.buttonLogin]} >
                         <Text uppercase={false} x>
-                          {I18n.t("forgotPassword", {
-                            locale: this.state.languageSelect
-                              ? this.state.languageSelect
-                              : "vn"
-                          })}
+                          {I18n.t("forgotPassword")}
                         </Text>
                       </Button>
                     </Col>
@@ -360,7 +356,7 @@ class login extends React.Component {
     } else {
       console.log(result)
       //alert('login :' + result.name)
-      loginAction.login_Socail(result,"FACEBOOK");
+      loginAction.login_Socail(result, "FACEBOOK");
       //alert('Success fetching data: ' + result.toString());
     }
   }
@@ -380,10 +376,10 @@ login.propTypes = {
 function mapStateToProps(state, props) {
   return {
     loginReducer: state.loginReducer,
-    initialValues:  {
-        username: "",//admin
-        password: ""//"123456a@"
-      }
+    initialValues: {
+      username: "",//admin
+      password: ""//"123456a@"
+    }
   };
 }
 function mapToDispatch(dispatch) {

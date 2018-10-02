@@ -43,7 +43,7 @@ export default {
   rating:"Rating",
   description:'Description: ',
   find:"Search",
-  confirmPassword:"Nhập lại mật khẩu",
+  confirmPassword:"Confirm Password",
   fullName:'Full name',
   diagram:'Sơ đồ',
   firstName:'First name',
@@ -57,6 +57,12 @@ export default {
   changePassword:'Change Password',
   newPassword:'New Password',
   changePasswordError:'Change password error!',
-  changePasswordSuccess:'Change password success.'
+  changePasswordSuccess:'Change password success.',
+  forgotPasswordSuccess: "Password sented to your email, Please check your email to get new Password.",
+  forgotPasswordFail:'Forgot password fail, please check email you type again.',
+  loginFail: "Login Fail!",
+  registerFail:"Register Fail!",
+  registerSuccess: "Register Success!",
+  foundBeacon:'Found the beacon do you want to get artifact info.'
   };
   

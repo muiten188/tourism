@@ -143,7 +143,6 @@ class Profile extends Component {
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
-    debugger;
     return (
       <Container style={styles.container}>
         {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
