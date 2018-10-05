@@ -12,7 +12,7 @@ export default {
   changePassword: 'Đổi mật khẩu',
   register: 'Register',
   result: "Result",
-  Smart_tourist: 'Smart tourist',
+  Smart_tourist: 'Smart Museum',
   home: 'Home',
   findGuider: 'Hướng dẫn viên',
   profile: 'Profile',

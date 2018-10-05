@@ -243,6 +243,7 @@ class Profile extends Component {
                     >
                       <Picker.Item label="Tiếng việt" value="vn" />
                       <Picker.Item label="English" value="en" />
+                      <Picker.Item label="日本語" value="jp" />
                     </Picker>
                   </Right>
                 </ListItem>

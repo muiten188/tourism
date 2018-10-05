@@ -33,12 +33,16 @@ export async function buildHeader(user) {
   // };
   var _lang = await this.getLangSetting();
   var header = {};
-  if (_lang == 'vn') {
-    _lang = 'vn';
+  if (_lang == 'jp') {
+    _lang = 'jp';
     header.language = _lang;
   }
-  else{
-    _lang = 'en_US';
+  else if (_lang == 'en') {
+    _lang = 'en_UK';
+    header.language = _lang;
+  }
+  else {
+    _lang = 'vn';
     header.language = _lang;
   }
   // if (user) {
@@ -137,7 +141,7 @@ export async function getBackgroundVideoSetting() {
   }
   else {
     var _backgroundVideo = await AsyncStorage.getItem("@backgroundVideo");
-    
+
     if (_backgroundVideo) {
       var oBackgroundVideo = JSON.parse(_backgroundVideo);
       backgroundVideoSetting = oBackgroundVideo;
@@ -154,7 +158,7 @@ export async function getnotifiSetting() {
     return this.notifiSetting;
   }
   else {
-    var _notifi= await AsyncStorage.getItem("@notifi");
+    var _notifi = await AsyncStorage.getItem("@notifi");
     if (_notifi) {
       var oNotifi = JSON.parse(_notifi);
       notifiSetting = oNotifi;
