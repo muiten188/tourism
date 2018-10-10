@@ -63,6 +63,7 @@ export default {
   loginFail: "Login Fail!",
   registerFail:"Register Fail!",
   registerSuccess: "Register Success!",
-  foundBeacon:'Found the beacon do you want to get artifact info.'
+  foundBeacon:'Found the beacon do you want to get artifact info.',
+  viewAllArtifact: 'View All Artifact'
   };
   

@@ -63,5 +63,6 @@ export default {
   loginFail: "ログインに失敗しました!",
   registerFail: "登録に失敗しました!",
   registerSuccess: "登録成功!",
-  foundBeacon: '成果物を見つけ、情報を親切にしたいですか？'
+  foundBeacon: 'Do you want view artifact info near you.？',
+  viewAllArtifact: 'View All Artifact'
 };

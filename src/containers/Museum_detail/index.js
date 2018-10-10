@@ -176,7 +176,7 @@ class MuseumDetail extends Component {
                                     <Button transparent onPress={() => {
                                         Actions.productList({ paramPassAction: this.props.paramPassAction });
                                     }} style={{ height: 33 }}>
-                                        <Text style={{ color: '#fff' }}>Xem tất cả hiện vật</Text>
+                                        <Text style={{ color: '#fff' }}>{I18n.t('viewAllArtifact')}</Text>
                                     </Button>
                                 </Col>
                             </Grid>

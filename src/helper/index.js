@@ -41,6 +41,10 @@ export async function buildHeader(user) {
     _lang = 'en_UK';
     header.language = _lang;
   }
+  else if (_lang == 'fr') {
+    _lang = 'fr';
+    header.language = _lang;
+  }
   else {
     _lang = 'vn';
     header.language = _lang;

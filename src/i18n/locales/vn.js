@@ -63,5 +63,6 @@ export default {
   loginFail: "Đăng nhập thất bại",
   registerFail: "Đăng ký thất bại",
   registerSuccess: "Đăng ký thành công",
-  foundBeacon:'Tìm thấy beacon bạn có muốn lấy thông tin hiện vật.'
+  foundBeacon: 'Bạn có muốn xem thông tin hiện vật gần bạn.',
+  viewAllArtifact: 'Xem tất cả hiện vật'
 };
